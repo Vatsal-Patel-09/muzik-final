@@ -9,6 +9,7 @@ import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import Services from "@/components/Services";
 import { Testimonials } from "@/components/Testimonials";
+import TopCompanies from "@/components/TopCompanies";
 
 import { TutorTeam } from "@/components/Tutor-Team";
 
@@ -21,6 +22,7 @@ export default function Home() {
         <Hero />
       <div>
         <About />
+        <TopCompanies />
         <Courses />
         <TutorTeam />
         <Testimonials />
