@@ -12,10 +12,10 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main>
+    <main className="bg-black text-white ">
       <Navbar />
-      <div>
         <Hero />
+      <div>
         <About />
         <Courses />
         <TutorTeam />
