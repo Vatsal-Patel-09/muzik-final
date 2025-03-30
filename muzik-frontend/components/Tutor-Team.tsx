@@ -1,4 +1,4 @@
-import { AnimatedTeam } from "@/components/ui/animated-testimonials";
+import { AnimatedTeam } from "@/components/ui/animated-team";
 
 export function TutorTeam() {
   const testimonials = [
@@ -13,11 +13,12 @@ export function TutorTeam() {
     {
       quote:
         "A skilled artist, entrepreneur and music business enthusiasts , Adwaitsingh, ensures our courses provide complete music industry insights with complete data and tips for every aspiring artists to grow and get better in their musical journey.",
-      name: "ADWAITSINGH RAJPUT",
+      name: "Adwaitsingh Rajput",
       designation: "Co Founder & Lead Course Instructor",
       src: "/assets/tutor/adwait.jpg",
       slink: "https://www.instagram.com/adwaitsinghrajput",
-    }    
+    },
   ];
   return <AnimatedTeam testimonials={testimonials} />;
 }
+ 
