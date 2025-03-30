@@ -1,4 +1,4 @@
-import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { AnimatedTeam } from "@/components/ui/animated-testimonials";
 
 export function TutorTeam() {
   const testimonials = [
@@ -19,5 +19,5 @@ export function TutorTeam() {
       slink: "https://www.instagram.com/adwaitsinghrajput",
     }    
   ];
-  return <AnimatedTestimonials testimonials={testimonials} />;
+  return <AnimatedTeam testimonials={testimonials} />;
 }
