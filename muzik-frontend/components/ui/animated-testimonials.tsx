@@ -12,7 +12,7 @@ type Testimonial = {
   src: string;
   slink: string;
 };
-export const AnimatedTestimonials = ({
+export const AnimatedTeam = ({
   testimonials,
   autoplay = false,
 }: {
