@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
         hostname: 'assets.aceternity.com',
       },
     ],
-    domains: ["images.unsplash.com", "www.istockphoto.com"],  // 👈 Allow Unsplash images
+    domains: ["images.unsplash.com", "www.istockphoto.com", "assets.aceternity.com"],  // 👈 Allow Unsplash images
   },
 };
 

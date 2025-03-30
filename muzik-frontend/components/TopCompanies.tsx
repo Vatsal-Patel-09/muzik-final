@@ -11,34 +11,24 @@ interface Company {
 
 const companies: Company[] = [
   {
-    name: "Universal Music",
-    logo: "/images/companies/universal.png",
+    name: "Muzik Bazar",
+    logo: "/assets/companylogo/1.png",
     description: "Leading global music corporation"
   },
   {
-    name: "Sony Music",
-    logo: "/images/companies/sony.png",
+    name: "God Grace Studio",
+    logo: "/assets/companylogo/2.png",
     description: "Worldwide music entertainment company"
   },
   {
-    name: "Warner Music Group",
-    logo: "/images/companies/warner.png",
+    name: "G8",
+    logo: "/assets/companylogo/3.png",
     description: "International music publishing and recording"
   },
   {
-    name: "Spotify",
-    logo: "/images/companies/spotify.png",
+    name: "God Grace Records",
+    logo: "/assets/companylogo/4.png",
     description: "Digital music streaming service"
-  },
-  {
-    name: "Apple Music",
-    logo: "/images/companies/apple.png",
-    description: "Music and video streaming service"
-  },
-  {
-    name: "Yamaha",
-    logo: "/images/companies/yamaha.png",
-    description: "Musical instruments and audio equipment"
   },
 ];
 
@@ -65,16 +55,16 @@ export const TopCompanies = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-center justify-items-center mx-auto max-w-4xl">
           {companies.map((company, index) => (
             <motion.div
               key={company.name}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="flex flex-col items-center justify-center p-4 bg-zinc-900/50 rounded-lg hover:bg-zinc-800/50 transition-all duration-300"
+              className="flex flex-col items-center justify-center p-4 bg-zinc-900/50 rounded-lg hover:bg-zinc-800/100 transition-all duration-300 w-full"
             >
-              <div className="h-16 w-32 relative flex items-center justify-center mb-3">
+              <div className="h-36 w-72 relative flex items-center justify-center">
                 <Image
                   src={company.logo}
                   alt={company.name}
@@ -82,7 +72,6 @@ export const TopCompanies = () => {
                   className="object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
                 />
               </div>
-              <h3 className="text-sm text-gray-300 font-medium">{company.name}</h3>
             </motion.div>
           ))}
         </div>

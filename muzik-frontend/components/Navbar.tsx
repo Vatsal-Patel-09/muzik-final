@@ -47,6 +47,7 @@ function Navbar({ className }: { className?: string }) {
             </Link>
           </div>
 
+          {/* Desktop Menu Items */}
           <div className="hidden md:flex items-center justify-center mx-auto">
             <div className="flex items-center gap-8">
               <ul className="flex items-center space-x-6 text-black">
@@ -94,9 +95,9 @@ function Navbar({ className }: { className?: string }) {
           </div>
 
           {/* Mobile Menu */}
-          <div className="md:hidden ml-56">
+          <div className="md:hidden ">
             <DropdownMenu>
-              <DropdownMenuTrigger><SquareMenu/></DropdownMenuTrigger>
+              <DropdownMenuTrigger><SquareMenu className="text-black"/></DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuLabel>Menu</DropdownMenuLabel>
                 <DropdownMenuSeparator />
