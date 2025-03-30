@@ -1,6 +1,6 @@
 "use client";
 
-import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
+import { IconArrowLeft, IconArrowRight, IconExternalLink } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -10,6 +10,7 @@ type Testimonial = {
   name: string;
   designation: string;
   src: string;
+  slink: string;
 };
 export const AnimatedTestimonials = ({
   testimonials,
@@ -112,8 +113,18 @@ export const AnimatedTestimonials = ({
               ease: "easeInOut",
             }}
           >
-            <h3 className="text-2xl font-bold text-black dark:text-white">
+            <h3 className="text-2xl font-bold text-black dark:text-white flex items-center gap-2">
               {testimonials[active].name}
+              {testimonials[active].slink && (
+                <a 
+                  href={testimonials[active].slink} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex hover:opacity-80 transition-opacity"
+                >
+                  <IconExternalLink className="h-5 w-5" />
+                </a>
+              )}
             </h3>
             <p className="text-sm text-gray-500 dark:text-neutral-500">
               {testimonials[active].designation}
