@@ -3,7 +3,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import createGlobe from "cobe";
 import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import Link from "next/link";
@@ -35,7 +34,7 @@ export function About() {
           About Us
         </h4>
 
-        <p className="text-sm lg:text-base  max-w-2xl  my-4 mx-auto text-neutral-500 text-center font-normal dark:text-neutral-300">
+        <p className="text-sm lg:text-base  max-w-2xl  my-4 mx-auto text-neutral-400 text-center font-normal dark:text-neutral-300">
         Music Skill House is an innovative online platform designed for aspiring musicians, independent artists, and students who want to master the art of music. Our goal is to provide industry-relevant education, helping learners refine their craft and succeed in the music industry
         </p>
       </div>
@@ -71,7 +70,7 @@ const FeatureCard = ({
 
 const FeatureTitle = ({ children }: { children?: React.ReactNode }) => {
   return (
-    <p className=" max-w-5xl mx-auto text-left tracking-tight text-white/50 dark:text-white text-xl md:text-2xl md:leading-snug">
+    <p className=" max-w-5xl mx-auto text-left tracking-tight text-white dark:text-white text-xl md:text-2xl md:leading-snug">
       {children}
     </p>
   );
@@ -82,7 +81,7 @@ const FeatureDescription = ({ children }: { children?: React.ReactNode }) => {
     <p
       className={cn(
         "text-sm md:text-base  max-w-4xl text-left mx-auto",
-        "text-neutral-500 text-center font-normal dark:text-neutral-300",
+        "text-neutral-400 text-center font-normal dark:text-neutral-300",
         "text-left max-w-sm mx-0 md:text-sm my-2"
       )}
     >
@@ -102,7 +101,7 @@ export const SkeletonOne = () => {
             alt="header"
             width={800}
             height={800}
-            className="h-full w-full object-cover object-left-top rounded-sm"
+            className="h-full w-full object-cover object-left-top rounded-sm "
           />
         </div>
       </div>
