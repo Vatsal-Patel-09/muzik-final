@@ -74,7 +74,7 @@ export const TopCompanies = () => {
               </div>
             </motion.div>
           ))}
-        </div>
+        </div> 
       </div>
     </section>
   );

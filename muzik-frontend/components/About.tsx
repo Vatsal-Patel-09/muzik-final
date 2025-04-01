@@ -162,7 +162,7 @@ export const SkeletonTwo = () => {
       </div>
       
       {/* Second row with all 5 images */}
-      <div className="flex flex-row -ml-60">
+      <div className="flex flex-row md:-ml-60">
         {images.map((image, idx) => (
           <motion.div
             key={"images-second" + idx}

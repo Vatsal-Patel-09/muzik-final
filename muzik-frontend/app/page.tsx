@@ -26,7 +26,7 @@ export default function Home() {
         <Courses />
         <TutorTeam />
         <Testimonials />
-        <Services />
+        {/* <Services /> */}
         <Faq />
         <Contact />
         <Footer />
