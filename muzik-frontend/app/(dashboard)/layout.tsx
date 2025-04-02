@@ -8,53 +8,38 @@ import {
   IconSettings,
   IconUserBolt,
 } from "@tabler/icons-react";
+import { Library , NotebookPen} from "lucide-react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-
-// const layout = ( {children} : {children:React.ReactNode}) => {
-//   return (
-//     <div className='flex flex-row'>
-//         <div className='bg-black text-white w-full h-screen flex flex-col justify-center items-center'>
-//             <DashboardSidebar />
-//             {children}
-            
-//         </div>
-//         {/* <div className='w-full h-screen flex flex-col justify-center items-center'>{children}</div> */}
-//     </div>
-//   )
-// }
-
-// export default layout
-
 const layout = ({ children } : { children:React.ReactNode }) => {
     const links = [
       {
-        label: "Dashboard",
-        href: "#",
+        label: "All Courses",
+        href: "/all-courses",
         icon: (
-          <IconBrandTabler className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+          <Library className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
         ),
       },
       {
-        label: "Profile",
-        href: "#",
+        label: "Purchased Courses",
+        href: "/purchased-courses",
         icon: (
-          <IconUserBolt className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+          <NotebookPen className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
         ),
       },
-      {
-        label: "Settings",
-        href: "#",
-        icon: (
-          <IconSettings className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
-        ),
-      },
+      // {
+      //   label: "Settings",
+      //   href: "#",
+      //   icon: (
+      //     <IconSettings className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+      //   ),
+      // },
       {
         label: "Logout",
-        href: "#",
+        href: "/login",
         icon: (
           <IconArrowLeft className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
         ),
@@ -64,7 +49,7 @@ const layout = ({ children } : { children:React.ReactNode }) => {
     return (
       <div
         className={cn(
-          "mx-auto flex w-full max-w-8xl flex-1 flex-col overflow-hidden border border-neutral-200 bg-gray-100 md:flex-row dark:border-neutral-700 dark:bg-neutral-800",
+          "mx-auto flex w-full max-w-8xl flex-1 flex-col overflow-hidden bg-gray-500 md:flex-row dark:border-neutral-700 dark:bg-neutral-800",
           "h-screen", // for your use case, use `h-screen` instead of `h-[60vh]`
         )}
       >
@@ -98,7 +83,7 @@ const layout = ({ children } : { children:React.ReactNode }) => {
           </SidebarBody>
         </Sidebar>
         <div className="flex flex-1">
-            <div className="flex h-full w-2xl flex-1 flex-col gap-2 rounded-tl-2xl border border-neutral-200 bg-white p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900">
+            <div className="flex h-full w-2xl flex-1 flex-col gap-2 rounded-tl-2xl bg-black p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900">
                 {children}
             </div>
         </div>
