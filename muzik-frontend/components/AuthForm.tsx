@@ -92,7 +92,7 @@ const AuthForm = () => {
             </form>
           </Form>
 
-          <OTPModal />
+          {/* <OTPModal /> */}
     </div>
   )
 }
