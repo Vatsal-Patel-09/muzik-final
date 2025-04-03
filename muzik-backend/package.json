@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "build": "node app.js",
+    "start": "node app.js"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
@@ -9,6 +13,7 @@
     "nodemailer": "^6.10.0",
     "pg": "^8.14.1",
     "pg-hstore": "^2.3.4",
+    "razorpay": "^2.9.6",
     "sequelize": "^6.37.7"
   },
   "devDependencies": {

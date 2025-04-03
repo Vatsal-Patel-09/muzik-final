@@ -14,10 +14,10 @@ const sendOtp = async (email) => {
     const otp = Math.floor(100000 + Math.random() * 900000); // 6-digit OTP
 
     // Create a JWT token to verify OTP later
-    const otpToken = jwt.sign({ email, otp }, process.env.JWT_SECRET, { expiresIn: "10m" });
+    const otpToken = jwt.sign({ email, otp }, 'muziktest', { expiresIn: "10m" });
 
     const mailOptions = {
-        from: process.env.EMAIL_USER,
+        from: 'vishenraghav@gmail.com',
         to: email,
         subject: "Your OTP Code",
         text: `Your OTP code is ${otp}. It will expire in 10 minutes.`,

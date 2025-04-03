@@ -1,4 +1,5 @@
 import AuthForm from "@/components/AuthForm";
+import PaymentForm from "@/components/PaymentForm";
 import { Fullscreen } from "lucide-react";
 
 function Page() {
@@ -10,6 +11,9 @@ function Page() {
       ></div>
       <div className="relative flex h-full items-center justify-center">
         <AuthForm />
+      </div>
+      <div className="relative flex h-full items-center justify-center">
+        <PaymentForm />
       </div>
     </div>
   );

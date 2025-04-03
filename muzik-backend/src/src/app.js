@@ -3,10 +3,10 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 
-const authRoutes = require("./routes/authRoutes");
-const courseRoutes = require("./routes/courseRoutes");
-const purchaseRoutes = require("./routes/purchaseRoutes");
-const paymentRoutes = require("./routes/paymentRoutes");
+const authRoutes = require("../../routes/authRoutes");
+const courseRoutes = require("../../routes/courseRoutes");
+const purchaseRoutes = require("../../routes/purchaseRoutes");
+const paymentRoutes = require("../../routes/paymentRoutes");
 
 dotenv.config();
 

@@ -8,6 +8,6 @@ const router = express.Router();
 router.get("/my-courses", authMiddleware, purchaseController.getUserPurchases);
 
 // Purchase a course (Requires Authentication)
-router.post("/", authMiddleware, purchaseController.purchaseCourse);
+// router.post("/", authMiddleware, purchaseController.purchaseCourse);
 
 module.exports = router;
