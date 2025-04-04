@@ -1,0 +1,8 @@
+services:
+  - type: worker
+    name: my-worker  # Change to your desired worker name
+    env: node
+    plan: free  # Choose the plan (free, starter, pro, etc.)
+    branch: main  # The branch to deploy from
+    buildCommand: npm install
+    startCommand: nodemon app.js  # Change this based on your worker file
