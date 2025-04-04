@@ -5,7 +5,7 @@ exports.getUserPurchases = async (req, res) => {
     try {
         const userId = req.user.id; // Extracted from JWT token
         const purchases = await Purchase.findAll({
-            where: { userId },
+            where: { email },
             include: [{ model: Course }] // Include course details
         });
 
