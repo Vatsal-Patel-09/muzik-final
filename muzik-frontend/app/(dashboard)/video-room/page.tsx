@@ -2,10 +2,12 @@
 
 import React, { Suspense } from "react";
 import { VideoRoomContent } from "@/components/video-room/VideoRoomContent";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function VideoRoomPage() {
   return (
-    <main className="bg-black min-h-screen py-8 px-4">
+    <ScrollArea className="h-[750px] border-none w-full rounded-md border p-4 ">
+    <main className=" min-h-screen py-8 px-4">
       <Suspense fallback={
         <div className="container mx-auto text-white text-center py-20">
           <div className="animate-pulse flex flex-col items-center justify-center">
@@ -19,5 +21,6 @@ export default function VideoRoomPage() {
         <VideoRoomContent />
       </Suspense>
     </main>
+    </ScrollArea>
   );
 }

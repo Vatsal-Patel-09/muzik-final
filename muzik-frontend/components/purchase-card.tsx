@@ -28,19 +28,19 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
   return (
     <div className="border rounded-lg overflow-hidden shadow-lg bg-white animate-fadeIn">
       <Tabs defaultValue="personal" className="w-full">
-        <TabsList className="grid w-full grid-cols-2">
+        {/* <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="personal" className="data-[state=active]:bg-gray-100">
             Personal
           </TabsTrigger>
           <TabsTrigger value="teams" className="data-[state=active]:bg-gray-100">
             Teams
           </TabsTrigger>
-        </TabsList>
+        </TabsList> */}
 
         <div className="p-6">
           {course.isPremium && (
             <div className="flex items-start mb-4">
-              <Check className="w-5 h-5 text-purple-600 mt-0.5" />
+              <Check className="w-5 h-5 text-blue-600 mt-0.5" />
               <p className="ml-2 text-gray-700">This Premium course is included in plans</p>
             </div>
           )}
@@ -48,13 +48,13 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
           <h3 className="text-xl font-bold text-gray-900 mb-1">Subscribe to Udemy's top courses</h3>
           <p className="text-gray-700 mb-4">
             Get this course, plus 12,000+ of our top-rated courses, with Personal Plan.{" "}
-            <span className="text-purple-600 font-medium hover:text-purple-700 transition-colors cursor-pointer">
+            <span className="text-blue-600 font-medium hover:text-blue-800 transition-colors cursor-pointer">
               Learn more
             </span>
           </p>
 
           <Button
-            className="w-full bg-purple-600 hover:bg-purple-700 text-white py-6 mb-2 transition-all hover:shadow-md"
+            className="w-full bg-blue-600 hover:bg-blue-800 text-white py-6 mb-2 transition-all hover:shadow-md"
             size="lg"
           >
             Start subscription
@@ -74,7 +74,7 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
           </div>
 
           <Button
-            className="w-full bg-purple-600 hover:bg-purple-700 text-white py-6 mb-3 transition-all hover:shadow-md"
+            className="w-full bg-blue-600 hover:bg-blue-800 text-white py-6 mb-3 transition-all hover:shadow-md"
             size="lg"
           >
             Add to cart
@@ -92,14 +92,14 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
           <p className="text-center text-sm text-gray-600 mb-4">Full Lifetime Access</p>
 
           <div className="flex justify-center space-x-4 text-sm">
-            <button className="text-gray-700 hover:text-gray-900 transition-colors">Share</button>
-            <button className="text-gray-700 hover:text-gray-900 transition-colors">Gift this course</button>
-            <button
+            <Button variant='outline' className="text-gray-700 hover:text-gray-900 transition-colors">Share</Button>
+            <Button variant='outline' className="text-gray-700 hover:text-gray-900 transition-colors">Gift this course</Button>
+            <Button variant='outline'
               className="text-gray-700 hover:text-gray-900 transition-colors"
               onClick={() => setShowCouponInput(!showCouponInput)}
             >
               Apply Coupon
-            </button>
+            </Button>
           </div>
 
           {showCouponInput && (
@@ -111,9 +111,9 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
                     <span className="ml-2 text-gray-700 font-medium">{couponCode}</span>
                     <span className="ml-2 text-gray-500">is applied</span>
                   </div>
-                  <button onClick={() => setCouponApplied(false)}>
+                  <Button onClick={() => setCouponApplied(false)}>
                     <X className="w-5 h-5 text-gray-400 hover:text-gray-600" />
-                  </button>
+                  </Button>
                 </div>
               ) : (
                 <div className="flex space-x-2">
@@ -123,7 +123,7 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
                     onChange={(e) => setCouponCode(e.target.value)}
                     className="flex-grow"
                   />
-                  <Button onClick={handleApplyCoupon} className="bg-purple-600 hover:bg-purple-700">
+                  <Button onClick={handleApplyCoupon} className="bg-blue-600 hover:bg-blue-700">
                     Apply
                   </Button>
                 </div>

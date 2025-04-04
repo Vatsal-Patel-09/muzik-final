@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import Link from "next/link";
+import { Button } from "./ui/button";
 
 export function About() {
   const features = [
@@ -50,6 +51,14 @@ export function About() {
           ))}
         </div>
       </div>
+     <div className="flex flex-col items-center justify-center mt-10">
+      <Link href='/About'>
+        <Button
+            variant="default"
+            className=" mx-auto text-sm md:text-base font-semibold rounded-full">Show More
+        </Button>
+      </Link>
+     </div>
     </div>
   );
 }

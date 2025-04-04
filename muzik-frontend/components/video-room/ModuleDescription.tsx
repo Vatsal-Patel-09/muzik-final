@@ -7,9 +7,9 @@ interface ModuleDescriptionProps {
 
 export function ModuleDescription({ title, description }: ModuleDescriptionProps) {
   return (
-    <div className="bg-neutral-900/60 p-5 rounded-xl">
-      <h3 className="text-xl font-semibold text-white mb-3">{title}</h3>
-      <p className="text-gray-300 leading-relaxed">{description}</p>
+    <div className="bg-neutral-200 p-5 rounded-xl shadow-md ">
+      <h3 className="text-xl font-semibold text-black mb-3">{title}</h3>
+      <p className="text-neutral-800 leading-relaxed">{description}</p>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import CourseDescription from "@/components/course-description"
 import CourseRequirements from "@/components/course-requirements"
 import CourseInstructor from "@/components/course-instructor"
 import PurchaseCard from "@/components/purchase-card"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 export default function CoursePage() {
   // This would typically come from an API or database
@@ -29,6 +30,7 @@ export default function CoursePage() {
   }
 
   return (
+    <ScrollArea className="h-[750px] border-none w-full rounded-md border p-4">
     <div className="min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -51,6 +53,7 @@ export default function CoursePage() {
         </div>
       </div>
     </div>
+    </ScrollArea>
   )
 }
 

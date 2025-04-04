@@ -94,7 +94,7 @@ const layout = ({ children } : { children:React.ReactNode }) => {
   export const Logo = () => {
     return (
       <Link
-        href="#"
+        href="/"
         className="relative z-20 flex items-center space-x-2 pt-1 text-sm font-normal text-black"
       >
         <Image src='/logo.jpg' width={24} height={24} alt="logo" className="rounded-full " />
@@ -105,8 +105,8 @@ const layout = ({ children } : { children:React.ReactNode }) => {
   export const LogoIcon = () => {
     return (
       <Link
-        href="#"
-        className="relative z-20 flex items-center space-x-2 pt-1 text-sm font-normal text-black"
+        href="/"
+        className="relative z-20 flex items-center space-x-2 pt-1 text-sm font-normal  text-black"
       >
         <Image src='/logo.jpg' width={24} height={24} alt="logo" className="rounded-full " />
       </Link>

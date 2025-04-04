@@ -17,8 +17,8 @@ export default function Footer() {
             <h4 className="font-semibold mb-3 md:mb-4 text-center md:text-left">Explore</h4>
             <ul className="flex flex-wrap justify-center md:flex-row gap-4 md:gap-6">
               <li><Link href="/" className="text-sm text-gray-600 hover:text-black">Home</Link></li>
-              <li><Link href="#about" className="text-sm text-gray-600 hover:text-black">About us</Link></li>
-              <li><Link href="#services" className="text-sm text-gray-600 hover:text-black">Services</Link></li>
+              <li><Link href="/About" className="text-sm text-gray-600 hover:text-black">About us</Link></li>
+              <li><Link href="#courses" className="text-sm text-gray-600 hover:text-black">Courses</Link></li>
               <li><Link href="#contact" className="text-sm text-gray-600 hover:text-black">Contact Us</Link></li>
             </ul>
           </div>

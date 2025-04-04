@@ -1,5 +1,6 @@
 import { Star, Users, Video } from "lucide-react"
 import Image from "next/image"
+import { Button } from "./ui/button"
 
 export default function CourseInstructor() {
   // This would typically come from an API
@@ -31,7 +32,7 @@ export default function CourseInstructor() {
         </div>
 
         <div className="flex-grow">
-          <h3 className="text-xl font-medium text-purple-600 hover:text-purple-700 transition-colors">
+          <h3 className="text-xl font-medium text-neutral-600 hover:text-neutral-800 transition-colors">
             {instructor.name}
           </h3>
           <p className="text-gray-600 mb-3">{instructor.title}</p>
@@ -64,9 +65,9 @@ export default function CourseInstructor() {
             </p>
           </div>
 
-          <button className="text-purple-600 font-medium hover:text-purple-700 transition-colors mt-2">
+          <Button variant='outline' className="transition-colors mt-2  text-blue-600 font-medium hover:text-blue-800">
             Show more
-          </button>
+          </Button>
         </div>
       </div>
     </section>
