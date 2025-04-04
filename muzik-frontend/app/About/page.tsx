@@ -39,7 +39,7 @@ const data = [
           </p>
           <div className="grid grid-cols-2 gap-4">
             <Image
-              src="/assets/meet soni.jpg"
+              src="/assets/tutor/meet.jpg"
               alt="startup template"
               width={500}
               height={500}
@@ -58,7 +58,7 @@ const data = [
           </p>
           <div className="grid grid-cols-2 gap-4">
             <Image
-              src="/assets/asr.jpg"
+              src="/assets/tutor/adwait.jpg"
               alt="hero template"
               width={500}
               height={500}
@@ -149,7 +149,7 @@ const page = () => {
                 </div>
             </div>
         </div>
-        <div className="border-t-2 border-gray mx-28 mt-10">
+        <div className="border-t-2 border-gray mx-4 mt-10">
             <Footer />
         </div>
     </div>

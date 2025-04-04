@@ -20,8 +20,8 @@ export function TutorTeam() {
     },
   ];
   return (
-    <div className="border-t-2 border-gray mx-28 mt-10 border-b-2 pb-16 border-gray">
-      <h2 className="text-3xl lg:text-5xl lg:leading-tight font-semibold text-center mt-20 ">Meet the Experts Behind Music Skill House</h2>
+    <div className="border-t-2 border-gray md:mx-28 mx-4 mt-10 border-b-2 pb-16 border-gray">
+      <h2 className="text-3xl lg:text-5xl lg:leading-tight font-semibold text-center mt-20 ">Meet the Instructors Behind Music Skill House</h2>
       <AnimatedTeam testimonials={testimonials} />
     </div>
   );
