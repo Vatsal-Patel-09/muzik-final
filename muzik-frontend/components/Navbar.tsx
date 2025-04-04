@@ -102,7 +102,7 @@ function Navbar({ className }: { className?: string }) {
                 <DropdownMenuLabel>Menu</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <Link href='/'><DropdownMenuItem>Home</DropdownMenuItem></Link>
-                <Link href='#about'><DropdownMenuItem>About</DropdownMenuItem></Link>
+                <Link href='/About'><DropdownMenuItem>About</DropdownMenuItem></Link>
                 <Link href='#courses'><DropdownMenuItem>Courses</DropdownMenuItem></Link>
                 {/* <Link href='#services'><DropdownMenuItem>Services</DropdownMenuItem></Link> */}
                 <Link href='#contact'><DropdownMenuItem>Contact</DropdownMenuItem></Link>

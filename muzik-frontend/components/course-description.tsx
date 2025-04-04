@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Check } from "lucide-react"
+import { Button } from "./ui/button"
 
 interface CourseDescriptionProps {
   course: {
@@ -96,19 +97,19 @@ export default function CourseDescription({ course }: CourseDescriptionProps) {
       </div>
 
       {!expanded ? (
-        <button
+        <Button variant='outline'
           onClick={() => setExpanded(true)}
-          className="mt-2 text-purple-600 font-medium hover:text-purple-700 transition-colors"
+          className="mt-2 text-blue-600 font-medium hover:text-blue-800 transition-colors"
         >
           Show more
-        </button>
+        </Button>
       ) : (
-        <button
+        <Button variant='outline'
           onClick={() => setExpanded(false)}
-          className="mt-4 text-purple-600 font-medium hover:text-purple-700 transition-colors"
+          className="mt-4 text-blue-600 font-medium hover:text-blue-800 transition-colors"
         >
           Show less
-        </button>
+        </Button>
       )}
     </section>
   )

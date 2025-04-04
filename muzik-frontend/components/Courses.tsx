@@ -14,7 +14,7 @@ export default function Courses() {
         <br />
         Discover a range of courses tailored for beginners and professionals alike. Whether you're looking to enhance your production skills, learn the nuances of mixing and mastering, or dive into film scoring, we have the right course for you!
         </p>
-        <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex flex-col md:flex-row gap-8 mt-3">
           <div className="flex items-center justify-center"><CourseCard /></div>
           {/* <div className="flex items-center justify-center"><CourseCard /></div> */}
         </div>

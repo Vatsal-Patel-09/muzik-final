@@ -85,7 +85,7 @@ export default function Contact() {
             </div>
           </div>
           <div className="relative h-[300px] w-full">
-            <DirectionsButton className="absolute right-2 top-2 z-10" />
+            <DirectionsButton className="absolute right-2 top-2 z-10 rounded-full" />
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.1866506366496!2d72.53093521094804!3d23.053617679065148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e85ec707d29a9%3A0xfb32f2b2ef518ccf!2sGod%20Grace%20Studio!5e0!3m2!1sen!2sin!4v1742746524241!5m2!1sen!2sin"
               width="100%"
