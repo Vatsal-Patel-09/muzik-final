@@ -47,9 +47,9 @@ const AuthForm = () => {
     }
 
   return (
-    <div className="border-2 border-gray-500 rounded-lg p-8 w-1/4 bg-black/70 text-white">
+    <div className="border-2 border-gray-500 rounded-lg p-8  bg-white/70 text-black">
 
-          <h1 className="text-[34px] mb-4 font-semibold flex items-center justify-center">Login</h1>
+          <h1 className="text-3xl lg:text-5xl lg:leading-tight mb-4 font-semibold flex items-center justify-center">Login</h1>
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -62,7 +62,7 @@ const AuthForm = () => {
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your Username" {...field} />
+                      <Input placeholder="Enter your Username"  {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -79,7 +79,7 @@ const AuthForm = () => {
                     <FormControl>
                       <Input placeholder="Enter your email to " {...field} />
                     </FormControl>
-                    <FormDescription>
+                    <FormDescription className="text-gray-900">
                       Enter the email with which the course was purchased.
                     </FormDescription>
                     <FormMessage />
@@ -88,7 +88,7 @@ const AuthForm = () => {
               />
 
 
-              <Button type="submit" variant='ghost' className="border-2 border-white">Send OTP</Button>
+              <Button type="submit" variant='default' className="border-2 border-black">Send OTP</Button>
             </form>
           </Form>
 

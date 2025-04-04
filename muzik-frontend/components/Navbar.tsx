@@ -38,7 +38,7 @@ function Navbar({ className }: { className?: string }) {
   };
 
   return (
-    <div className={cn("fixed top-10 inset-x-0 max-w-7xl mx-auto z-50 -mt-5", className)}>
+    <div className={cn("fixed top-10 inset-x-0 max-w-7xl mx-auto z-50 -mt-5  rounded-full", className)}>
       <Menu setActive={setActive}>
         <div className="flex items-center justify-between w-full">
           <div>
@@ -86,7 +86,7 @@ function Navbar({ className }: { className?: string }) {
               ) : (
                 <Button variant="outline" 
                   onClick={handleLogin}
-                  className="text-black text-xs font-semibold bg-white p-3 rounded-full"
+                  className="text-black text-xs font-semibold bg-white border-2 border-neutral-300 p-3 rounded-full"
                 >
                   Log in
                 </Button>

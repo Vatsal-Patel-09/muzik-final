@@ -30,11 +30,11 @@ export function About() {
   return (
     <div id="about" className="relative z-20 py-10 lg:py-40 max-w-7xl mx-auto ">
       <div className="px-8">
-        <h4 className="text-3xl lg:text-5xl lg:leading-tight max-w-5xl mx-auto text-center tracking-tight font-medium text-white dark:text-white">
+        <h4 className="text-3xl lg:text-5xl lg:leading-tight max-w-5xl mx-auto text-center tracking-tight font-medium text-black dark:text-white">
           About Us
         </h4>
 
-        <p className="text-sm lg:text-base  max-w-2xl  my-4 mx-auto text-neutral-400 text-center font-normal dark:text-neutral-300">
+        <p className="text-sm lg:text-base  max-w-2xl  my-4 mx-auto text-neutral-800 text-center font-normal dark:text-neutral-800">
         Music Skill House is an innovative online platform designed for aspiring musicians, independent artists, and students who want to master the art of music. Our goal is to provide industry-relevant education, helping learners refine their craft and succeed in the music industry
         </p>
       </div>
@@ -81,7 +81,7 @@ const FeatureDescription = ({ children }: { children?: React.ReactNode }) => {
     <p
       className={cn(
         "text-sm md:text-base  max-w-4xl text-left mx-auto",
-        "text-neutral-400 text-center font-normal dark:text-neutral-300",
+        "text-neutral-800 text-center font-normal dark:text-neutral-800",
         "text-left max-w-sm mx-0 md:text-sm my-2"
       )}
     >
@@ -137,7 +137,8 @@ export const SkeletonTwo = () => {
     <div className="relative flex flex-col items-start p-8 gap-10 h-full overflow-hidden">
       
       {/* First row with all 5 images */}
-      <div className="flex flex-row -ml-20">
+      <div className="hidden md:block">
+      <div className="flex flex-row -ml-10">
         {images.map((image, idx) => (
           <motion.div
             variants={imageVariants}
@@ -160,9 +161,10 @@ export const SkeletonTwo = () => {
           </motion.div>
         ))}
       </div>
+      </div>
       
       {/* Second row with all 5 images */}
-      <div className="flex flex-row md:-ml-60">
+      <div className="flex flex-row lg:-ml-60 ">
         {images.map((image, idx) => (
           <motion.div
             key={"images-second" + idx}
