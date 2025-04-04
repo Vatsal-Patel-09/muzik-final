@@ -63,7 +63,7 @@ export function Testimonials() {
   ];
   return (
     <div className="relative overflow-hidden w-full h-full py-20 ">
-      <h2 className="text-4xl font-bold text-center mb-8">Testimonials</h2>
+      <h2 className="text-3xl lg:text-5xl lg:leading-tight font-semibold text-center mb-8">Testimonials</h2>
       <Carousel slides={slideData} />
     </div>
   );

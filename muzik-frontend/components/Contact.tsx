@@ -6,7 +6,7 @@ export default function Contact() {
   return (
     <section id="contact" className="relative py-20 border-t-2 border-gray mx-28 mt-10 border-b-2 pb-30">
       <div className="container mx-auto px-6">
-        <h2 className="mb-8 text-center text-3xl font-bold">Contact Us</h2>
+        <h2 className="mb-8 text-center text-3xl lg:text-5xl lg:leading-tight font-semibold">Contact Us</h2>
         <div className="flex md:flex-row flex-col justify-center items-center gap-8 ">
           <div>
             <h3 className="mb-4 text-xl font-semibold">
@@ -31,7 +31,7 @@ export default function Contact() {
                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                   ></path>
                 </svg>
-                <Link target="_blank" href={'mailto:muzikskillhouse@gmail.com'} ><Button variant='link' className="text-white -ml-3" >muzikskillhouse@gmail.com</Button></Link>
+                <Link target="_blank" href={'mailto:muzikskillhouse@gmail.com'} ><Button variant='link' className="text-black -ml-3" >muzikskillhouse@gmail.com</Button></Link>
               </p>
               <p className="flex items-center">
                 <svg
@@ -73,7 +73,7 @@ export default function Contact() {
                 </svg>
                 <a
                   href="https://g.co/kgs/vPTEZ8N"
-                  className="text-blue-400 hover:underline"
+                  className="text-blue-500 hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

@@ -17,7 +17,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="bg-black text-white ">
+    <main className="bg-white h-screen w-screen overflow-x-hidden">
       <Navbar />
         <Hero />
       <div>
