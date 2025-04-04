@@ -51,7 +51,7 @@ const PaymentForm = () => {
         try {
 
             // Request backend to create a Razorpay order
-            const { data } = await axios.post("http://localhost:5000/api/payments/create_razorpay_order", {
+            const { data } = await axios.post("https://muzik-mgj9.onrender.com/api/payments/create_razorpay_order", {
                 amount: parseInt(values.amount), // Convert to number
                 email: values?.email,
             });
@@ -66,7 +66,7 @@ const PaymentForm = () => {
                 order_id: data.id,
                 handler: async (response: any) => {
                     // Verify payment
-                    const verifyRes = await axios.post("http://localhost:5000/api/payments/get_razorpay_order_status", response);
+                    const verifyRes = await axios.post("https://muzik-mgj9.onrender.com/api/payments/get_razorpay_order_status", response);
                     alert(verifyRes.data.message);
                 },
                 prefill: {
