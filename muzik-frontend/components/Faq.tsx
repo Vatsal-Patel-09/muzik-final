@@ -147,7 +147,7 @@ export default function FAQ() {
             <div className="mt-10 text-center">
               <Dialog>
                 <DialogTrigger className=" px-6 py-2 rounded-fulltransition-colors">
-                  <Button variant='default' >Show More</Button>
+                  <Button variant='default' className="rounded-full" >Show More</Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-2xl">
                   <DialogHeader>

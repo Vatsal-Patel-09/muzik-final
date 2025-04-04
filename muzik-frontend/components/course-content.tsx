@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { ChevronDown, ChevronUp, File, Play, Code } from "lucide-react"
+import { Button } from "./ui/button"
 
 interface CourseContentProps {
   course: {
@@ -99,8 +100,8 @@ export default function CourseContent({ course }: CourseContentProps) {
     <section className="border-t border-gray-200 pt-8">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-900">Course content</h2>
-        <button
-          className="text-purple-600 font-medium hover:text-purple-700 transition-colors"
+        <Button variant='outline'
+          className="text-blue-500 font-medium hover:text-blue-700 transition-colors"
           onClick={() => {
             if (expandedSections.length === sections.length) {
               setExpandedSections([])
@@ -110,7 +111,7 @@ export default function CourseContent({ course }: CourseContentProps) {
           }}
         >
           {expandedSections.length === sections.length ? "Collapse all sections" : "Expand all sections"}
-        </button>
+        </Button>
       </div>
 
       <div className="text-sm text-gray-600 mb-4">
@@ -147,7 +148,7 @@ export default function CourseContent({ course }: CourseContentProps) {
                     <div className="flex items-center">
                       <span className="mr-3 text-gray-500">{getIcon(lecture.type)}</span>
                       <span className="text-gray-900">{lecture.title}</span>
-                      {lecture.preview && <span className="ml-2 text-purple-600 text-sm font-medium">Preview</span>}
+                      {lecture.preview && <span className="ml-2 text-blue-600 text-sm font-medium">Preview</span>}
                     </div>
                     <span className="text-sm text-gray-600">{lecture.duration}</span>
                   </div>
