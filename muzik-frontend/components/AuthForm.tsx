@@ -1,11 +1,11 @@
 "use client"
- 
+
 import { z } from "zod"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-
 import { Button } from "@/components/ui/button"
+import axios from "axios"
 import {
   Form,
   FormControl,
@@ -16,7 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
- 
+
 const formSchema = z.object({
   username: z.string().min(2).max(50),
   email: z.string().email(),
@@ -30,25 +30,90 @@ const AuthForm = () => {
   const [accountId, setAccountId] = useState(false);
   const [submit, setSubmit] = useState(false);
 
-    // 1. Define your form.
-    const form = useForm<z.infer<typeof formSchema>>({
-      resolver: zodResolver(formSchema),
-      defaultValues: {
-        username: "",
-        email: "",
-      },
-    })
-   
-    // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof formSchema>) {
-      // Do something with the form values.
-      // ✅ This will be type-safe and validated.
-      console.log(values)
+  // 1. Define your form.
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+    },
+  })
+
+  // 2. Define a submit handler.
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log("dsgygsdufgusdgfsd", values)
+    sendOtpFunction(values)
+  }
+
+
+  const sendOtpFunction = async (values: z.infer<typeof formSchema>) => {
+    try {
+      await axios.post("https://muzik-mgj9.onrender.com/api/auth/login-otp", {
+        email: values.email
+      }).then((response) => {
+        localStorage.setItem("email", values.email)
+        console.log("dsbfygdsuf", response)
+      }).catch((error) => {
+        console.error("Error sending OTP", error)
+
+      })
+
+    } catch (error) {
+      console.error("adsjgygufgdsfsdf", error)
     }
+  }
 
   return (
     <div className="border-2 border-gray-500 rounded-lg p-8  bg-white/70 text-black">
 
+<!-- <<<<<<< backend
+      <h1 className="text-[34px] mb-4 font-semibold flex items-center justify-center">Login</h1>
+
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+
+              <FormItem>
+                <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter your Username" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter your email to " {...field} />
+                </FormControl>
+                <FormDescription>
+                  Enter the email with which the course was purchased.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+
+          <Button type="submit" variant='ghost' className="border-2 border-white">Send OTP</Button>
+        </form>
+      </Form>
+
+      <OTPModal /> -->
+<!-- ======= -->
           <h1 className="text-3xl lg:text-5xl lg:leading-tight mb-4 font-semibold flex items-center justify-center">Login</h1>
 
           <Form {...form}>
@@ -93,6 +158,7 @@ const AuthForm = () => {
           </Form>
 
           {/* <OTPModal /> */}
+<!-- >>>>>>> main -->
     </div>
   )
 }
