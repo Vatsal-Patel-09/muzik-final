@@ -18,20 +18,20 @@ export default function Footer() {
             <ul className="flex flex-wrap justify-center md:flex-row gap-4 md:gap-6">
               <li><Link href="/" className="text-sm text-gray-600 hover:text-black">Home</Link></li>
               <li><Link href="/About" className="text-sm text-gray-600 hover:text-black">About us</Link></li>
-              <li><Link href="#courses" className="text-sm text-gray-600 hover:text-black">Courses</Link></li>
+              <li><Link href="#services" className="text-sm text-gray-600 hover:text-black">Courses</Link></li>
               <li><Link href="#contact" className="text-sm text-gray-600 hover:text-black">Contact Us</Link></li>
             </ul>
           </div>
         </div>
         
         {/* Bottom section with copyright and legal links */}
-        <div className="mt-8 pt-6 border-t border-gray-200 flex flex-col mx-0 md:mx-20 md:flex-row justify-between items-center">
+        <div className="mt-8 pt-6 border-t border-gray-200 flex flex-col mx-0 md:mx-24 md:flex-row justify-between items-center">
           <p className="text-xs md:text-sm text-gray-600 text-center md:text-left mb-4 md:mb-0">
             &copy; 2025 Muzik Skill House. All rights reserved.
           </p>
 
-          <div className="flex flex-col items-center justify-center md:flex-row gap-2 md:gap-4">
-            <Button variant='link' className="text-black text-xs md:text-sm py-1"
+          <div className="grid grid-cols-2 md:grid-cols-4 md:flex-row gap-2 md:gap-4">
+            <Button variant='link' className="text-black text-xs md:text-sm py-1 flex items-center justify-center"
               onClick={() => {
                 const link = document.createElement("a");
                 link.href = "/tnc.pdf";
@@ -41,13 +41,13 @@ export default function Footer() {
             >
               Terms of use
             </Button>
-            <Link href='https://merchant.razorpay.com/policy/Q72SJo2YuNMqTd/terms'>
+            <Link className="flex items-center justify-center" href='https://merchant.razorpay.com/policy/Q72SJo2YuNMqTd/terms'>
               <Button variant="link" className="text-black text-xs md:text-sm py-1">Terms and Conditions</Button>
             </Link>
-            <Link href='https://merchant.razorpay.com/policy/Q72SJo2YuNMqTd/refund'>
+            <Link className="flex items-center justify-center" href='https://merchant.razorpay.com/policy/Q72SJo2YuNMqTd/refund'>
               <Button variant="link" className="text-black text-xs md:text-sm py-1">Cancellations and Refunds</Button>
             </Link>
-            <Link href='https://merchant.razorpay.com/policy/Q72SJo2YuNMqTd/privacy'>
+            <Link className="flex items-center justify-center" href='https://merchant.razorpay.com/policy/Q72SJo2YuNMqTd/privacy'>
               <Button variant="link" className="text-black text-xs md:text-sm py-1">Privacy Policy</Button>
             </Link>
           </div>
