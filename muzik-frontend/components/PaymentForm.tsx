@@ -58,7 +58,7 @@ const PaymentForm = () => {
 
             // Configure Razorpay checkout
             const options = {
-                key: "rzp_test_4qm51zu31eNS4J", // Replace with actual Key ID
+                key: "rzp_live_a2JtgAgHLcozFk", // Replace with actual Key ID
                 amount: data.amount,
                 currency: data.currency,
                 name: "Your Company",
