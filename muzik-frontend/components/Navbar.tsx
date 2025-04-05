@@ -16,15 +16,6 @@ import {
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 
-export function NavbarDemo() {
-  return (
-    <div className="relative w-full flex items-center justify-center">
-      <Navbar className="top-2" />
-      <p className="text-black dark:text-white">The Navbar will show on top of the page</p>
-    </div>
-  );
-}
-
 function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,7 +41,7 @@ function Navbar({ className }: { className?: string }) {
           {/* Desktop Menu Items */}
           <div className="hidden md:flex items-center justify-center mx-auto">
             <div className="flex items-center gap-8">
-              <ul className="flex items-center space-x-6 text-black">
+              <ul className="flex items-center space-x-6 text-white">
                 <li><Link href='/'>Home</Link></li>
                 <li><Link href='/About'>About</Link></li>
                 <li><Link href='/all-courses'>Courses</Link></li>
@@ -97,7 +88,7 @@ function Navbar({ className }: { className?: string }) {
           {/* Mobile Menu */}
           <div className="md:hidden ">
             <DropdownMenu>
-              <DropdownMenuTrigger><SquareMenu className="text-black"/></DropdownMenuTrigger>
+              <DropdownMenuTrigger><SquareMenu className="text-white"/></DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuLabel>Menu</DropdownMenuLabel>
                 <DropdownMenuSeparator />
