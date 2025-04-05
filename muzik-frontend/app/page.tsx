@@ -22,7 +22,7 @@ axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 export default function Home() {
 
   return (
-    <main className="bg-black text-white ">
+    <main className="bg-white h-screen w-screen overflow-x-hidden">
       <Navbar />
         <Hero />
       <div>

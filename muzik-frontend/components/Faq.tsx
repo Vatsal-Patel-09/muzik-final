@@ -117,9 +117,9 @@ export default function FAQ() {
   ]
 
   return (
-    <section className="py-20 border-t-2 border-gray mx-28 mt-20">
+    <section className="py-20 border-t-2 border-gray md:mx-28 mx-4 mt-20">
       <div className="container mx-auto px-6 flex items-center justify-center flex-col">
-        <h2 className="text-3xl font-bold text-center mb-8">FAQs</h2>
+        <h2 className="text-3xl lg:text-5xl lg:leading-tight font-semibold text-center mb-8">FAQs</h2>
         <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
           Find answers to common questions about our music courses and services.
         </p>
@@ -146,8 +146,8 @@ export default function FAQ() {
             
             <div className="mt-10 text-center">
               <Dialog>
-                <DialogTrigger className="border-2 border-black px-6 py-2 rounded-fulltransition-colors">
-                  <Button variant='ghost' className="bg-black border-2 border-white">Show More</Button>
+                <DialogTrigger className=" px-6 py-2 rounded-fulltransition-colors">
+                  <Button variant='default' className="rounded-full" >Show More</Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-2xl">
                   <DialogHeader>

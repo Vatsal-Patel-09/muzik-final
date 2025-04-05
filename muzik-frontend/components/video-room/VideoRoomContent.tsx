@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { VideoPlayer } from "@/components/video-room/VideoPlayer";
 import { VideoTitle } from "@/components/video-room/VideoTitle";
 import { ModuleDescription } from "@/components/video-room/ModuleDescription";
 import { UpcomingVideosList } from "@/components/video-room/UpcomingVideosList";
-import { useSearchParams, useRouter } from "next/navigation";
 
 // Mock data structure - replace with real API calls
 const coursesData = {
@@ -73,7 +73,7 @@ const coursesData = {
   // Add more courses as needed
 };
 
-export default function VideoRoomPage() {
+export function VideoRoomContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   
@@ -111,51 +111,49 @@ export default function VideoRoomPage() {
   };
 
   return (
-    <main className="bg-black min-h-screen py-8 px-4">
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Video Player - Takes up 2/3 of the width on large screens */}
-          <div className="lg:col-span-2">
-            <VideoPlayer 
-              otp={currentLesson.otp} 
-              playbackInfo={currentLesson.playbackInfo} 
-            />
-          </div>
-          
-          {/* Upcoming Videos List - Takes up 1/3 of the width on large screens */}
-          <div className="lg:col-span-1">
-            <UpcomingVideosList 
-              videos={courseData.lessons} 
-              onVideoSelect={handleVideoSelect}
-              currentVideoId={currentLesson.id}
-            />
-          </div>
+    <div className="container mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Video Player - Takes up 2/3 of the width on large screens */}
+        <div className="lg:col-span-2">
+          <VideoPlayer 
+            otp={currentLesson.otp} 
+            playbackInfo={currentLesson.playbackInfo} 
+          />
         </div>
         
-        {/* Video Title with Next Button */}
-        <div className="mt-6 flex justify-between items-center">
-          <VideoTitle title={currentLesson.title} />
-          
-          <button 
-            onClick={handleNextLesson}
-            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full flex items-center gap-2"
-            disabled={currentLesson.id === courseData.lessons[courseData.lessons.length - 1].id}
-          >
-            Next Lesson
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clipRule="evenodd" />
-            </svg>
-          </button>
-        </div>
-        
-        {/* Module Description */}
-        <div className="mt-6">
-          <ModuleDescription 
-            title={courseData.title} 
-            description={currentLesson.description || courseData.description} 
+        {/* Upcoming Videos List - Takes up 1/3 of the width on large screens */}
+        <div className="lg:col-span-1">
+          <UpcomingVideosList 
+            videos={courseData.lessons} 
+            onVideoSelect={handleVideoSelect}
+            currentVideoId={currentLesson.id}
           />
         </div>
       </div>
-    </main>
+      
+      {/* Video Title with Next Button */}
+      <div className="mt-6 flex justify-between items-center">
+        <VideoTitle title={currentLesson.title} />
+        
+        <button 
+          onClick={handleNextLesson}
+          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full flex items-center gap-2"
+          disabled={currentLesson.id === courseData.lessons[courseData.lessons.length - 1].id}
+        >
+          Next Lesson
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clipRule="evenodd" />
+          </svg>
+        </button>
+      </div>
+      
+      {/* Module Description */}
+      <div className="mt-6">
+        <ModuleDescription 
+          title={courseData.title} 
+          description={currentLesson.description || courseData.description} 
+        />
+      </div>
+    </div>
   );
 }

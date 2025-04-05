@@ -53,8 +53,8 @@ export function UpcomingVideosList({ videos, onVideoSelect, currentVideoId }: Up
   };
 
   return (
-    <div className="bg-black text-white rounded-xl p-4">
-      <h2 className="text-xl font-semibold mb-4 text-white">Course Lessons</h2>
+    <div className="bg-white text-black rounded-xl p-4 shadow-md">
+      <h2 className="text-xl font-semibold mb-4 text-black">Course Lessons</h2>
       <AnimatePresence>
         {active && typeof active === "object" && (
           <motion.div
@@ -74,7 +74,7 @@ export function UpcomingVideosList({ videos, onVideoSelect, currentVideoId }: Up
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, transition: { duration: 0.05 } }}
-              className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6"
+              className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-gray-200 rounded-full h-6 w-6"
               onClick={() => setActive(null)}
             >
               <CloseIcon />
@@ -82,7 +82,7 @@ export function UpcomingVideosList({ videos, onVideoSelect, currentVideoId }: Up
             <motion.div
               layoutId={`card-${active.id}-${id}`}
               ref={ref}
-              className="w-full max-w-[500px] h-full md:h-fit md:max-h-[90%] flex flex-col bg-neutral-900 sm:rounded-3xl overflow-hidden"
+              className="w-full max-w-[500px] h-full md:h-fit md:max-h-[90%] flex flex-col bg-white sm:rounded-3xl overflow-hidden shadow-lg"
             >
               <motion.div layoutId={`image-${active.id}-${id}`}>
                 <Image
@@ -100,13 +100,13 @@ export function UpcomingVideosList({ videos, onVideoSelect, currentVideoId }: Up
                   <div className="">
                     <motion.h3
                       layoutId={`title-${active.id}-${id}`}
-                      className="font-bold text-white"
+                      className="font-bold text-black"
                     >
                       {active.title}
                     </motion.h3>
                     <motion.p
                       layoutId={`description-${active.id}-${id}`}
-                      className="text-neutral-400"
+                      className="text-gray-600"
                     >
                       {active.duration}
                     </motion.p>
@@ -129,7 +129,7 @@ export function UpcomingVideosList({ videos, onVideoSelect, currentVideoId }: Up
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="text-neutral-400 text-xs md:text-sm lg:text-base h-40 md:h-fit pb-10 flex flex-col items-start gap-4 overflow-auto [mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch]"
+                    className="text-gray-600 text-xs md:text-sm lg:text-base h-40 md:h-fit pb-10 flex flex-col items-start gap-4 overflow-auto [mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch]"
                   >
                     {typeof active.content === "function"
                       ? active.content()
@@ -149,8 +149,8 @@ export function UpcomingVideosList({ videos, onVideoSelect, currentVideoId }: Up
             onClick={() => handleVideoClick(video)}
             className={`p-3 flex justify-between items-center rounded-lg cursor-pointer ${
               video.id === currentVideoId 
-                ? "bg-green-900/30 border border-green-500" 
-                : "bg-neutral-900/50 hover:bg-neutral-800"
+                ? "bg-green-100 border border-green-500" 
+                : "bg-gray-50 hover:bg-gray-100"
             }`}
           >
             <div className="flex gap-3 items-center">
@@ -161,18 +161,18 @@ export function UpcomingVideosList({ videos, onVideoSelect, currentVideoId }: Up
                   </svg>
                 </div>
               ) : (
-                <div className="w-5 h-5 rounded-full border border-gray-500 flex items-center justify-center">
+                <div className="w-5 h-5 rounded-full border border-gray-400 flex items-center justify-center">
                   <span className="text-xs text-gray-500">{video.id}</span>
                 </div>
               )}
               <div>
-                <h3 className="font-medium text-white text-left">{video.title}</h3>
-                <p className="text-gray-400 text-sm">{video.duration}</p>
+                <h3 className="font-medium text-black text-left">{video.title}</h3>
+                <p className="text-gray-500 text-sm">{video.duration}</p>
               </div>
             </div>
             <motion.button
               layoutId={`button-${video.id}-${id}`}
-              className="px-3 py-1 text-xs rounded-full bg-neutral-800 hover:bg-green-500 text-white"
+              className="px-3 py-1 text-xs rounded-full bg-gray-200 hover:bg-green-500 hover:text-white text-black"
             >
               {video.isCompleted ? "Rewatch" : "Play"}
             </motion.button>

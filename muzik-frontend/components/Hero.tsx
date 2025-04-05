@@ -30,20 +30,12 @@ export default function Hero() {
             Your Gateway to Professional Music Education
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
-            <Link href='/login'>
-              <Button size="lg" className="font-medium w-full sm:w-auto">
-                Get Started
+            <Link href='/all-courses'>
+              <Button size="lg" className="font-medium sm:w-auto w-40 rounded-full" variant="outline">
+                Explore our Courses
               </Button>
             </Link>
-            <Link href="#courses">
-              <Button
-                variant="outline"
-                size="lg"
-                className="font-medium bg-transparent text-white border-white hover:bg-white/10 w-full sm:w-auto"
-              >
-                Explore
-              </Button>
-            </Link>
+
           </div>
         </div>
       </div>

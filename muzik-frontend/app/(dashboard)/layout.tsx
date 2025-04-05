@@ -20,14 +20,14 @@ const layout = ({ children } : { children:React.ReactNode }) => {
         label: "All Courses",
         href: "/all-courses",
         icon: (
-          <Library className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+          <Library className="h-5 w-5 shrink-0 text-black dark:text-neutral-200" />
         ),
       },
       {
         label: "Purchased Courses",
         href: "/purchased-courses",
         icon: (
-          <NotebookPen className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+          <NotebookPen className="h-5 w-5 shrink-0 text-black dark:text-neutral-200" />
         ),
       },
       // {
@@ -41,7 +41,7 @@ const layout = ({ children } : { children:React.ReactNode }) => {
         label: "Logout",
         href: "/login",
         icon: (
-          <IconArrowLeft className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+          <IconArrowLeft className="h-5 w-5 shrink-0 text-black dark:text-neutral-200" />
         ),
       },
     ];
@@ -49,7 +49,7 @@ const layout = ({ children } : { children:React.ReactNode }) => {
     return (
       <div
         className={cn(
-          "mx-auto flex w-full max-w-8xl flex-1 flex-col overflow-hidden bg-gray-500 md:flex-row dark:border-neutral-700 dark:bg-neutral-800",
+          "mx-auto flex w-full max-w-8xl flex-1 flex-col overflow-hidden bg-neutral-200 md:flex-row dark:border-neutral-700 dark:bg-neutral-800",
           "h-screen", // for your use case, use `h-screen` instead of `h-[60vh]`
         )}
       >
@@ -83,7 +83,7 @@ const layout = ({ children } : { children:React.ReactNode }) => {
           </SidebarBody>
         </Sidebar>
         <div className="flex flex-1">
-            <div className="flex h-full w-2xl flex-1 flex-col gap-2 rounded-tl-2xl bg-black p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900">
+            <div className="flex h-auto w-2xl flex-1 flex-col gap-2 rounded-tl-2xl md:p-10 dark:border-neutral-700 dark:bg-neutral-900 bg-white">
                 {children}
             </div>
         </div>
@@ -94,7 +94,7 @@ const layout = ({ children } : { children:React.ReactNode }) => {
   export const Logo = () => {
     return (
       <Link
-        href="#"
+        href="/"
         className="relative z-20 flex items-center space-x-2 pt-1 text-sm font-normal text-black"
       >
         <Image src='/logo.jpg' width={24} height={24} alt="logo" className="rounded-full " />
@@ -105,8 +105,8 @@ const layout = ({ children } : { children:React.ReactNode }) => {
   export const LogoIcon = () => {
     return (
       <Link
-        href="#"
-        className="relative z-20 flex items-center space-x-2 pt-1 text-sm font-normal text-black"
+        href="/"
+        className="relative z-20 flex items-center space-x-2 pt-1 text-sm font-normal  text-black"
       >
         <Image src='/logo.jpg' width={24} height={24} alt="logo" className="rounded-full " />
       </Link>
