@@ -53,12 +53,6 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
             </span>
           </p>
 
-          <Button
-            className="w-full bg-blue-600 hover:bg-blue-800 text-white py-6 mb-2 transition-all hover:shadow-md"
-            size="lg"
-          >
-            Start subscription
-          </Button>
 
           <p className="text-center text-sm text-gray-600 mb-1">Starting at ₹850 per month</p>
           <p className="text-center text-sm text-gray-600 mb-4">Cancel anytime</p>
@@ -72,13 +66,6 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
             {course.currency}
             {course.price}
           </div>
-
-          <Button
-            className="w-full bg-blue-600 hover:bg-blue-800 text-white py-6 mb-3 transition-all hover:shadow-md"
-            size="lg"
-          >
-            Add to cart
-          </Button>
 
           <Button
             variant="outline"

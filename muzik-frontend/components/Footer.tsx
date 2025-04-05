@@ -5,17 +5,17 @@ import { Button } from "./ui/button"
 
 export default function Footer() {
   return (
-    <footer className="pt-8 md:pt-16 pb-8 md:pb-12 flex">
+    <footer className="py-8 md:pt-16 md:pb-12 w-full">
       <div className="container mx-auto px-4 md:px-6 flex flex-col w-full">
-        {/* Top section - visible on all devices */}
-        <div className="flex flex-col md:flex-row justify-center md:justify-around items-center gap-8 md:gap-20">
+        {/* Top section */}
+        <div className="flex flex-col md:flex-row justify-center md:justify-around items-center gap-6 md:gap-20">
           <div className="text-center md:text-left md:ml-[-120px]">
             <h3 className="font-bold text-lg mb-2 md:mb-4">MUZIK Skill House</h3>
             <p className="text-sm text-gray-800 max-w-xs">Unlock Your Musical Potential with Our Expert-Curated Courses</p>
           </div>
-          <div className="mt-6 md:mt-0">
-            <h4 className="font-semibold mb-3 md:mb-4 text-center md:text-left">Explore</h4>
-            <ul className="flex flex-wrap justify-center md:flex-row gap-4 md:gap-6">
+          <div className="mt-4 md:mt-0">
+            <h4 className="font-semibold mb-2 md:mb-4 text-center md:text-left">Explore</h4>
+            <ul className="flex flex-wrap justify-center md:justify-start gap-4 md:gap-6">
               <li><Link href="/" className="text-sm text-gray-600 hover:text-black">Home</Link></li>
               <li><Link href="/About" className="text-sm text-gray-600 hover:text-black">About us</Link></li>
               <li><Link href="#services" className="text-sm text-gray-600 hover:text-black">Courses</Link></li>
@@ -30,7 +30,7 @@ export default function Footer() {
             &copy; 2025 Muzik Skill House. All rights reserved.
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 md:flex-row gap-2 md:gap-4">
+          <div className="flex flex-col  md:flex-row gap-2 md:gap-4">
             <Button variant='link' className="text-black text-xs md:text-sm py-1 flex items-center justify-center"
               onClick={() => {
                 const link = document.createElement("a");

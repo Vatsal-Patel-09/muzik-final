@@ -31,7 +31,7 @@ export default function Hero() {
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
             <Link href='/all-courses'>
-              <Button size="lg" className="font-medium w-full sm:w-auto rounded-full" variant="outline">
+              <Button size="lg" className="font-medium sm:w-auto w-40 rounded-full" variant="outline">
                 Explore our Courses
               </Button>
             </Link>

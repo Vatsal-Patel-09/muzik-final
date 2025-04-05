@@ -34,7 +34,7 @@ const companies: Company[] = [
 
 export const TopCompanies = () => {
   return (
-    <section className="pb-16 pt-8 lg:-mt-16 md:pt-0 text-black">
+    <section className="border-t-2 border-gray md:mx-28 mx-4 mt-8 pb-16 lg:-mt-16 pt-16 text-black">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <motion.h2 
