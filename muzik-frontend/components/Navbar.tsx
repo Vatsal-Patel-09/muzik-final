@@ -53,7 +53,7 @@ function Navbar({ className }: { className?: string }) {
               <ul className="flex items-center space-x-6 text-black">
                 <li><Link href='/'>Home</Link></li>
                 <li><Link href='/About'>About</Link></li>
-                <li><Link href='#courses'>Courses</Link></li>
+                <li><Link href='/all-courses'>Courses</Link></li>
                 {/* <li><Link href='#services'>Services</Link></li> */}
                 <li><Link href='#contact'>Contact</Link></li>
               </ul>
@@ -103,7 +103,7 @@ function Navbar({ className }: { className?: string }) {
                 <DropdownMenuSeparator />
                 <Link href='/'><DropdownMenuItem>Home</DropdownMenuItem></Link>
                 <Link href='/About'><DropdownMenuItem>About</DropdownMenuItem></Link>
-                <Link href='#courses'><DropdownMenuItem>Courses</DropdownMenuItem></Link>
+                <Link href='/all-courses'><DropdownMenuItem>Courses</DropdownMenuItem></Link>
                 {/* <Link href='#services'><DropdownMenuItem>Services</DropdownMenuItem></Link> */}
                 <Link href='#contact'><DropdownMenuItem>Contact</DropdownMenuItem></Link>
                 <DropdownMenuSeparator />
