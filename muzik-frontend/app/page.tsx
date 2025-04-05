@@ -14,8 +14,13 @@ import TopCompanies from "@/components/TopCompanies";
 import { TutorTeam } from "@/components/Tutor-Team";
 
 import Image from "next/image";
+import axios from "axios";
 
+axios.defaults.baseURL = 'https://muzik-mgj9.onrender.com';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 export default function Home() {
+
   return (
     <main className="bg-black text-white ">
       <Navbar />
