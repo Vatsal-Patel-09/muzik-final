@@ -1,9 +1,8 @@
 "use client"
 
-import { useState, useRef } from "react"
-import { Star, Play } from "lucide-react"
+import { useRef } from "react"
+import { Star } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
 
 interface CourseHeaderProps {
   course: {
@@ -17,7 +16,6 @@ interface CourseHeaderProps {
 }
 
 export default function CourseHeader({ course }: CourseHeaderProps) {
-  const [videoOpen, setVideoOpen] = useState(false)
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
   return (
@@ -38,33 +36,19 @@ export default function CourseHeader({ course }: CourseHeaderProps) {
 
       <h1 className="text-3xl font-bold text-gray-900 mb-6">{course.title}</h1>
 
-      <div
-        className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden mb-6 group cursor-pointer"
-        onClick={() => setVideoOpen(true)}
-      >
-        <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
-          <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-            <Play className="w-8 h-8 text-gray-900 ml-1" />
-          </div>
-          <span className="absolute bottom-4 left-4 text-white font-medium text-lg">Preview this course</span>
+      <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden mb-6">
+        <div className="w-full h-full">
+          <iframe
+            ref={iframeRef}
+            src="https://player.vdocipher.com/v2/?otp=20160313versASE323fdpDXQeczLVUYAsfEOAyp0QBIFoJVowHESzTZGTwm41hVN&playbackInfo=eyJ2aWRlb0lkIjoiMmI4NGFkYzIwZTE5NGZkMzgwYzZjZDYyMmFkNGYxZTMifQ=="
+            style={{ border: 0 }}
+            className="w-full h-full"
+            allowFullScreen={true}
+            allow="encrypted-media"
+            title="Video Player"
+          ></iframe>
         </div>
-        <img src="/placeholder.svg?height=480&width=854" alt="Course preview" className="w-full h-full object-cover" />
       </div>
-
-      <Dialog open={videoOpen} onOpenChange={setVideoOpen}>
-        <DialogContent className="max-w-4xl p-0 bg-black overflow-hidden" onInteractOutside={(e) => e.preventDefault()}>
-          <div className="aspect-video w-full">
-            <iframe
-              ref={iframeRef}
-              src={course.videoUrl}
-              className="absolute top-0 left-0 w-full h-full"
-              allowFullScreen={true}
-              allow="encrypted-media"
-              title="Video Player"
-            ></iframe>
-          </div>
-        </DialogContent>
-      </Dialog>
     </div>
   )
 }

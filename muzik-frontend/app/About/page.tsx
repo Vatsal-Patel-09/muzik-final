@@ -7,6 +7,7 @@ import { Timeline } from "@/components/ui/timeline";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Contact from "@/components/Contact";
 
 export const about = [
   {
@@ -82,7 +83,7 @@ const page = () => {
               <div 
                 className="absolute inset-0 bg-cover bg-center mx-auto md:mx-20 overflow-x-hidden w-[90%] rounded-2xl "
                 style={{
-                  backgroundImage: 'url("/assets/about/about4.jpg")', // Replace with your actual image path
+                  backgroundImage: 'url("/assets/about/AboutFixed04.jpg")', // Replace with your actual image path
                 }}
               >
                 {/* <div className="absolute inset-0 bg-black/70 backdrop-blur-sm"></div> */}
@@ -110,6 +111,7 @@ const page = () => {
             </div>
         </div>
         <div className="border-t-2 border-gray mx-4 mt-10">
+            <Contact />
             <Footer />
         </div>
     </div>
