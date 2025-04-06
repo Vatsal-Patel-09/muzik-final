@@ -24,6 +24,7 @@ const formSchema = z.object({
 
 import React, { useState } from 'react'
 import OTPModal from "./OTPModal"
+import axios from "axios"
 
 const AuthForm = () => {
 
@@ -43,12 +44,27 @@ const AuthForm = () => {
    
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
-      // Check if both username and email are filled
-      if (values.username && values.email) {
-        setEmail(values.email); // Store the email dynamically
-        setIsOTPModalOpen(true); // Open OTP modal
-      } else {
-        alert("Please fill in both username and email fields."); // Show alert if fields are empty
+      // Do something with the form values.
+      // ✅ This will be type-safe and validated.
+      console.log("dsgygsdufgusdgfsd", values)
+      sendOtpFunction(values)
+    }
+
+    const sendOtpFunction = async (values: z.infer<typeof formSchema>) => {
+      try {
+        await axios.post("https://muzik-mgj9.onrender.com/api/auth/login-otp", {
+          email: values.email
+        }).then((response) => {
+          localStorage.setItem("email", values.email)
+          // console.log("dsbfygdsuf", response)
+          setIsOTPModalOpen(true);
+        }).catch((error) => {
+          console.error("Error sending OTP", error)
+  
+        })
+  
+      } catch (error) {
+        console.error("adsjgygufgdsfsdf", error)
       }
     }
 
