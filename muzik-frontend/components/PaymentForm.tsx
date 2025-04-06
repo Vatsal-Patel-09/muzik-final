@@ -33,7 +33,6 @@ const PaymentForm = () => {
         },
     });
 
-
     useEffect(() => {
         const script = document.createElement("script");
         script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -58,7 +57,7 @@ const PaymentForm = () => {
 
             // Configure Razorpay checkout
             const options = {
-                key: "rzp_test_4qm51zu31eNS4J", // Replace with actual Key ID
+                key: "rzp_test_OQpyXeT0pQTeUQ", // Replace with actual Key ID
                 amount: data.amount,
                 currency: data.currency,
                 name: "Your Company",

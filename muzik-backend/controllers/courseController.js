@@ -1,6 +1,6 @@
 const Course = require("../models/Course");
 exports.getCourses = async (req, res) => {
-    const courses = await Course.find();
+    const courses = await Course.find({});
     res.json(courses);
 };
 exports.addCourse = async (req, res) => {

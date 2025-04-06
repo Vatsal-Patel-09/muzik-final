@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Muzik Skill House",
   description: "Master the Art of Music – Learn, Create, and Elevate!",
+  icons: {
+    icon: "muzik-frontend/app/favicon.ico",
+    },
 };
 
 export default function RootLayout({
