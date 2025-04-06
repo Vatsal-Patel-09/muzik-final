@@ -30,6 +30,7 @@ const AuthForm = () => {
   const [accountId, setAccountId] = useState(false);
   const [submit, setSubmit] = useState(false);
   const [isOTPModalOpen, setIsOTPModalOpen] = useState(false); // State to control OTP modal visibility
+  const [email, setEmail] = useState(""); // State to store the email dynamically
 
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
@@ -44,6 +45,7 @@ const AuthForm = () => {
     function onSubmit(values: z.infer<typeof formSchema>) {
       // Check if both username and email are filled
       if (values.username && values.email) {
+        setEmail(values.email); // Store the email dynamically
         setIsOTPModalOpen(true); // Open OTP modal
       } else {
         alert("Please fill in both username and email fields."); // Show alert if fields are empty
@@ -96,7 +98,12 @@ const AuthForm = () => {
             </form>
           </Form>
 
-          {isOTPModalOpen && <OTPModal />} {/* Render OTP modal only if isOTPModalOpen is true */}
+          {isOTPModalOpen && (
+            <OTPModal 
+              email={email} 
+              onClose={() => setIsOTPModalOpen(false)} // Allow modal to be reopened
+            />
+          )}
     </div>
   )
 }
