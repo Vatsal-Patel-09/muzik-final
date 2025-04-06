@@ -12,6 +12,8 @@ import {
     AlertDialogTitle,
   } from "@/components/ui/alert-dialog"
 
+  import { X } from 'lucide-react';
+
   import {
     InputOTP,
     InputOTPGroup,
@@ -53,48 +55,62 @@ const OTPModal = () => {
 
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-        <AlertDialogContent className='shad-alert-dialog'>
+        <AlertDialogContent className='shad-alert-dialog rounded-lg p-6'>
             <AlertDialogHeader className='relative flex justify-center'>
-            <AlertDialogTitle className='h2 text-center'>
-                Enter your OTP
-                <Image src='/assets/icons/close-dark.svg' alt='close' width={20} height={20} onClick={() => setIsOpen(false)} className='otp-close-button' />
-            </AlertDialogTitle>
-            <AlertDialogDescription className='subtitle-2 text-center text-light-100'>
-                We&apos;ve sent a code to <span className='pl-1 text-brand'>johnDoe@gmail.com</span>
-            </AlertDialogDescription>
+                <X 
+                    width={20} 
+                    height={20} 
+                    onClick={() => setIsOpen(false)} 
+                    className="absolute right-4 top-4 cursor-pointer text-gray-500 hover:text-gray-700"
+                />
+                <AlertDialogTitle className='h2 text-center text-xl font-semibold text-gray-800'>
+                    Enter your OTP
+                </AlertDialogTitle>
+                <AlertDialogDescription className='subtitle-2 mt-2 text-center text-sm text-gray-600'>
+                    We&apos;ve sent a code to <span className='pl-1 font-medium text-brand'>johnDoe@gmail.com</span>
+                </AlertDialogDescription>
             </AlertDialogHeader>
 
-            <InputOTP maxLength={6} value={password} onChange={setPassword}>
-                <InputOTPGroup className='shad-otp'>
-                    <InputOTPSlot index={0} className='shad-otp-slot' />
-                    <InputOTPSlot index={1} className='shad-otp-slot' />
-                    <InputOTPSlot index={2} className='shad-otp-slot' />
-                    <InputOTPSlot index={3} className='shad-otp-slot' />
-                    <InputOTPSlot index={4} className='shad-otp-slot' />
-                    <InputOTPSlot index={5} className='shad-otp-slot' />
-                </InputOTPGroup>
-            </InputOTP>
+            <div className="mt-6 flex justify-center">
+                <InputOTP maxLength={6} value={password} onChange={setPassword}>
+                    <InputOTPGroup className='shad-otp flex gap-2'>
+                        <InputOTPSlot index={0} className='shad-otp-slot w-10 h-12 border rounded-md text-center text-lg' />
+                        <InputOTPSlot index={1} className='shad-otp-slot w-10 h-12 border rounded-md text-center text-lg' />
+                        <InputOTPSlot index={2} className='shad-otp-slot w-10 h-12 border rounded-md text-center text-lg' />
+                        <InputOTPSlot index={3} className='shad-otp-slot w-10 h-12 border rounded-md text-center text-lg' />
+                        <InputOTPSlot index={4} className='shad-otp-slot w-10 h-12 border rounded-md text-center text-lg' />
+                        <InputOTPSlot index={5} className='shad-otp-slot w-10 h-12 border rounded-md text-center text-lg' />
+                    </InputOTPGroup>
+                </InputOTP>
+            </div>
 
-            <AlertDialogFooter>
-
-                <div className='flex w-full flex-col gap-4'>
-                    <AlertDialogAction onClick={handleSubmit} className='shad-submit-btn h-12' type='button'>
+            <AlertDialogFooter className="mt-4">
+                <div className='flex w-full flex-col gap-3'>
+                    <AlertDialogAction 
+                        onClick={handleSubmit} 
+                        className='h-12 bg-brand text-white bg-black hover:bg-gray-900 rounded-md hover:bg-brand-dark flex justify-center items-center' 
+                        type='button'
+                    >
                         Submit
                         {isLoading && (
                             <Image src='/assets/icons/loader.svg' alt='loader' width={24} height={24} className='ml-2 animate-spin' />
                         )}
                     </AlertDialogAction>
                 
-            
-                    <div className='subtitle-2 mt-2 text-center text-light-100'>
+                    <div className='subtitle-2 text-center text-sm text-gray-600'>
                         Didn&apos;t get a code?
-                        <Button type='button' variant='link' className='pl-1 text-brand'>Click to resend</Button> {/*onClick={handleResendOTP} */}
+                        <Button 
+                            type='button' 
+                            variant='link' 
+                            className='pl-1 text-brand font-medium hover:underline'
+                        >
+                            Click to resend
+                        </Button> {/*onClick={handleResendOTP} */}
                     </div>
                 </div>
             </AlertDialogFooter>
         </AlertDialogContent>
     </AlertDialog>
-
   )
 }
 
