@@ -121,11 +121,12 @@ export const SkeletonOne = () => {
 
 export const SkeletonTwo = () => {
   const images = [
-    "/assets/about/about1.jpg",
-    "/assets/about/about2.jpg",
-    "/assets/about/about3.jpg",
-    "/assets/about/about4.jpg",
-    "/assets/about/about5.jpg",
+    "/assets/about/AboutFixed01.jpg",
+    "/assets/about/AbourFixed02.JPG",
+    "/assets/about/AboutFixed03.JPG",
+    "/assets/about/AboutFixed04.jpg",
+    "/assets/about/AboutFixed05.JPG",
+    
   ];
 
   const imageVariants = {
