@@ -7,6 +7,7 @@ import { Timeline } from "@/components/ui/timeline";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Contact from "@/components/Contact";
 
 export const about = [
   {
@@ -110,6 +111,7 @@ const page = () => {
             </div>
         </div>
         <div className="border-t-2 border-gray mx-4 mt-10">
+            <Contact />
             <Footer />
         </div>
     </div>
