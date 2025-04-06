@@ -22,9 +22,6 @@ const AllCourses = () => {
     }
   };
 
-  const handleNavigate = (id: string) => {
-    router.push(`/course-description/${id}`); // Navigating to /course/:id
-  };
 
   useEffect(() => {
     fetchAllCourses();

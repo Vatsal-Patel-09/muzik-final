@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import {
   IconArrowLeft,
@@ -13,6 +13,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useEffect } from "react";
 
 const layout = ({ children } : { children:React.ReactNode }) => {
     const links = [
@@ -46,6 +47,21 @@ const layout = ({ children } : { children:React.ReactNode }) => {
       },
     ];
     const [open, setOpen] = useState(false);
+  //  const [userData, setUserData] = useState(null);
+
+
+//     useEffect(() => {
+
+//       const userData = localStorage.getItem("user");
+//       if (userData) {
+//         setUserData(JSON.parse(userData));
+//       }
+      
+// }),[]
+const userData = localStorage.getItem("user");
+console.log("User data", userData);
+
+ 
     return (
       <div
         className={cn(
@@ -66,7 +82,7 @@ const layout = ({ children } : { children:React.ReactNode }) => {
             <div>
               <SidebarLink
                 link={{
-                  label: "Manu Arora",
+                  label: userData.email,
                   href: "#",
                   icon: (
                     <Image

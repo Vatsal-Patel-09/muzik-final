@@ -5,8 +5,9 @@ interface VideoPlayerProps {
   playbackInfo: string;
 }
 
-export function VideoPlayer({ otp, playbackInfo }: VideoPlayerProps) {
-  const iframeUrl = `https://player.vdocipher.com/v2/?otp=${otp}&playbackInfo=${playbackInfo}`;
+export function VideoPlayer({ playbackInfo }: VideoPlayerProps) {
+  console.log("playbackInfo", playbackInfo?.video?.url);
+  const iframeUrl = playbackInfo?.video?.url;
   const iframeRef = useRef<HTMLIFrameElement>(null);
   
   // When otp or playbackInfo changes, force the iframe to reload
@@ -16,7 +17,7 @@ export function VideoPlayer({ otp, playbackInfo }: VideoPlayerProps) {
       // Update iframe src to load new video
       iframe.src = iframeUrl;
     }
-  }, [otp, playbackInfo, iframeUrl]);
+  }, [ playbackInfo, iframeUrl]);
   
   return (
     <div className="video-player-container border border-white rounded-lg">
