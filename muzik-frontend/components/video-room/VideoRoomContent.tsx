@@ -69,8 +69,68 @@ const coursesData = {
         playbackInfo: "eyJ2aWRlb0lkIjoiNmI4NGFkYzIwZTE5NGZkMzgwYzZjZDYyMmFkNGYxZTMifQ=="
       }
     ]
+  },  // Add more courses as needed
+  "course-2": {
+    title: "Fundamentals of Music Production",
+    description: "This module covers the essential concepts and techniques in music production. You'll learn about digital audio workstations, signal flow, recording techniques, and basic mixing principles. By the end of this module, you'll have the foundation needed to start producing your own music.",
+    lessons: [
+      { 
+        id: 1, 
+        title: "Setting Up Your Digital Audio Workstation", 
+        duration: "15:30", 
+        isCompleted: true,
+        description: "Learn how to set up your DAW for optimal workflow",
+        thumbnail: "https://assets.aceternity.com/demos/daw-setup.jpeg",
+        content: "This lesson walks you through the essential setup of a Digital Audio Workstation for music production.",
+        otp: "20160313versASE323oFfLos1jd6YiTTNXlCALSuphYKMOID1Yu5Vd3DBM60XVnI",
+        playbackInfo: "eyJ2aWRlb0lkIjoiMmI4NGFkYzIwZTE5NGZkMzgwYzZjZDYyMmFkNGYxZTMifQ=="
+      },
+      { 
+        id: 2, 
+        title: "Understanding Audio Signal Flow", 
+        duration: "12:45", 
+        isCompleted: false,
+        description: "Master the concepts of audio routing in your projects",
+        thumbnail: "https://assets.aceternity.com/demos/signal-flow.jpeg",
+        content: "Understanding signal flow is crucial for troubleshooting and creating complex audio production setups.",
+        otp: "20160313versASE323sDFfLos1jd6YiTTNXlCALSuphYKMOID1Yu5Vd3DBM60XVnI",
+        playbackInfo: "eyJ2aWRlb0lkIjoiM2I4NGFkYzIwZTE5NGZkMzgwYzZjZDYyMmFkNGYxZTMifQ=="
+      },
+      { 
+        id: 3, 
+        title: "Recording Techniques for Vocals", 
+        duration: "18:20", 
+        isCompleted: false,
+        description: "Professional vocal recording methods explained",
+        thumbnail: "https://assets.aceternity.com/demos/vocal-recording.jpeg",
+        content: "Learn proper microphone placement, room treatment considerations, and performance techniques for capturing the perfect vocal take.",
+        otp: "20160313versASE323oFfLos1jd6FGTTNXlCALSuphYKMOID1Yu5Vd3DBM60XVnI",
+        playbackInfo: "eyJ2aWRlb0lkIjoiNGI4NGFkYzIwZTE5NGZkMzgwYzZjZDYyMmFkNGYxZTMifQ=="
+      },
+      { 
+        id: 4, 
+        title: "Basics of MIDI Programming", 
+        duration: "14:10", 
+        isCompleted: false,
+        description: "Getting started with virtual instruments and MIDI",
+        thumbnail: "https://assets.aceternity.com/demos/midi-programming.jpeg",
+        content: "This lesson covers MIDI basics, from note input to advanced controller automation for expressive performances.",
+        otp: "20160313versASE323oFfLos1jd6YiTBNXlCALSuphYKMOID1Yu5Vd3DBM60XVnI",
+        playbackInfo: "eyJ2aWRlb0lkIjoiNWI4NGFkYzIwZTE5NGZkMzgwYzZjZDYyMmFkNGYxZTMifQ=="
+      },
+      { 
+        id: 5, 
+        title: "Introduction to Mixing", 
+        duration: "20:35", 
+        isCompleted: false,
+        description: "Fundamental mixing concepts and techniques",
+        thumbnail: "https://assets.aceternity.com/demos/mixing-intro.jpeg",
+        content: "Learn the foundations of mixing including balance, EQ, compression, and spatial effects to create professional sounding mixes.",
+        otp: "20160313versASE323oFfLos1jd6YiTTNHLCALSuphYKMOID1Yu5Vd3DBM60XVnI",
+        playbackInfo: "eyJ2aWRlb0lkIjoiNmI4NGFkYzIwZTE5NGZkMzgwYzZjZDYyMmFkNGYxZTMifQ=="
+      }
+    ]
   }
-  // Add more courses as needed
 };
 
 export function VideoRoomContent() {

@@ -23,24 +23,45 @@ const formSchema = z.object({
 
 import React, { useState } from 'react'
 import OTPModal from "./OTPModal"
+import axios from "axios"
 
 const AuthForm = () => {
   const [isOTPModalOpen, setIsOTPModalOpen] = useState(false); // State to control OTP modal visibility
   const [email, setEmail] = useState(""); // State to store the email dynamically
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-    },
-  });
+    // 1. Define your form.
+    const form = useForm<z.infer<typeof formSchema>>({
+      resolver: zodResolver(formSchema),
+      defaultValues: {
+        username: "",
+        email: "",
+      },
+    })
+   
+    // 2. Define a submit handler.
+    function onSubmit(values: z.infer<typeof formSchema>) {
+      // Do something with the form values.
+      // ✅ This will be type-safe and validated.
+      console.log("dsgygsdufgusdgfsd", values)
+      sendOtpFunction(values)
+    }
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    if (values.email) {
-      setEmail(values.email); // Store the email dynamically
-      setIsOTPModalOpen(true); // Open OTP modal
-    } else {
-      alert("Please fill in the email field."); // Show alert if the field is empty
+    const sendOtpFunction = async (values: z.infer<typeof formSchema>) => {
+      try {
+        await axios.post("https://muzik-mgj9.onrender.com/api/auth/login-otp", {
+          email: values.email
+        }).then((response) => {
+          localStorage.setItem("email", values.email)
+          // console.log("dsbfygdsuf", response)
+          setIsOTPModalOpen(true);
+        }).catch((error) => {
+          console.error("Error sending OTP", error)
+  
+        })
+  
+      } catch (error) {
+        console.error("adsjgygufgdsfsdf", error)
+      }
     }
   }
 
