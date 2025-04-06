@@ -104,7 +104,7 @@ export const SkeletonOne = () => {
       <div className="w-full p-3 mx-auto dark:bg-neutral-900 shadow-xl rounded-xl group h-full overflow-hidden">
         <div className="flex flex-1 w-full h-full flex-col space-y-2 relative">
           <Image
-            src="/assets/about/about0.jpg"
+            src="/assets/about/about5.jpg"
             alt="Music studio"
             width={800}
             height={800}
@@ -121,11 +121,11 @@ export const SkeletonOne = () => {
 
 export const SkeletonTwo = () => {
   const images = [
-    "/assets/about/AboutFixed01.jpg",
-    "/assets/about/AbourFixed02.JPG",
-    "/assets/about/AboutFixed03.JPG",
-    "/assets/about/AboutFixed06.jpg",
-    "/assets/about/AboutFixed05.JPG",
+    "/assets/about/about1.jpg",
+    "/assets/about/about2.jpg",
+    "/assets/about/about3.jpg",
+    "/assets/about/about4.jpg",
+    "/assets/about/about5.jpg",
     
   ];
 
