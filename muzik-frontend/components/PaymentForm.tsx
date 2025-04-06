@@ -50,14 +50,14 @@ const PaymentForm = () => {
         try {
 
             // Request backend to create a Razorpay order
-            const { data } = await axios.post("http://localhost:5000/api/payments/create_razorpay_order", {
+            const { data } = await axios.post("https://muzik-mgj9.onrender.com/api/payments/create_razorpay_order", {
                 amount: parseInt(values.amount), // Convert to number
                 email: values?.email,
             });
 
             // Configure Razorpay checkout
             const options = {
-                key: "rzp_test_OQpyXeT0pQTeUQ", // Replace with actual Key ID
+                key: "rzp_test_dvTr7JEpaRNOTf", // Replace with actual Key ID
                 amount: data.amount,
                 currency: data.currency,
                 name: "Your Company",
@@ -65,7 +65,7 @@ const PaymentForm = () => {
                 order_id: data.id,
                 handler: async (response: any) => {
                     // Verify payment
-                    const verifyRes = await axios.post("http://localhost:5000/api/payments/get_razorpay_order_status", response);
+                    const verifyRes = await axios.post("https://muzik-mgj9.onrender.com/api/payments/get_razorpay_order_status", response);
                     alert(verifyRes.data.message);
                 },
                 prefill: {

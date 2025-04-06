@@ -1,27 +1,97 @@
-import { CourseCard } from '@/components/courseCard'
-import { ScrollArea } from '@radix-ui/react-scroll-area'
-import Link from 'next/link'
-import React from 'react'
+"use client";
+import { CourseCard } from "@/components/courseCard";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 
 const page = () => {
+  const [storeCoursesData, setStoreCoursesData] = React.useState([]);
+  const [storePurchasedCourse, setStorePurchasedCourse] = useState([]);
+  const fetchAllCourses = async ({ email }: { email: string }) => {
+    try {
+      const response = await fetch("https://muzik-mgj9.onrender.com/api/courses", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await response.json();
+      setStoreCoursesData(data);
+      console.log("All courses", data);
+    } catch (error) {
+      console.error("Error fetching all courses", error);
+    }
+  };
+
+  const fetchPurchasedAllCourses = async () => {
+    try {
+      const response = await fetch(
+        "https://muzik-mgj9.onrender.com/api/purchases/my-courses",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const data = await response.json();
+      setStorePurchasedCourse(data?.courses);
+    } catch (error) {
+      console.error("Error fetching all courses", error);
+    }
+  };
+
+  const fetchLoggedInUser = async () => {
+    try {
+      const response = await fetch("https://muzik-mgj9.onrender.com/api/user/me", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await response.json();
+      const loggedInEmail = data?.user?.email;
+      fetchAllCourses({ email: loggedInEmail });
+      console.log("Logged in user data", data);
+    } catch (error) {
+      console.error("Error fetching logged in user data", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchLoggedInUser();
+    fetchPurchasedAllCourses();
+  }, []);
   return (
     <div>
-    <div>
-        <h1 className='text-4xl lg:text-5xl lg:leading-tight font-semibold mt-5 ml-10 md:mt-0 md:ml-10 -mb-5 text-black'>Purchased Courses</h1>
-        <div className='w-full relative'>
-          <div className='scroll-fade-wrapper relative'>
+      <div>
+        <h1 className="text-4xl lg:text-5xl lg:leading-tight font-semibold mt-5 ml-10 md:mt-0 md:ml-10 -mb-5 text-black">
+          Purchased Courses
+        </h1>
+        <div className="w-full relative">
+          <div className="scroll-fade-wrapper relative">
             <ScrollArea className="h-[650px] border-none w-full rounded-md border p-4 mt-3">
-              <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 mt-10'>
-                <Link href='/video-room'><CourseCard /></Link>
-              </div>
+              {storePurchasedCourse?.length > 0 &&
+                storePurchasedCourse?.map((response,idx) => {
+                  return (
+                    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 mt-10" key={idx+1}>
+                      <Link href="/video-room">
+                        <CourseCard />
+                      </Link>
+                    </div>
+                  );
+                })}
             </ScrollArea>
             {/* <div className="fade-top absolute top-0 left-0 right-0 h-10 bg-gradient-to-b from-white to-transparent pointer-events-none z-10"></div> */}
             {/* <div className="fade-bottom absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-white to-transparent pointer-events-none z-10"></div> */}
           </div>
         </div>
+      </div>
     </div>
-</div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
