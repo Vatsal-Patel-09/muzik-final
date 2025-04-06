@@ -124,7 +124,7 @@ export const SkeletonTwo = () => {
     "/assets/about/AboutFixed01.jpg",
     "/assets/about/AbourFixed02.JPG",
     "/assets/about/AboutFixed03.JPG",
-    "/assets/about/AboutFixed04.jpg",
+    "/assets/about/AboutFixed06.jpg",
     "/assets/about/AboutFixed05.JPG",
     
   ];
