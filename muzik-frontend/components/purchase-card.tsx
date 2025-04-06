@@ -25,6 +25,8 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
     }
   }
 
+  console.log("course",course)
+
   return (
     <div className="border rounded-lg overflow-hidden shadow-lg bg-white animate-fadeIn">
       <Tabs defaultValue="personal" className="w-full">
@@ -71,6 +73,7 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
             variant="outline"
             className="w-full py-6 mb-4 border-gray-300 hover:bg-gray-50 transition-all"
             size="lg"
+            style={{cursor:"pointer"}}
           >
             Buy now
           </Button>

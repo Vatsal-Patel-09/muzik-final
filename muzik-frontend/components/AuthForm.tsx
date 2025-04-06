@@ -68,7 +68,6 @@ const AuthForm = () => {
   return (
     <div className="border-2 border-gray-500 rounded-lg p-8  bg-white/70 text-black">
 
-<!-- <<<<<<< backend
       <h1 className="text-[34px] mb-4 font-semibold flex items-center justify-center">Login</h1>
 
       <Form {...form}>
@@ -112,53 +111,7 @@ const AuthForm = () => {
         </form>
       </Form>
 
-      <OTPModal /> -->
-<!-- ======= -->
-          <h1 className="text-3xl lg:text-5xl lg:leading-tight mb-4 font-semibold flex items-center justify-center">Login</h1>
-
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-
-              <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-
-                  <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your Username"  {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your email to " {...field} />
-                    </FormControl>
-                    <FormDescription className="text-gray-900">
-                      Enter the email with which the course was purchased.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-
-              <Button type="submit" variant='default' className="border-2 border-black">Send OTP</Button>
-            </form>
-          </Form>
-
-          {/* <OTPModal /> */}
-<!-- >>>>>>> main -->
+      <OTPModal /> 
     </div>
   )
 }

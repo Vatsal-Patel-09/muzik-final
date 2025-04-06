@@ -15,6 +15,8 @@ import { TutorTeam } from "@/components/Tutor-Team";
 
 import Image from "next/image";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 axios.defaults.baseURL = 'https://muzik-mgj9.onrender.com';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -23,6 +25,7 @@ export default function Home() {
 
   return (
     <main className="bg-white h-screen w-screen overflow-x-hidden">
+      <ToastContainer />
       <Navbar />
         <Hero />
       <div>

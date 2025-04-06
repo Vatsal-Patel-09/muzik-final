@@ -31,9 +31,9 @@ export default function CourseHeader({ course }: CourseHeaderProps) {
         <div className="flex items-center">
           <span className="text-amber-500 font-bold">{course.rating}</span>
           <Star className="w-4 h-4 fill-amber-500 text-amber-500 ml-1" />
-          <span className="text-gray-600 ml-1">({course.ratingCount.toLocaleString()} ratings)</span>
+          <span className="text-gray-600 ml-1">({course?.ratingCount?.toLocaleString()} ratings)</span>
         </div>
-        <span className="text-gray-600">{course.studentCount.toLocaleString()} students</span>
+        <span className="text-gray-600">{course?.studentCount?.toLocaleString()} students</span>
       </div>
 
       <h1 className="text-3xl font-bold text-gray-900 mb-6">{course.title}</h1>
