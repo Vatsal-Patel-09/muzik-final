@@ -17,10 +17,14 @@ interface Video {
 interface UpcomingVideosListProps {
   videos: Video[];
   onVideoSelect?: (video: Video) => void;
-  currentVideoId?: number;
+  currentVideoId?: string;
 }
 
-export function UpcomingVideosList({ videos, onVideoSelect, currentVideoId }: UpcomingVideosListProps) {
+export function UpcomingVideosList({
+  videos,
+  onVideoSelect,
+  currentVideoId,
+}: UpcomingVideosListProps) {
   const [active, setActive] = useState<Video | boolean | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   const id = useId();
@@ -44,9 +48,9 @@ export function UpcomingVideosList({ videos, onVideoSelect, currentVideoId }: Up
 
   useOutsideClick(ref, () => setActive(null));
 
-  const handleVideoClick = (video: Video) => {
+  const handleVideoClick = (video: Video, idx) => {
     if (onVideoSelect) {
-      onVideoSelect(video);
+      onVideoSelect({video, idx});
     } else {
       setActive(video);
     }
@@ -142,42 +146,57 @@ export function UpcomingVideosList({ videos, onVideoSelect, currentVideoId }: Up
         ) : null}
       </AnimatePresence>
       <ul className="space-y-2 max-h-[500px] overflow-y-auto">
-        {videos.map((video) => (
-          <motion.div
-            layoutId={`card-${video.id}-${id}`}
-            key={`card-${video.id}-${id}`}
-            onClick={() => handleVideoClick(video)}
-            className={`p-3 flex justify-between items-center rounded-lg cursor-pointer ${
-              video.id === currentVideoId 
-                ? "bg-green-100 border border-green-500" 
-                : "bg-gray-50 hover:bg-gray-100"
-            }`}
-          >
-            <div className="flex gap-3 items-center">
-              {video.isCompleted ? (
-                <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+        {videos?.length > 0 &&
+          videos?.map((video, idx) => {
+            console.log("sdhfgohdsfg");
+            return (
+              <motion.div
+                layoutId={`card-${video.id}-${id}`}
+                key={`card-${video.id}-${id}`}
+                onClick={() => handleVideoClick(video,idx)}
+                className={`p-3 flex justify-between items-center rounded-lg cursor-pointer ${
+                  idx === currentVideoId
+                    ? "bg-green-100 border border-green-500"
+                    : "bg-gray-50 hover:bg-gray-100"
+                }`}
+              >
+                <div className="flex gap-3 items-center">
+                  {video.isCompleted ? (
+                    <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-3 w-3 text-white"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                  ) : (
+                    <div className="w-5 h-5 rounded-full border border-gray-400 flex items-center justify-center">
+                      <span className="text-xs text-gray-500">{video.id}</span>
+                    </div>
+                  )}
+                  <div>
+                    <h3 className="font-medium text-black text-left">
+                      {video.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm">{video.duration}</p>
+                  </div>
                 </div>
-              ) : (
-                <div className="w-5 h-5 rounded-full border border-gray-400 flex items-center justify-center">
-                  <span className="text-xs text-gray-500">{video.id}</span>
-                </div>
-              )}
-              <div>
-                <h3 className="font-medium text-black text-left">{video.title}</h3>
-                <p className="text-gray-500 text-sm">{video.duration}</p>
-              </div>
-            </div>
-            <motion.button
-              layoutId={`button-${video.id}-${id}`}
-              className="px-3 py-1 text-xs rounded-full bg-gray-200 hover:bg-green-500 hover:text-white text-black"
-            >
-              {video.isCompleted ? "Rewatch" : "Play"}
-            </motion.button>
-          </motion.div>
-        ))}
+                <motion.button
+                  layoutId={`button-${video.id}-${id}`}
+                  className="px-3 py-1 text-xs rounded-full bg-gray-200 hover:bg-green-500 hover:text-white text-black"
+                >
+                  {video.isCompleted ? "Rewatch" : "Play"}
+                </motion.button>
+              </motion.div>
+            );
+          })}
       </ul>
     </div>
   );

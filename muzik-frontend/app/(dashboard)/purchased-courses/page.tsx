@@ -52,6 +52,7 @@ const page = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
+      // localStorage.setItem("user", JSON.stringify(response));
       const data = await response.json();
       const loggedInEmail = data?.user?.email;
       fetchAllCourses({ email: loggedInEmail });
@@ -75,10 +76,13 @@ const page = () => {
           <div className="scroll-fade-wrapper relative">
             <ScrollArea className="h-[650px] border-none w-full rounded-md border p-4 mt-3">
               {storePurchasedCourse?.length > 0 &&
-                storePurchasedCourse?.map((response,idx) => {
+                storePurchasedCourse?.map((response, idx) => {
                   return (
-                    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 mt-10" key={idx+1}>
-                      <Link href="/video-room">
+                    <div
+                      className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 mt-10"
+                      key={idx + 1}
+                    >
+                      <Link href={`/video-room?courseId=${response?._id}`}>
                         <CourseCard />
                       </Link>
                     </div>
