@@ -99,14 +99,14 @@ export default function CourseDescription({ course }: CourseDescriptionProps) {
       {!expanded ? (
         <Button variant='outline'
           onClick={() => setExpanded(true)}
-          className="mt-2 text-blue-600 font-medium hover:text-blue-800 transition-colors"
+          className="mt-2 text-green-600 font-medium hover:text-green-800 transition-colors"
         >
           Show more
         </Button>
       ) : (
         <Button variant='outline'
           onClick={() => setExpanded(false)}
-          className="mt-4 text-blue-600 font-medium hover:text-blue-800 transition-colors"
+          className="mt-4 text-green-600 font-medium hover:text-green-800 transition-colors"
         >
           Show less
         </Button>

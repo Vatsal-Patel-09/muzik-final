@@ -40,7 +40,7 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
         <div className="p-6">
           {course.isPremium && (
             <div className="flex items-start mb-4">
-              <Check className="w-5 h-5 text-blue-600 mt-0.5" />
+              <Check className="w-5 h-5 text-green-600 mt-0.5" />
               <p className="ml-2 text-gray-700">This Premium course is included in plans</p>
             </div>
           )}
@@ -48,7 +48,7 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
           <h3 className="text-xl font-bold text-gray-900 mb-1">Subscribe to Udemy's top courses</h3>
           <p className="text-gray-700 mb-4">
             Get this course, plus 12,000+ of our top-rated courses, with Personal Plan.{" "}
-            <span className="text-blue-600 font-medium hover:text-blue-800 transition-colors cursor-pointer">
+            <span className="text-green-600 font-medium hover:text-green-800 transition-colors cursor-pointer">
               Learn more
             </span>
           </p>
@@ -110,7 +110,7 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
                     onChange={(e) => setCouponCode(e.target.value)}
                     className="flex-grow"
                   />
-                  <Button onClick={handleApplyCoupon} className="bg-blue-600 hover:bg-blue-700">
+                  <Button onClick={handleApplyCoupon} className="bg-green-600 hover:bg-green-700">
                     Apply
                   </Button>
                 </div>
