@@ -33,7 +33,7 @@ const AuthForm = () => {
     const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: {
-        username: "",
+        // username: "",
         email: "",
       },
     })
@@ -63,7 +63,6 @@ const AuthForm = () => {
         console.error("adsjgygufgdsfsdf", error)
       }
     }
-  }
 
   return (
     <div className="border-2 border-gray-500 rounded-lg p-8 bg-white/70 text-black">
