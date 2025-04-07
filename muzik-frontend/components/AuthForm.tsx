@@ -43,7 +43,8 @@ const AuthForm = () => {
       // Do something with the form values.
       // ✅ This will be type-safe and validated.
       console.log("dsgygsdufgusdgfsd", values)
-      sendOtpFunction(values)
+      setEmail(values.email);
+      sendOtpFunction(values);
     }
 
     const sendOtpFunction = async (values: z.infer<typeof formSchema>) => {

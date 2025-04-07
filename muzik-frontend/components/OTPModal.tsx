@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,20 +10,18 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-
 import { X } from "lucide-react";
-
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";  // Import Toastify CSS
 
 const OTPModal = ({ email, onClose }: { email: string; onClose: () => void }) => {
   const router = useRouter();
@@ -32,8 +29,9 @@ const OTPModal = ({ email, onClose }: { email: string; onClose: () => void }) =>
   const [otp, setOtp] = useState(""); // State to store OTP
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async () => {
-    if (otp.length !== 6) {
+  const sendOtpFunction = async (props: { email: string; otp: string }) => {
+    // Validate OTP length before making the API call.
+    if (props.otp.length !== 6) {
       toast.error("Please enter a valid 6-digit OTP.", {
         position: "top-right",
         autoClose: 3000,
@@ -46,44 +44,43 @@ const OTPModal = ({ email, onClose }: { email: string; onClose: () => void }) =>
       });
       return;
     }
-
-    setIsLoading(true);
-
     try {
-      const response = await axios.post("https://muzik-mgj9.onrender.com/api/auth/login", {
-        email,
-        otp,
-      });
-
-      localStorage.setItem("token", response?.data?.token);
-      toast.success("OTP verified successfully", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-
-      setTimeout(() => {
-        router.push("/");
-      }, 2000);
+      await axios
+        .post("https://muzik-mgj9.onrender.com/api/auth/login", {
+          email: props.email,
+          otp: props.otp,
+        })
+        .then((response) => {
+          localStorage.setItem("token", response?.data?.token);
+          toast.success("OTP verified successfully", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setTimeout(() => {
+            router.push("/purchased-courses");
+          }, 2000);
+        })
+        .catch((error) => {
+          toast.error("Failed to verify OTP. Please try again.", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          console.error("Error sending OTP", error);
+        });
     } catch (error) {
-      toast.error("Failed to verify OTP. Please try again.", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      console.error("Error verifying OTP", error);
-    } finally {
-      setIsLoading(false);
+      console.error("Unexpected error in sendOtpFunction", error);
     }
   };
 
@@ -95,6 +92,8 @@ const OTPModal = ({ email, onClose }: { email: string; onClose: () => void }) =>
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogContent className="shad-alert-dialog rounded-lg p-6 bg-white shadow-lg">
+        {/* ToastContainer placed without inline styles */}
+        <ToastContainer />
         <AlertDialogHeader className="relative flex justify-center">
           <X
             width={24}
@@ -110,15 +109,6 @@ const OTPModal = ({ email, onClose }: { email: string; onClose: () => void }) =>
             <span className="font-semibold text-brand">{email}</span>
           </AlertDialogDescription>
         </AlertDialogHeader>
-
-        <div
-          style={{
-            position: "absolute",
-            top: "0",
-          }}
-        >
-          <ToastContainer />
-        </div>
 
         <div className="mt-6 flex justify-center">
           <InputOTP maxLength={6} value={otp} onChange={setOtp}>
@@ -136,10 +126,11 @@ const OTPModal = ({ email, onClose }: { email: string; onClose: () => void }) =>
         <AlertDialogFooter className="mt-6">
           <div className="flex w-full flex-col gap-4">
             <AlertDialogAction
-              onClick={handleSubmit}
+              onClick={() => sendOtpFunction({ email, otp })}
               className="h-12 bg-brand rounded-lg bg-black hover:bg-black/85 flex justify-center items-center text-base font-medium shadow-md transition-all duration-200"
               type="button"
-            >Submit
+            >
+              Submit
             </AlertDialogAction>
 
             <div className="text-center text-sm text-gray-600">
@@ -147,7 +138,7 @@ const OTPModal = ({ email, onClose }: { email: string; onClose: () => void }) =>
               <Button
                 type="button"
                 variant="link"
-                className=" font-medium hover:underline"
+                className="font-medium hover:underline"
               >
                 Resend OTP
               </Button>
