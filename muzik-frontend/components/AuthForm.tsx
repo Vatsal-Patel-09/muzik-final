@@ -18,7 +18,6 @@ import {
 import { Input } from "@/components/ui/input"
  
 const formSchema = z.object({
-  username: z.string().min(2).max(50),
   email: z.string().email(),
 })
 
@@ -27,9 +26,6 @@ import OTPModal from "./OTPModal"
 import axios from "axios"
 
 const AuthForm = () => {
-
-  const [accountId, setAccountId] = useState(false);
-  const [submit, setSubmit] = useState(false);
   const [isOTPModalOpen, setIsOTPModalOpen] = useState(false); // State to control OTP modal visibility
   const [email, setEmail] = useState(""); // State to store the email dynamically
 
@@ -37,7 +33,7 @@ const AuthForm = () => {
     const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: {
-        username: "",
+        // username: "",
         email: "",
       },
     })
@@ -47,7 +43,8 @@ const AuthForm = () => {
       // Do something with the form values.
       // ✅ This will be type-safe and validated.
       console.log("dsgygsdufgusdgfsd", values)
-      sendOtpFunction(values)
+      setEmail(values.email);
+      sendOtpFunction(values);
     }
 
     const sendOtpFunction = async (values: z.infer<typeof formSchema>) => {
@@ -69,59 +66,39 @@ const AuthForm = () => {
     }
 
   return (
-    <div className="border-2 border-gray-500 rounded-lg p-8  bg-white/70 text-black">
+    <div className="border-2 border-gray-500 rounded-lg p-8 bg-white/70 text-black">
+      <h1 className="text-3xl lg:text-5xl lg:leading-tight mb-4 font-semibold flex items-center justify-center">Login</h1>
 
-          <h1 className="text-3xl lg:text-5xl lg:leading-tight mb-4 font-semibold flex items-center justify-center">Login</h1>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter your email" {...field} />
+                </FormControl>
+                <FormDescription className="text-gray-900">
+                  Enter the email with which the course was purchased.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit" variant="default" className="border-2 border-black">Send OTP</Button>
+        </form>
+      </Form>
 
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-
-              <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-
-                  <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your Username"  {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your email to " {...field} />
-                    </FormControl>
-                    <FormDescription className="text-gray-900">
-                      Enter the email with which the course was purchased.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-
-              <Button type="submit" variant='default' className="border-2 border-black">Send OTP</Button>
-            </form>
-          </Form>
-
-          {isOTPModalOpen && (
-            <OTPModal 
-              email={email} 
-              onClose={() => setIsOTPModalOpen(false)} // Allow modal to be reopened
-            />
-          )}
+      {isOTPModalOpen && (
+        <OTPModal 
+          email={email} 
+          onClose={() => setIsOTPModalOpen(false)} // Allow modal to be reopened
+        />
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default AuthForm
+export default AuthForm;
