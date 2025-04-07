@@ -6,12 +6,9 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useSearchParams } from "next/navigation";
 
 export default function VideoRoomPage() {
-  const searchParams = useSearchParams();
-  const courseId = searchParams.get("courseId");
-
   return (
     <ScrollArea className="h-[750px] border-none w-full rounded-md border p-4 ">
-      <main className=" min-h-screen py-8 px-4">
+      <main className="min-h-screen py-8 px-4">
         <Suspense
           fallback={
             <div className="container mx-auto text-white text-center py-20">
@@ -24,9 +21,15 @@ export default function VideoRoomPage() {
             </div>
           }
         >
-          <VideoRoomContent courseId={courseId} />
+          <VideoRoomPageContent />
         </Suspense>
       </main>
     </ScrollArea>
   );
+}
+
+function VideoRoomPageContent() {
+  const searchParams = useSearchParams();
+  const courseId = searchParams.get("courseId");
+  return <VideoRoomContent courseId={courseId} />;
 }
