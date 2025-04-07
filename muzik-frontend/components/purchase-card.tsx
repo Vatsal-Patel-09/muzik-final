@@ -11,6 +11,7 @@ interface PurchaseCardProps {
     price: number
     currency: string
     isPremium: boolean
+    paymentUrl?: string
   }
 }
 
@@ -19,13 +20,23 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
   const [couponApplied, setCouponApplied] = useState(false)
   const [showCouponInput, setShowCouponInput] = useState(false)
 
-  const handleApplyCoupon = () => {
-    if (couponCode.trim()) {
-      setCouponApplied(true)
+  console.log("Course details:", course)
+
+  // const handleApplyCoupon = () => {
+  //   if (couponCode.trim()) {
+  //     setCouponApplied(true)
+  //   }
+  // }
+  console.log("this is new name ", course?.[0])
+
+  const handlePaymentGateway = () => {
+    try {
+      const url = course?.[0]?.paymentUrl || "";
+      window.open(url, '_blank');
+    } catch (error) {
+      console.error("Error opening payment URL:", error);
     }
   }
-
-  console.log("course",course)
 
   return (
     <div className="border rounded-lg overflow-hidden shadow-lg bg-white animate-fadeIn">
@@ -55,7 +66,6 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
             </span>
           </p>
 
-
           <p className="text-center text-sm text-gray-600 mb-1">Starting at ₹850 per month</p>
           <p className="text-center text-sm text-gray-600 mb-4">Cancel anytime</p>
 
@@ -70,18 +80,19 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
           </div>
 
           <Button
+            onClick={() => handlePaymentGateway()}
             variant="outline"
             className="w-full py-6 mb-4 border-gray-300 hover:bg-gray-50 transition-all"
             size="lg"
-            style={{cursor:"pointer"}}
+            style={{ cursor: "pointer" }}
           >
             Buy now
           </Button>
-
+{/* 
           <p className="text-center text-sm text-gray-600 mb-1">30-Day Money-Back Guarantee</p>
-          <p className="text-center text-sm text-gray-600 mb-4">Full Lifetime Access</p>
+          <p className="text-center text-sm text-gray-600 mb-4">Full Lifetime Access</p> */}
 
-          <div className="flex justify-center space-x-4 text-sm">
+          {/* <div className="flex justify-center space-x-4 text-sm">
             <Button variant='outline' className="text-gray-700 hover:text-gray-900 transition-colors">Share</Button>
             <Button variant='outline' className="text-gray-700 hover:text-gray-900 transition-colors">Gift this course</Button>
             <Button variant='outline'
@@ -90,9 +101,9 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
             >
               Apply Coupon
             </Button>
-          </div>
+          </div> */}
 
-          {showCouponInput && (
+          {/* {showCouponInput && (
             <div className="mt-4 animate-slideDown">
               {couponApplied ? (
                 <div className="flex items-center justify-between p-3 bg-gray-50 rounded border">
@@ -119,7 +130,7 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
                 </div>
               )}
             </div>
-          )}
+          )} */}
         </div>
       </Tabs>
     </div>
