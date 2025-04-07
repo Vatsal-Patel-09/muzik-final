@@ -15,59 +15,45 @@ import { TutorTeam } from "@/components/Tutor-Team";
 
 import Image from "next/image";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
-import { useEffect , useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import { useEffect, useState } from "react";
 
-axios.defaults.baseURL = 'https://muzik-mgj9.onrender.com';
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+axios.defaults.baseURL = "https://muzik-mgj9.onrender.com";
+axios.defaults.headers.post["Content-Type"] = "application/json";
+axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 export default function Home() {
-
-  const [storeUserData, setStoreUserData] = useState({}); 
+  const [storeUserData, setStoreUserData] = useState({});
 
   const fetchLoggedInUser = async () => {
     try {
-      const response = await fetch("https://muzik-mgj9.onrender.com/api/user/me", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      console.log("Response", response);
-      const data = await response.json();
-      console.log("Data", data);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      const loggedInEmail = data?.user?.email;
-      // fetchAllCourses({ email: loggedInEmail });
-      console.log("Logged in user data", data);
+      await axios
+        .get("https://muzik-mgj9.onrender.com/api/user/me", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((response) => {
+          setStoreUserData(response?.data?.user)
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
     } catch (error) {
       console.error("Error fetching logged in user data", error);
     }
   };
 
   useEffect(() => {
-      fetchLoggedInUser();
-      // fetchPurchasedAllCourses();
-      const userData = localStorage.getItem("user");
-      console.log("this is data ", userData);
-      if (userData) {
-        setStoreUserData(JSON.parse(userData));
-      } else {
-        setStoreUserData({});
-      }
-    }, []);
-
-    console.log("stored data", storeUserData);
-  
-  
-    
+    fetchLoggedInUser();
+  }, []);
 
   return (
     <main className="bg-white h-screen w-screen overflow-x-hidden">
       <ToastContainer />
       <Navbar />
-        <Hero />
+      <Hero />
       <div>
         <About />
         <TopCompanies />
