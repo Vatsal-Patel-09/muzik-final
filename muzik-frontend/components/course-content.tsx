@@ -5,73 +5,49 @@ import { ChevronDown, ChevronUp, File, Play, Code } from "lucide-react"
 import { Button } from "./ui/button"
 
 interface CourseContentProps {
-  course: {
-    totalSections: number
-    totalLectures: number
-    totalHours: number
-  }
+  course: any;
 }
 
 export default function CourseContent({ course }: CourseContentProps) {
   const [expandedSections, setExpandedSections] = useState<number[]>([0])
-
-  // This would typically come from an API
-  const sections = [
+  
+  // Extract content from the course data or use default content
+  const sections = course.sections || [
     {
       id: 1,
-      title: "Day 1 - Beginner - Working with Variables in Python to Manage Data",
-      lectures: 12,
-      duration: "1hr 12min",
+      title: "Introduction to the Course",
+      lectures: 5,
+      duration: "45min",
       content: [
-        { id: 1, title: "What you're going to get from this course", duration: "03:27", type: "video", preview: true },
-        { id: 2, title: "START HERE", duration: "02:53", type: "video" },
-        {
-          id: 3,
-          title: "Downloadable Resources and Tips for Taking the Course",
-          duration: "04:22",
-          type: "video",
-          preview: true,
-        },
-        { id: 4, title: "Day 1 Goals: what we will make by the end of the day", duration: "02:30", type: "video" },
-        { id: 5, title: "Download and Setup PyCharm for Learning", duration: "01:25", type: "document" },
-        { id: 6, title: "Printing to the Console in Python", duration: "11:25", type: "video" },
-        { id: 7, title: "Printing Practice", duration: "1 question", type: "exercise" },
-        { id: 8, title: "String Manipulation and Code Intelligence", duration: "09:13", type: "video" },
-        { id: 9, title: "Debugging Practice", duration: "1 question", type: "exercise" },
-        { id: 10, title: "The Python Input Function", duration: "12:35", type: "video" },
-        { id: 11, title: "Python Variables", duration: "13:02", type: "video" },
-        { id: 12, title: "Variable Naming", duration: "04:23", type: "video" },
-      ],
+        { id: 1, title: "Getting Started", duration: "05:27", type: "video", preview: true },
+        { id: 2, title: "Course Overview", duration: "07:53", type: "video" },
+        { id: 3, title: "Setup Instructions", duration: "08:22", type: "document" },
+      ]
     },
     {
       id: 2,
-      title: "Day 2 - Beginner - Understanding Data Types and How to Manipulate Strings",
-      lectures: 7,
-      duration: "58min",
-      content: [],
+      title: "Basic Concepts",
+      lectures: 6,
+      duration: "1hr 10min",
+      content: []
     },
     {
       id: 3,
-      title: "Day 3 - Beginner - Control Flow and Logical Operators",
-      lectures: 10,
-      duration: "1hr 15min",
-      content: [],
-    },
-    {
-      id: 4,
-      title: "Day 4 - Beginner - Randomisation and Python Lists",
-      lectures: 7,
-      duration: "1hr 4min",
-      content: [],
-    },
-    {
-      id: 5,
-      title: "Day 5 - Beginner - Python Loops",
-      lectures: 6,
-      duration: "41min",
-      content: [],
-    },
-  ]
+      title: "Advanced Topics",
+      lectures: 8,
+      duration: "1hr 30min",
+      content: []
+    }
+  ];
+
+  const bonusContent = course[0].bonusContent;
+  const faq = course[0].faq[0];
+  
+
+  // Calculate totals
+  const totalSections = course.sectionCount || sections.length;
+  const totalLectures = course.lectureCount || sections.reduce((acc, section) => acc + section.lectures, 0);
+  const totalHours = course.totalDuration || "10h";
 
   const toggleSection = (sectionIndex: number) => {
     setExpandedSections((prev) => {
@@ -115,7 +91,7 @@ export default function CourseContent({ course }: CourseContentProps) {
       </div>
 
       <div className="text-sm text-gray-600 mb-4">
-        {course.totalSections} sections • {course.totalLectures} lectures • {course.totalHours}h total length
+        {totalSections} sections • {totalLectures} lectures • {totalHours} total length
       </div>
 
       <div className="border rounded-lg overflow-hidden divide-y">
@@ -140,7 +116,7 @@ export default function CourseContent({ course }: CourseContentProps) {
 
             {expandedSections.includes(index) && (
               <div className="bg-white divide-y">
-                {section.content.map((lecture) => (
+                {(section.content || []).map((lecture) => (
                   <div
                     key={lecture.id}
                     className="px-6 py-3 flex justify-between items-center hover:bg-gray-50 transition-colors"

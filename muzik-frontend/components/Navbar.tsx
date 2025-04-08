@@ -130,11 +130,11 @@ function Navbar({ className }: { className?: string }) {
                     height={40}
                     className="rounded-full cursor-pointer"
                   /> */}
-                  <div className="absolute right-0 mt-2 bg-white p-3 rounded-lg shadow-lg w-40">
-                    {/* <p className="text-sm font-semibold text-gray-700">
-                      John Doe
-                    </p> */}
-                    <p className="text-xs text-gray-500">{storeUserData?.email}</p>
+                  <div className="absolute right-0 mt-2 bg-white p-3 rounded-lg shadow-lg w-50">
+                  {/* CHANGE: Added "truncate" and "max-w-[150px]" to prevent email overflow */}
+                  <p className="text-xs text-gray-500 truncate max-w-[200px]">
+                    {storeUserData?.email}
+                  </p>
                     <Button
                       onClick={handleLogout}
                       variant="outline"
@@ -192,14 +192,12 @@ function Navbar({ className }: { className?: string }) {
                 <DropdownMenuSeparator />
 
                 {/* User Info & Logout inside Dropdown */}
-                {isLoggedIn ? (
+                {storeUserData?.email ? (
                   <>
                     <DropdownMenuItem className="flex flex-col items-start">
-                      <p className="text-sm font-semibold text-gray-700">
-                        John Doe
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        johndoe@example.com
+                      
+                      <p className="text-xs text-gray-500 truncate max-w-[150px]">
+                        {storeUserData?.email}
                       </p>
                     </DropdownMenuItem>
                     <DropdownMenuItem
