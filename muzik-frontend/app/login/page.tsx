@@ -12,9 +12,9 @@ function Page() {
       <div className="relative flex h-full items-center justify-center">
         <AuthForm />
       </div>
-      <div className="relative flex h-full items-center justify-center">
+      {/* <div className="relative flex h-full items-center justify-center">
         <PaymentForm />
-      </div>
+      </div> */}
     </div>
   );
 }
