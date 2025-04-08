@@ -26,7 +26,7 @@ export function CourseCard({ course }: any) {
         <CardItem translateZ="100" className="w-full mt-4">
           <div className="relative aspect-video w-full overflow-hidden rounded-lg">
             <Image
-              src={course?.thumbnail}
+              src= {course?.thumbnail}
               height={400}
               width={600}
               className="w-full object-cover rounded-xl group-hover/card:scale-105 transition-transform duration-300"
