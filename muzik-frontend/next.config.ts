@@ -6,10 +6,10 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'assets.aceternity.com',
+        hostname: 'i.postimg.cc',
       },
     ],
-    domains: ["images.unsplash.com", "www.istockphoto.com", "assets.aceternity.com"],  // 👈 Allow Unsplash images
+    domains: ["i.postimg.cc"],  
   },
 };
 

@@ -3,37 +3,38 @@
 import Image from "next/image";
 import React from "react";
 import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
-import Link from "next/link";
 
-export function CourseCard({ data }: any) {
-
-  console.log("Course data", data?.description, data?.instructor, data?.price,data?.thumbnail, data?.title, data?.videourl);
-
+export function CourseCard({ course }: any) {
   return (
-    <CardContainer className="inter-var w-[90%] flex">
-      <CardBody className="border-2 border-neutral-200 bg-whiteda shadow-md relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2]  w-auto sm:w-[30rem] h-auto rounded-xl p-6   ">
+    <CardContainer className="w-full">
+      <CardBody className="border-2 border-neutral-200 bg-white shadow-md relative group/card hover:shadow-xl transition-all duration-200 w-full h-full rounded-xl p-6">
         <CardItem
           translateZ="50"
-          className="text-xl font-bold text-neutral-800 dark:text-black"
+          className="text-xl font-bold text-neutral-800 dark:text-black line-clamp-2 h-16"
         >
-          Make things float in air
+          {course?.title || "Course Title"}
         </CardItem>
+        
         <CardItem
           as="p"
           translateZ="60"
-          className="text-neutral-800 text-sm max-w-sm mt-2 dark:text-neutral-300"
+          className="text-neutral-800 text-md font-semibold mt-2 dark:text-neutral-300"
         >
-          Hover over this card to unleash the power of CSS perspective
+          ₹ {course?.price}
         </CardItem>
+        
         <CardItem translateZ="100" className="w-full mt-4">
-          <Image
-            src="/courses/course1.jpg"
-            height="1000"
-            width="1000"
-            className="h-40 md:h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
-            alt="thumbnail"
-          />
+          <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+            <Image
+              src= {course?.thumbnail}
+              height={400}
+              width={600}
+              className="w-full object-cover rounded-xl group-hover/card:scale-105 transition-transform duration-300"
+              alt={course?.title || "Course thumbnail"}
+            />
+          </div>
         </CardItem>
+      
       </CardBody>
     </CardContainer>
   );

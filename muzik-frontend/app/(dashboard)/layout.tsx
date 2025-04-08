@@ -113,7 +113,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                 href: "#",
                 icon: (
                   <Image
-                    src="https://assets.aceternity.com/manu.png"
+                    src="/avatar.jpg"
                     className="h-7 w-7 shrink-0 rounded-full"
                     width={50}
                     height={50}
