@@ -66,6 +66,9 @@ const page = () => {
     fetchLoggedInUser();
     fetchPurchasedAllCourses();
   }, []);
+
+  console.log("Purchased courses", storePurchasedCourse);
+
   return (
     <div>
       <div>
@@ -79,11 +82,11 @@ const page = () => {
                 storePurchasedCourse?.map((response, idx) => {
                   return (
                     <div
-                      className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 mt-10"
+                      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
                       key={idx + 1}
                     >
                       <Link href={`/video-room?courseId=${response?._id}`}>
-                        <CourseCard />
+                        <CourseCard course={response}  />
                       </Link>
                     </div>
                   );
