@@ -6,13 +6,15 @@ interface VideoPlayerProps {
 
 export function VideoPlayer({ videoUrl }: VideoPlayerProps) {
   return (
-    <div className="video-player-container">
+    <div className="w-full aspect-video rounded-lg overflow-hidden">
       <iframe 
         src={videoUrl}
-        style={{ border: 0, height: "360px", width: "640px", maxWidth: "100%" }}
-        allowFullScreen={true}
+        className="w-full h-full"
+        style={{ border: 0 }}
+        allowFullScreen
         allow="encrypted-media"
         title="Video Player"
+        referrerPolicy="origin"
       ></iframe>
     </div>
   );

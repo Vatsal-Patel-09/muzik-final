@@ -1,22 +1,50 @@
-import AuthForm from "@/components/AuthForm";
-import PaymentForm from "@/components/PaymentForm";
-import { Fullscreen } from "lucide-react";
+"use client";
 
-function Page() {
+import React, { Suspense, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { VideoRoomContent } from "@/components/video-room/VideoRoomContent";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+export default function VideoRoomPage() {
+  const router = useRouter();
+
+  // Dummy authentication check – replace with real auth logic
+  const isAuthenticated = Boolean(localStorage.getItem("authToken"));
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/login");
+    }
+  }, [isAuthenticated, router]);
+
+  if (!isAuthenticated) {
+    return <div className="text-center py-10">Redirecting to login...</div>;
+  }
+
   return (
-    <div className="relative h-screen w-screen bg-black/100">
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-40"
-        style={{ backgroundImage: "url('/login-image.jpg')" }}
-      ></div>
-      <div className="relative flex h-full items-center justify-center">
-        <AuthForm />
-      </div>
-      {/* <div className="relative flex h-full items-center justify-center">
-        <PaymentForm />
-      </div> */}
-    </div>
+    <ScrollArea className="h-[750px] border-none w-full rounded-md border p-4">
+      <main className="min-h-screen py-8 px-4">
+        <Suspense
+          fallback={
+            <div className="container mx-auto text-white text-center py-20">
+              <div className="animate-pulse flex flex-col items-center justify-center">
+                <div className="h-32 w-32 bg-gray-700 rounded-full mb-4"></div>
+                <div className="h-4 w-48 bg-gray-700 rounded mb-2"></div>
+                <div className="h-3 w-36 bg-gray-700 rounded"></div>
+              </div>
+              <p className="mt-6">Loading video content...</p>
+            </div>
+          }
+        >
+          <VideoRoomPageContent />
+        </Suspense>
+      </main>
+    </ScrollArea>
   );
 }
 
-export default Page;
+function VideoRoomPageContent() {
+  const searchParams = useSearchParams();
+  const courseId = searchParams.get("courseId");
+  return <VideoRoomContent courseId={courseId} />;
+}
