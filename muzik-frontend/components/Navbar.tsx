@@ -35,6 +35,7 @@ function Navbar({ className }: { className?: string }) {
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.removeItem("token"); // Remove token from local storage
+    router.push("/login"); // Redirect to login page
   };
 
 
