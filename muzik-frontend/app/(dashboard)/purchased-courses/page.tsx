@@ -72,25 +72,27 @@ const page = () => {
   return (
     <div>
       <div>
-        <h1 className="text-4xl lg:text-5xl lg:leading-tight font-semibold mt-5 ml-10 md:mt-0 md:ml-10 -mb-5 text-black">
+        <h1 className="text-4xl lg:text-5xl lg:leading-tight font-semibold mt-5 mb-8 md:mt-0 text-black">
           Purchased Courses
         </h1>
         <div className="w-full relative">
           <div className="scroll-fade-wrapper relative">
-            <ScrollArea className="h-[650px] border-none w-full rounded-md border p-4 mt-3">
+            <ScrollArea className="h-[650px] w-full">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-5">
               {storePurchasedCourse?.length > 0 &&
                 storePurchasedCourse?.map((response, idx) => {
-                  return (
-                    <div
-                      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+                return (
+                  <div key={idx} className="mb-2 ml-2">
+                    <Link
+                      href={`/video-room?courseId=${response?._id}`}
                       key={idx + 1}
-                    >
-                      <Link href={`/video-room?courseId=${response?._id}`}>
-                        <CourseCard course={response}  />
-                      </Link>
-                    </div>
-                  );
+                      >
+                      <CourseCard course={response} />
+                    </Link>
+                  </div>
+                );
                 })}
+              </div>
             </ScrollArea>
             {/* <div className="fade-top absolute top-0 left-0 right-0 h-10 bg-gradient-to-b from-white to-transparent pointer-events-none z-10"></div> */}
             {/* <div className="fade-bottom absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-white to-transparent pointer-events-none z-10"></div> */}

@@ -1,75 +1,91 @@
 "use client"
-
-import { useState } from "react"
-import { Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Tabs } from "@/components/ui/tabs"
+import { ShoppingCart, Heart, Award, Clock, BarChart } from "lucide-react"
 
 interface PurchaseCardProps {
-  course: any;
+  course: any
 }
 
 export default function PurchaseCard({ course }: PurchaseCardProps) {
-  const [couponCode, setCouponCode] = useState("")
-  const [couponApplied, setCouponApplied] = useState(false)
-  const [showCouponInput, setShowCouponInput] = useState(false)
+  // Extract course data from the API response
+  // If course is an array, get the first item, otherwise use the course object directly
+  const courseData = Array.isArray(course) ? course[0] : course
 
+  // Get course details or set defaults
+  const price = courseData?.price || "N/A"
+  const currency = courseData?.currency || "₹"
+  const title = courseData?.title || "Course Title"
+  const paymentUrl = courseData?.paymentUrl
+  const duration = courseData?.duration || "Self-paced"
+  const level = courseData?.level || "All Levels"
+  const totalLessons = courseData?.playlist?.[0]?.modules?.length || 0
+
+  // Handle payment gateway redirect
   const handlePaymentGateway = () => {
     try {
-      // Try to get payment URL directly or from nested data structure
-      let paymentUrl;
-      if (course.paymentUrl) {
-        paymentUrl = course.paymentUrl;
-      } else if (Array.isArray(course) && course[0]?.paymentUrl) {
-        paymentUrl = course[0].paymentUrl;
+      if (paymentUrl) {
+        window.open(paymentUrl, "_blank")
       } else {
-        paymentUrl = "https://example.com/payment";
+        console.error("Payment URL not found in course data")
       }
-      
-      window.open(paymentUrl, '_blank');
     } catch (error) {
-      console.error("Error opening payment URL:", error);
+      console.error("Error opening payment URL:", error)
     }
   }
 
-  // Determine course price and currency
-  const price = course.price || (Array.isArray(course) && course[0]?.price);
-  const currency = course.currency || (Array.isArray(course) && course[0]?.currency) || "₹";
-
   return (
-    <div className="border rounded-lg overflow-hidden shadow-lg mx-auto bg-white animate-fadeIn">
+    <div className="border rounded-xl overflow-hidden shadow-lg mx-auto bg-white animate-fadeIn sticky top-6">
       <Tabs defaultValue="personal" className="w-full">
         <div className="p-6">
-
-
-          <h3 className="text-xl font-bold text-gray-900 mb-1">{course[0].title}</h3>
-          <p className="text-gray-700 mb-4">
-            Get this course, and enjoy it get the full access to all the course contents.{" "}
-            <span className="text-green-600 font-medium hover:text-green-800 transition-colors cursor-pointer">
-              Learn more
-            </span>
-          </p>
-
-          <div className="relative flex items-center justify-center mb-4">
-            <div className="border-t border-gray-200 absolute w-full"></div>
-            <span className="bg-white px-2 text-gray-500 text-sm relative">or</span>
-          </div>
-
-          <div className="text-3xl font-bold text-gray-900 mb-4 text-center">
+          {/* Course price */}
+          <div className="text-3xl font-bold text-gray-900 mb-4">
             {currency} {price}
           </div>
 
-          <Button
-            onClick={() => handlePaymentGateway()}
-            variant="outline"
-            className="w-full py-6 mb-4 border-gray-300 hover:bg-gray-50 transition-all cursor-pointer"
-            size="lg"
-          >
-            Buy now
-          </Button>
+          {/* Purchase buttons */}
+          <div className="space-y-3 mb-6">
+            <Button
+              onClick={handlePaymentGateway}
+              className="w-full py-6 bg-green-600 hover:bg-green-700 text-white"
+              size="lg"
+            >
+              <ShoppingCart className="mr-2 h-5 w-5" /> Buy now
+            </Button>
+          </div>
+
+          {/* Course details */}
+          <div className="space-y-4 text-sm">
+            <h3 className="font-semibold text-gray-900">This course includes:</h3>
+
+            <div className="space-y-3">
+              <div className="flex items-start">
+                <Clock className="w-5 h-5 text-gray-700 mr-3 mt-0.5" />
+                <div>
+                  <p className="text-gray-900 font-medium">Course Duration</p>
+                  <p className="text-gray-600">{duration}</p>
+                </div>
+              </div>
+
+              <div className="flex items-start">
+                <BarChart className="w-5 h-5 text-gray-700 mr-3 mt-0.5" />
+                <div>
+                  <p className="text-gray-900 font-medium">Difficulty Level</p>
+                  <p className="text-gray-600">{level}</p>
+                </div>
+              </div>
+
+              <div className="flex items-start">
+                <Award className="w-5 h-5 text-gray-700 mr-3 mt-0.5" />
+                <div>
+                  <p className="text-gray-900 font-medium">Total Lessons</p>
+                  <p className="text-gray-600">{totalLessons} lessons</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </Tabs>
     </div>
   )
 }
-
