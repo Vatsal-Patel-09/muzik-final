@@ -12,11 +12,12 @@ interface Video {
   description?: string;
   thumbnail?: string;
   content?: string | (() => React.ReactNode);
+  url?: string;
 }
 
 interface UpcomingVideosListProps {
   videos: Video[];
-  onVideoSelect?: (video: Video) => void;
+  onVideoSelect?: (video: Video, idx?: number) => void;
   currentVideoId?: string;
 }
 
@@ -48,9 +49,9 @@ export function UpcomingVideosList({
 
   useOutsideClick(ref, () => setActive(null));
 
-  const handleVideoClick = (video: Video, idx) => {
+  const handleVideoClick = (video: Video, idx: number) => {
     if (onVideoSelect) {
-      onVideoSelect({video, idx});
+      onVideoSelect(video, idx);
     } else {
       setActive(video);
     }
@@ -98,7 +99,6 @@ export function UpcomingVideosList({
                   className="w-full h-80 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top"
                 />
               </motion.div>
-
               <div>
                 <div className="flex justify-between items-start p-4">
                   <div className="">
@@ -115,7 +115,6 @@ export function UpcomingVideosList({
                       {active.duration}
                     </motion.p>
                   </div>
-
                   <motion.button
                     layoutId={`button-${active.id}-${id}`}
                     onClick={() => {
@@ -147,15 +146,14 @@ export function UpcomingVideosList({
       </AnimatePresence>
       <ul className="space-y-2 max-h-[500px] overflow-y-auto">
         {videos?.length > 0 &&
-          videos?.map((video, idx) => {
-            console.log("sdhfgohdsfg");
+          videos.map((video, idx) => {
             return (
               <motion.div
                 layoutId={`card-${video.id}-${id}`}
                 key={`card-${video.id}-${id}`}
-                onClick={() => handleVideoClick(video,idx)}
+                onClick={() => handleVideoClick(video, idx)}
                 className={`p-3 flex justify-between items-center rounded-lg cursor-pointer ${
-                  idx === currentVideoId
+                  idx.toString() === currentVideoId
                     ? "bg-green-100 border border-green-500"
                     : "bg-gray-50 hover:bg-gray-100"
                 }`}
@@ -205,18 +203,9 @@ export function UpcomingVideosList({
 export const CloseIcon = () => {
   return (
     <motion.svg
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 1,
-      }}
-      exit={{
-        opacity: 0,
-        transition: {
-          duration: 0.05,
-        },
-      }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.05 } }}
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
