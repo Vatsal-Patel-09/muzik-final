@@ -3,12 +3,8 @@
 import { Suspense } from "react"
 import { VideoRoomContent } from "@/components/video-room/VideoRoomContent"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { useSearchParams } from "next/navigation"
 
 export default function VideoRoomPage() {
-  const searchParams = useSearchParams()
-  const courseId = searchParams.get("courseId")
-
   return (
     <ScrollArea className="h-[calc(100vh-40px)] border-none w-full rounded-md p-4">
       <main className="min-h-screen py-4">
@@ -24,7 +20,7 @@ export default function VideoRoomPage() {
             </div>
           }
         >
-          <VideoRoomContent courseId={courseId} />
+          <VideoRoomContent />
         </Suspense>
       </main>
     </ScrollArea>
