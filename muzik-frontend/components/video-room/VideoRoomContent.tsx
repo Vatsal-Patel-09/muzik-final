@@ -8,7 +8,7 @@ import { ModuleDescription } from "@/components/video-room/ModuleDescription";
 import { UpcomingVideosList } from "@/components/video-room/UpcomingVideosList";
 import axios from "axios";
 
-export function VideoRoomContent({ courseId: propCourseId }: { courseId: string | null }) {
+export function VideoRoomContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -17,6 +17,7 @@ export function VideoRoomContent({ courseId: propCourseId }: { courseId: string 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Get courseId and lessonId from searchParams
   const courseId = searchParams.get("courseId") || "course-1";
   const lessonIdParam = searchParams.get("lessonId");
 
@@ -103,7 +104,7 @@ export function VideoRoomContent({ courseId: propCourseId }: { courseId: string 
   return (
     <div className="container mx-auto p-4">
       <div className="grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-6">
-        {/* Video Player (3 columns on lg) */}
+        {/* Video Player */}
         <div>
           {currentLesson && currentLesson.url ? (
             <VideoPlayer videoUrl={currentLesson.url} />
@@ -112,7 +113,7 @@ export function VideoRoomContent({ courseId: propCourseId }: { courseId: string 
           )}
         </div>
 
-        {/* Course Lessons (1 column on lg), narrower */}
+        {/* Course Lessons */}
         <div>
           <UpcomingVideosList
             videos={videoArray}
@@ -133,42 +134,16 @@ export function VideoRoomContent({ courseId: propCourseId }: { courseId: string 
             href="https://chat.whatsapp.com/JCQTWuhiWso60lQ3R9U8Qg"
             target="_blank"
             rel="noopener noreferrer"
-            className="
-              bg-green-500 
-              hover:bg-green-600 
-              text-black 
-              px-3 
-              py-2 
-              rounded-full 
-              flex 
-              items-center 
-              justify-center 
-              gap-2 
-              text-sm
-              whitespace-nowrap
-            "
+            className="bg-green-500 hover:bg-green-600 text-black px-3 py-2 rounded-full flex items-center justify-center gap-2 text-sm whitespace-nowrap"
           >
             Join WhatsApp Community
           </a>
 
-          {/* Mark as Completed button if not done yet */}
+          {/* Mark as Completed button */}
           {!currentLesson?.isCompleted && (
             <button
               onClick={markLessonCompleted}
-              className="
-                bg-green-600 
-                hover:bg-green-700 
-                text-black 
-                px-3 
-                py-2 
-                rounded-full 
-                flex 
-                items-center 
-                justify-center 
-                gap-2 
-                text-sm 
-                whitespace-nowrap
-              "
+              className="bg-green-600 hover:bg-green-700 text-black px-3 py-2 rounded-full flex items-center justify-center gap-2 text-sm whitespace-nowrap"
             >
               Mark as Completed
             </button>
@@ -176,30 +151,10 @@ export function VideoRoomContent({ courseId: propCourseId }: { courseId: string 
 
           <button
             onClick={handleNextLesson}
-            disabled={
-              videoArray.findIndex((lesson: any) => lesson.id === currentLesson?.id) 
-              === videoArray.length - 1
-            }
-            className={`
-              bg-green-600 
-              hover:bg-green-700 
-              text-black 
-              px-3 
-              py-2 
-              rounded-full 
-              flex 
-              items-center 
-              justify-center 
-              gap-2 
-              text-sm 
-              whitespace-nowrap
-              ${
-                videoArray.findIndex((lesson: any) => lesson.id === currentLesson?.id)
-                === videoArray.length - 1
-                  ? "opacity-50 cursor-not-allowed"
-                  : ""
-              }
-            `}
+            disabled={videoArray.findIndex((lesson: any) => lesson.id === currentLesson?.id) === videoArray.length - 1}
+            className={`bg-green-600 hover:bg-green-700 text-black px-3 py-2 rounded-full flex items-center justify-center gap-2 text-sm whitespace-nowrap ${
+              videoArray.findIndex((lesson: any) => lesson.id === currentLesson?.id) === videoArray.length - 1 ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
             Next Lesson
           </button>
