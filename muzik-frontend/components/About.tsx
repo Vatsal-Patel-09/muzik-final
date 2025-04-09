@@ -26,7 +26,7 @@ export function About() {
   ];
 
   return (
-    <div id="about" className="relative z-20 py-10 md:-mt-10 lg:py-32 max-w-7xl mx-auto overflow-hidden">
+    <div id="about" className="relative z-20 py-10 lg:-mt-10 lg:py-32 max-w-7xl mx-auto overflow-hidden">
       <div className="px-8">
         <h4 className="text-3xl lg:text-5xl lg:leading-tight max-w-5xl mx-auto text-center tracking-tight font-medium text-black dark:text-white">
           About Us
@@ -150,7 +150,7 @@ export const SkeletonTwo = () => {
     <div className="relative flex flex-col items-start p-4 md:p-8 gap-6 h-full overflow-hidden">
       
       {/* First row with images - hidden on small screens, visible on md and up */}
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <div className="flex flex-row -ml-10">
           {images.slice(0, 3).map((image, idx) => (
             <motion.div
