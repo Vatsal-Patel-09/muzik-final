@@ -1,0 +1,103 @@
+{
+    "courseTitle": "",
+    "thumbnailImage": "",
+    "promoVideoUrl": "",
+    "description": "",
+    "whatYoullLearn": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "courseFormat": [
+      "",
+      "",
+      "",
+      ""
+    ],
+    "targetAudience": [
+      "",
+      "",
+      "",
+      ""
+    ],
+    "bonusMaterials": [
+      "",
+      "",
+      "",
+      ""
+    ],
+    "price": "",
+    "paymentUrl": "",
+    "accessValidity": "Lifetime Access",
+    "experienceRequired": "",
+    "instructor": {
+      "name": "",
+      "social": "",
+      "description": ""
+    },
+    "callToAction": "",
+    "courseStructure": {
+      "introVideo": {
+        "title": "",
+        "description": "",
+        "introVideoUrl": "",
+      },
+      "modules": [
+        {
+          "moduleTitle": "",
+          "moduleDescription": "",
+          "lessons": [
+            {
+              "title": "",
+              "lessonUrl": ""
+            },
+            {
+              "title": "",
+              "lessonUrl": ""
+            }
+          ]
+        },
+        {
+          "moduleTitle": "",
+          "moduleDescription": "",
+          "lessons": [
+            {
+              "title": "",
+              "lessonUrl": ""
+            }
+          ]
+        },
+        {
+          "moduleTitle": "",
+          "moduleDescription": "",
+          "lessons": [
+            {
+              "title": "",
+              "lessonUrl": ""
+            },
+            {
+              "title": "",
+              "lessonUrl": ""
+            }
+          ]
+        },
+        {
+          "moduleTitle": "",
+          "moduleDescription": "",
+          "lessons": [
+            {
+              "title": "",
+              "lessonUrl": ""
+            },
+            {
+              "title": "",
+              "lessonUrl": ""
+            }
+          ]
+        }
+      ]
+    }
+  }
+  
