@@ -55,7 +55,7 @@ export const TopCompanies = () => {
           </motion.p>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-8 mx-auto max-w-4xl">
+        <div className="flex flex-col lg:flex-row gap-8 mx-auto max-w-4xl">
           {companies.map((company, index) => (
             <motion.div
               key={company.name}

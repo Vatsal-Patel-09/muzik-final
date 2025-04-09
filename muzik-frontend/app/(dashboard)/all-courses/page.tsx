@@ -30,8 +30,9 @@ const AllCourses = () => {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl lg:text-5xl lg:leading-tight font-semibold mb-8 text-black">
+    <div className="">
+      <div>
+      <h1 className="text-4xl lg:text-5xl lg:leading-tight font-semibold mb-8  text-black">
         All Courses
       </h1>
       
@@ -47,9 +48,9 @@ const AllCourses = () => {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-5">
               {storeCoursesData?.map((course: any) => (
-                <div key={course._id} className="mb-2">
+                <div key={course._id} className="mb-2 ml-2">
                   <Link
                     href={`/course-description?courseId=${course._id}`}
                   >
@@ -60,6 +61,7 @@ const AllCourses = () => {
             </div>
           )}
         </ScrollArea>
+      </div>
       </div>
     </div>
   );
