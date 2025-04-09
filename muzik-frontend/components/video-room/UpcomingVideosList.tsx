@@ -57,9 +57,81 @@ export function UpcomingVideosList({
     }
   };
 
+  if (!videos || videos.length === 0) {
+    return (
+      <div className="p-4 text-center text-gray-500">
+        No lessons available.
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-white text-black rounded-xl p-4 shadow-md">
-      <h2 className="text-xl font-semibold mb-4 text-black">Course Lessons</h2>
+    <div className="bg-white text-black rounded-xl p-4 shadow-md max-w-full">
+      <h2 className="text-xl font-semibold mb-4">Course Lessons</h2>
+      <ul className="space-y-2">
+        {videos.map((video, idx) => {
+          const isActive = video.id.toString() === currentVideoId;
+
+          return (
+            <motion.li
+              key={`video-${video.id}-${id}`}
+              onClick={() => handleVideoClick(video, idx)}
+              className={`p-3 rounded-lg cursor-pointer flex justify-between items-center 
+                transition-all duration-200 
+                ${isActive ? "bg-green-100 border border-green-500" : "bg-gray-50 hover:bg-gray-100"}
+              `}
+            >
+              <div className="flex items-start gap-3">
+                {video.thumbnail && (
+                  <Image
+                    src={video.thumbnail}
+                    alt={video.title}
+                    width={60}
+                    height={60}
+                    className="rounded flex-shrink-0"
+                  />
+                )}
+
+                {/* Title wraps instead of truncating */}
+                <div className="flex flex-col">
+                  <span className="font-medium text-black text-sm leading-5 break-words">
+                    {video.title}
+                  </span>
+                  <span className="text-gray-500 text-xs leading-4">
+                    {video.duration}
+                  </span>
+                </div>
+              </div>
+
+              {/* "Pending" / "Completed" + Button stay on same line */}
+              <div className="flex items-center gap-2 flex-shrink-0">
+                {video.isCompleted ? (
+                  <span className="text-green-600 text-xs font-bold">Completed</span>
+                ) : (
+                  <span className="text-gray-400 text-xs">Pending</span>
+                )}
+                <motion.button
+                  className="
+                    px-2 
+                    py-1 
+                    text-xs 
+                    rounded-full 
+                    bg-gray-200 
+                    hover:bg-green-500 
+                    hover:text-white 
+                    transition-colors 
+                    whitespace-nowrap
+                  "
+                >
+                  {video.isCompleted ? "Rewatch" : "Play"}
+                </motion.button>
+              </div>
+            </motion.li>
+          );
+        })}
+      </ul>
+
+      {/* Optional Modal */}
       <AnimatePresence>
         {active && typeof active === "object" && (
           <motion.div
@@ -87,115 +159,31 @@ export function UpcomingVideosList({
             <motion.div
               layoutId={`card-${active.id}-${id}`}
               ref={ref}
-              className="w-full max-w-[500px] h-full md:h-fit md:max-h-[90%] flex flex-col bg-white sm:rounded-3xl overflow-hidden shadow-lg"
+              className="w-full max-w-[500px] h-full md:h-auto md:max-h-[90%] flex flex-col bg-white sm:rounded-3xl overflow-hidden shadow-lg p-4"
             >
-              <motion.div layoutId={`image-${active.id}-${id}`}>
-                <Image
-                  priority
-                  width={200}
-                  height={200}
-                  src={active.thumbnail || "/lesson-placeholder.jpg"}
-                  alt={active.title}
-                  className="w-full h-80 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top"
-                />
-              </motion.div>
-              <div>
-                <div className="flex justify-between items-start p-4">
-                  <div className="">
-                    <motion.h3
-                      layoutId={`title-${active.id}-${id}`}
-                      className="font-bold text-black"
-                    >
-                      {active.title}
-                    </motion.h3>
-                    <motion.p
-                      layoutId={`description-${active.id}-${id}`}
-                      className="text-gray-600"
-                    >
-                      {active.duration}
-                    </motion.p>
-                  </div>
-                  <motion.button
-                    layoutId={`button-${active.id}-${id}`}
-                    onClick={() => {
-                      if (onVideoSelect) onVideoSelect(active);
-                      setActive(null);
-                    }}
-                    className="px-4 py-3 text-sm rounded-full font-bold bg-green-500 text-white"
-                  >
-                    {active.isCompleted ? "Rewatch" : "Start"}
-                  </motion.button>
-                </div>
-                <div className="pt-4 relative px-4">
-                  <motion.div
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="text-gray-600 text-xs md:text-sm lg:text-base h-40 md:h-fit pb-10 flex flex-col items-start gap-4 overflow-auto [mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch]"
-                  >
-                    {typeof active.content === "function"
-                      ? active.content()
-                      : active.content}
-                  </motion.div>
-                </div>
+              {/* Lesson detail example */}
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="font-bold text-xl">{active.title}</h3>
+                <motion.button
+                  layoutId={`button-${active.id}-${id}`}
+                  onClick={() => {
+                    if (onVideoSelect) onVideoSelect(active);
+                    setActive(null);
+                  }}
+                  className="px-4 py-2 text-sm rounded-full font-bold bg-green-500 text-white"
+                >
+                  {active.isCompleted ? "Rewatch" : "Start"}
+                </motion.button>
+              </div>
+              <div className="overflow-auto text-sm text-gray-800 leading-5">
+                {typeof active.content === "function"
+                  ? active.content()
+                  : active.content}
               </div>
             </motion.div>
           </div>
         ) : null}
       </AnimatePresence>
-      <ul className="space-y-2 max-h-[500px] overflow-y-auto">
-        {videos?.length > 0 &&
-          videos.map((video, idx) => {
-            return (
-              <motion.div
-                layoutId={`card-${video.id}-${id}`}
-                key={`card-${video.id}-${id}`}
-                onClick={() => handleVideoClick(video, idx)}
-                className={`p-3 flex justify-between items-center rounded-lg cursor-pointer ${
-                  idx.toString() === currentVideoId
-                    ? "bg-green-100 border border-green-500"
-                    : "bg-gray-50 hover:bg-gray-100"
-                }`}
-              >
-                <div className="flex gap-3 items-center">
-                  {video.isCompleted ? (
-                    <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-3 w-3 text-white"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                  ) : (
-                    <div className="w-5 h-5 rounded-full border border-gray-400 flex items-center justify-center">
-                      <span className="text-xs text-gray-500">{video.id}</span>
-                    </div>
-                  )}
-                  <div>
-                    <h3 className="font-medium text-black text-left">
-                      {video.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm">{video.duration}</p>
-                  </div>
-                </div>
-                <motion.button
-                  layoutId={`button-${video.id}-${id}`}
-                  className="px-3 py-1 text-xs rounded-full bg-gray-200 hover:bg-green-500 hover:text-white text-black"
-                >
-                  {video.isCompleted ? "Rewatch" : "Play"}
-                </motion.button>
-              </motion.div>
-            );
-          })}
-      </ul>
     </div>
   );
 }
