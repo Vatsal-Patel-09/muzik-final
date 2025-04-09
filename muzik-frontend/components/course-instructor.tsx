@@ -1,87 +1,88 @@
-import { Star, Users, Video } from "lucide-react"
+"use client"
+
+import { useState } from "react"
+import { Star, Users, Video, ChevronDown, ChevronUp } from "lucide-react"
 import Image from "next/image"
 import { Button } from "./ui/button"
-import { useState } from "react"
 
 interface CourseInstructorProps {
-  course: any;
+  course: any
 }
 
 export default function CourseInstructor({ course }: CourseInstructorProps) {
-  const [showFullBio, setShowFullBio] = useState(false);
-  
-  // Extract instructor data from course or use default
+  const [showFullBio, setShowFullBio] = useState(false)
+
+  // Extract instructor data from the API response
+  // If course has instructor property, use it, otherwise build from individual properties
   const instructor = course.instructor || {
-    name: course.instructorName || "Course Instructor",
-    title: course.instructorTitle || "Instructor",
-    rating: course.instructorRating || 4.5,
-    reviewCount: course.instructorReviewCount || 1000,
-    studentCount: course.instructorStudentCount || 10000,
-    courseCount: course.instructorCourseCount || 5,
-    bio: course.instructorBio || "This instructor is passionate about teaching and has helped many students master this subject.",
-    profileImage: course.instructorImage || "/placeholder.svg",
-  };
+    name: course.instructorName || (Array.isArray(course) && course[0]?.instructorName) || "Course Instructor",
+    title: course.instructorTitle || (Array.isArray(course) && course[0]?.instructorTitle) || "Instructor",
+    rating: course.instructorRating || (Array.isArray(course) && course[0]?.instructorRating) || 4.5,
+    reviewCount: course.instructorReviewCount || (Array.isArray(course) && course[0]?.instructorReviewCount) || 0,
+    studentCount: course.instructorStudentCount || (Array.isArray(course) && course[0]?.instructorStudentCount) || 0,
+    courseCount: course.instructorCourseCount || (Array.isArray(course) && course[0]?.instructorCourseCount) || 0,
+    bio: course.instructorBio || (Array.isArray(course) && course[0]?.instructorBio) || "",
+    profileImage: course.instructorImage || (Array.isArray(course) && course[0]?.instructorImage) || "/avatar.jpg",
+  }
 
   // Truncate bio for display
-  const shortBio = instructor.bio?.substring(0, 150) + (instructor.bio?.length > 150 ? "..." : "");
+  const shortBio = instructor.bio?.substring(0, 150) + (instructor.bio?.length > 150 ? "..." : "")
 
   return (
     <section className="border-t border-gray-200 pt-8">
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Instructor</h2>
 
-      <div className="flex flex-col md:flex-row gap-6">
-        <div className="flex-shrink-0">
-          <div className="relative w-24 h-24 rounded-full overflow-hidden">
-            <Image
-              src={instructor.profileImage || "/placeholder.svg"}
-              alt={instructor.name}
-              fill
-              className="object-cover"
-            />
-          </div>
-        </div>
-
-        <div className="flex-grow">
-          <h3 className="text-xl font-medium text-neutral-600 hover:text-neutral-800 transition-colors">
-            {instructor.name}
-          </h3>
-          <p className="text-gray-600 mb-3">{instructor.title}</p>
-
-          <div className="flex flex-wrap gap-y-2 gap-x-6 mb-4">
-            <div className="flex items-center">
-              <Star className="w-5 h-5 text-gray-700" />
-              <span className="ml-2 text-gray-700">{instructor.rating} Instructor Rating</span>
-            </div>
-            <div className="flex items-center">
-              <Users className="w-5 h-5 text-gray-700" />
-              <span className="ml-2 text-gray-700">{instructor.reviewCount?.toLocaleString()} Reviews</span>
-            </div>
-            <div className="flex items-center">
-              <Users className="w-5 h-5 text-gray-700" />
-              <span className="ml-2 text-gray-700">{instructor.studentCount?.toLocaleString()} Students</span>
-            </div>
-            <div className="flex items-center">
-              <Video className="w-5 h-5 text-gray-700" />
-              <span className="ml-2 text-gray-700">{instructor.courseCount} Courses</span>
+      <div className="bg-gray-50 rounded-xl p-6">
+        <div className="flex flex-col md:flex-row gap-6">
+          {/* Instructor profile image */}
+          <div className="flex-shrink-0">
+            <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-md">
+              <Image
+                src={instructor.profileImage || "/avatar.jpg"}
+                alt={instructor.name}
+                fill
+                className="object-cover"
+              />
             </div>
           </div>
 
-          <div className="text-gray-700">
-            <p className="mb-3">{showFullBio ? instructor.bio : shortBio}</p>
-          </div>
+          <div className="flex-grow">
+            {/* Instructor name and title */}
+            <h3 className="text-xl font-bold text-gray-900 hover:text-gray-700 transition-colors">{instructor.name}</h3>
+            <p className="text-gray-600 mb-3">{instructor.title}</p>
 
-          {instructor.bio?.length > 150 && (
-            <Button 
-              variant='outline' 
-              className="transition-colors mt-2 text-green-600 font-medium hover:text-green-800"
-              onClick={() => setShowFullBio(!showFullBio)}
-            >
-              {showFullBio ? "Show less" : "Show more"}
-            </Button>
-          )}
+
+
+            {/* Instructor bio */}
+            {instructor.bio && (
+              <>
+                <div className="text-gray-700">
+                  <p className="mb-3">{showFullBio ? instructor.bio : shortBio}</p>
+                </div>
+
+                {/* Show more/less button for bio if it's longer than 150 characters */}
+                {instructor.bio?.length > 150 && (
+                  <Button
+                    variant="ghost"
+                    className="transition-colors text-green-600 font-medium hover:text-green-800 p-0 flex items-center"
+                    onClick={() => setShowFullBio(!showFullBio)}
+                  >
+                    {showFullBio ? (
+                      <>
+                        Show less <ChevronUp className="ml-1 h-4 w-4" />
+                      </>
+                    ) : (
+                      <>
+                        Show more <ChevronDown className="ml-1 h-4 w-4" />
+                      </>
+                    )}
+                  </Button>
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </section>
   )
 }
-
