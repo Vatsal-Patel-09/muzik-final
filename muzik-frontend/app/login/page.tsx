@@ -1,6 +1,8 @@
+"use client";
+
 import AuthForm from "@/components/AuthForm";
-import PaymentForm from "@/components/PaymentForm";
-import { Fullscreen } from "lucide-react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Page() {
   return (
@@ -12,9 +14,8 @@ function Page() {
       <div className="relative flex h-full items-center justify-center">
         <AuthForm />
       </div>
-      {/* <div className="relative flex h-full items-center justify-center">
-        <PaymentForm />
-      </div> */}
+      {/* Global ToastContainer for toast notifications */}
+      <ToastContainer />
     </div>
   );
 }
