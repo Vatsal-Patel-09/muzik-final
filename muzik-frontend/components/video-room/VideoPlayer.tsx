@@ -1,3 +1,62 @@
+// import React from "react";
+
+// interface VideoPlayerProps {
+//   videoUrl: string;
+// }
+
+// export function VideoPlayer({ videoUrl }: VideoPlayerProps) {
+//   // Container styles equivalent to "w-full aspect-video rounded-lg overflow-hidden"
+//   const containerStyle: React.CSSProperties = {
+//     width: "100%",
+//     aspectRatio: "16/9", 
+//     borderRadius: "0.5rem", // equivalent to rounded-lg
+//     overflow: "hidden",
+//     maxWidth: "100%"
+//   };
+  
+//   // iframe styles equivalent to "w-full h-full" with border: 0
+//   const iframeStyle: React.CSSProperties = {
+//     width: "100%",
+//     height: "100%",
+//     border: "0",
+//   };
+
+//   return (
+//     <div style={containerStyle}>
+//       <iframe 
+//         src={videoUrl}
+//         style={iframeStyle}
+//         allowFullScreen={true}
+//         allow="encrypted-media"
+//         title="Video Player"
+//         // Remove sandbox attribute as it might restrict DRM functionality
+//       ></iframe>
+//     </div>
+//   );
+// }
+
+// import React from "react";
+
+// interface VideoPlayerProps {
+//   videoUrl: string;
+// }
+
+// export function VideoPlayer({ videoUrl }: VideoPlayerProps) {
+//   return (
+//     <div style={{ maxWidth: "100%", width: "100%", aspectRatio: "16/9",  borderRadius: "0.5rem",}}>
+//       <iframe 
+//         src={videoUrl}
+//         style={{ border: 0, height: "100%", width: "100%", maxWidth: "100%" }}
+//         allowFullScreen={true}
+//         allow="encrypted-media"
+//         title="Video Player"
+//       ></iframe>
+//     </div>
+//   );
+// }
+
+//fucking ass hole over flow hidden error  
+
 import React from "react";
 
 interface VideoPlayerProps {
@@ -6,7 +65,7 @@ interface VideoPlayerProps {
 
 export function VideoPlayer({ videoUrl }: VideoPlayerProps) {
   return (
-    <div className="w-full aspect-video rounded-lg overflow-hidden">
+    <div className="w-full aspect-video rounded-lg ">
       <iframe 
         src={videoUrl}
         className="w-full h-full"
@@ -14,7 +73,8 @@ export function VideoPlayer({ videoUrl }: VideoPlayerProps) {
         allowFullScreen
         allow="encrypted-media"
         title="Video Player"
-        referrerPolicy="origin"
+        // referrerPolicy="origin"
+        sandbox="allow-scripts allow-same-origin allow-presentation"
       ></iframe>
     </div>
   );
