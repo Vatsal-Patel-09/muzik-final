@@ -48,7 +48,7 @@ const AllCourses = () => {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-5">
               {storeCoursesData?.map((course: any) => (
                 <div key={course._id} className="mb-2 ml-2">
                   <Link

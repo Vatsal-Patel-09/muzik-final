@@ -2,7 +2,6 @@
 
 import CourseHeader from "@/components/course-header"
 import CourseDescription from "@/components/course-description"
-import CourseRequirements from "@/components/course-requirements"
 import CourseInstructor from "@/components/course-instructor"
 import PurchaseCard from "@/components/purchase-card"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -96,15 +95,18 @@ export default function CoursePageContent() {
           // Actual content when data is loaded
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              
               <div className="lg:col-span-2">
                 <CourseHeader course={courseData} />
+                <div className="lg:hidden block">
+                  <PurchaseCard course={courseData} />
+                </div>
                 <div className="mt-8 space-y-8">
                   <CourseDescription course={courseData} />
-                  <CourseRequirements course={courseData} />
                   <CourseInstructor course={courseData} />
                 </div>
               </div>
-              <div className="lg:col-span-1">
+              <div className="lg:col-span-1 hidden lg:block">
                 <PurchaseCard course={courseData} />
               </div>
             </div>

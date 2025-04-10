@@ -1,7 +1,7 @@
 "use client"
 import { Button } from "@/components/ui/button"
 import { Tabs } from "@/components/ui/tabs"
-import { ShoppingCart, Heart, Award, Clock, BarChart } from "lucide-react"
+import { ShoppingCart, Heart, Award, Clock, BarChart, ArrowLeft, ArrowRight } from "lucide-react"
 
 interface PurchaseCardProps {
   course: any
@@ -14,11 +14,10 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
 
   // Get course details or set defaults
   const price = courseData?.price || "N/A"
-  const currency = courseData?.currency || "₹"
-  const title = courseData?.title || "Course Title"
+  const title = courseData?.courseTitle || "Course Title"
   const paymentUrl = courseData?.paymentUrl
   const duration = courseData?.duration || "Self-paced"
-  const level = courseData?.level || "All Levels"
+  const callToAction = courseData?.callToAction || "Enroll Now"
   const totalLessons = courseData?.playlist?.[0]?.modules?.length || 0
 
   // Handle payment gateway redirect
@@ -37,10 +36,11 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
   return (
     <div className="border rounded-xl overflow-hidden shadow-lg mx-auto bg-white animate-fadeIn sticky top-6">
       <Tabs defaultValue="personal" className="w-full">
+        <h1 className="text-[25px] p-5 font-semibold">{title}</h1>
         <div className="p-6">
           {/* Course price */}
-          <div className="text-3xl font-bold text-gray-900 mb-4">
-            {currency} {price}
+          <div className="text-3xl font-bold -mt-8 text-gray-900 mb-4">
+            {price}
           </div>
 
           {/* Purchase buttons */}
@@ -56,7 +56,7 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
 
           {/* Course details */}
           <div className="space-y-4 text-sm">
-            <h3 className="font-semibold text-gray-900">This course includes:</h3>
+            
 
             <div className="space-y-3">
               <div className="flex items-start">
@@ -68,20 +68,14 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
               </div>
 
               <div className="flex items-start">
-                <BarChart className="w-5 h-5 text-gray-700 mr-3 mt-0.5" />
+                <ArrowRight className="w-10 h-10 text-gray-700 -ml-1  mr-3 mt-0.5" />
                 <div>
-                  <p className="text-gray-900 font-medium">Difficulty Level</p>
-                  <p className="text-gray-600">{level}</p>
+                  <p className="text-gray-600 font-medium">{callToAction}</p>
                 </div>
               </div>
+              
 
-              <div className="flex items-start">
-                <Award className="w-5 h-5 text-gray-700 mr-3 mt-0.5" />
-                <div>
-                  <p className="text-gray-900 font-medium">Total Lessons</p>
-                  <p className="text-gray-600">{totalLessons} lessons</p>
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>

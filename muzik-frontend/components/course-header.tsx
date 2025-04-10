@@ -13,9 +13,9 @@ export default function CourseHeader({ course }: CourseHeaderProps) {
 
   // Extract course data from the API response
   // course[0] contains the main course information
-  const title = course[0]?.title || "Course Title"
+  const title = course[0]?.courseTitle || "Course Title"
   const promoVideoUrl = course[0]?.promoVideoUrl
-  const thumbnail = course[0]?.thumbnail
+  const thumbnail = course[0]?.thumbnailImage
 
   return (
     <div className="pt-6">
