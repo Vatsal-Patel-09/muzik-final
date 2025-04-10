@@ -1,32 +1,26 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Star, Users, Video, ChevronDown, ChevronUp } from "lucide-react"
-import Image from "next/image"
-import { Button } from "./ui/button"
+import { useState } from "react";
+import { Star, Users, Video, ChevronDown, ChevronUp } from "lucide-react";
+import Image from "next/image";
+import { Button } from "./ui/button";
+import Link from "next/link";
+import { IconExternalLink } from "@tabler/icons-react";
 
 interface CourseInstructorProps {
-  course: any
+  course: any;
 }
 
 export default function CourseInstructor({ course }: CourseInstructorProps) {
-  const [showFullBio, setShowFullBio] = useState(false)
+  const [showFullBio, setShowFullBio] = useState(false);
 
   // Extract instructor data from the API response
-  // If course has instructor property, use it, otherwise build from individual properties
-  const instructor = course.instructor || {
-    name: course.instructorName || (Array.isArray(course) && course[0]?.instructorName) || "Course Instructor",
-    title: course.instructorTitle || (Array.isArray(course) && course[0]?.instructorTitle) || "Instructor",
-    rating: course.instructorRating || (Array.isArray(course) && course[0]?.instructorRating) || 4.5,
-    reviewCount: course.instructorReviewCount || (Array.isArray(course) && course[0]?.instructorReviewCount) || 0,
-    studentCount: course.instructorStudentCount || (Array.isArray(course) && course[0]?.instructorStudentCount) || 0,
-    courseCount: course.instructorCourseCount || (Array.isArray(course) && course[0]?.instructorCourseCount) || 0,
-    bio: course.instructorBio || (Array.isArray(course) && course[0]?.instructorBio) || "",
-    profileImage: course.instructorImage || (Array.isArray(course) && course[0]?.instructorImage) || "/avatar.jpg",
-  }
-
-  // Truncate bio for display
-  const shortBio = instructor.bio?.substring(0, 150) + (instructor.bio?.length > 150 ? "..." : "")
+  const instructor = course[0]?.instructor || {
+    name: "Unknown Instructor",
+    bio: "",
+    description: "",
+    Image: "/avatar.jpg",
+  };
 
   return (
     <section className="border-t border-gray-200 pt-8">
@@ -38,7 +32,7 @@ export default function CourseInstructor({ course }: CourseInstructorProps) {
           <div className="flex-shrink-0">
             <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-md">
               <Image
-                src={instructor.profileImage || "/avatar.jpg"}
+                src={instructor.ImageUrl || "/avatar.jpg"}
                 alt={instructor.name}
                 fill
                 className="object-cover"
@@ -48,20 +42,25 @@ export default function CourseInstructor({ course }: CourseInstructorProps) {
 
           <div className="flex-grow">
             {/* Instructor name and title */}
-            <h3 className="text-xl font-bold text-gray-900 hover:text-gray-700 transition-colors">{instructor.name}</h3>
-            <p className="text-gray-600 mb-3">{instructor.title}</p>
-
-
+            <h3 className="text-xl flex font-bold text-gray-900 hover:text-gray-700 transition-colors">
+              {instructor.name} 
+              <Link href={instructor.social} target="blank"><IconExternalLink className="h-5 w-5 mt-1.5 ml-2" /></Link>
+            </h3>
+            <p className="text-gray-600 mb-3">{instructor.description}</p>
 
             {/* Instructor bio */}
             {instructor.bio && (
               <>
                 <div className="text-gray-700">
-                  <p className="mb-3">{showFullBio ? instructor.bio : shortBio}</p>
+                  <p className="mb-3">
+                    {showFullBio
+                      ? instructor.bio
+                      : `${instructor.bio.slice(0, 150)}...`}
+                  </p>
                 </div>
 
-                {/* Show more/less button for bio if it's longer than 150 characters */}
-                {instructor.bio?.length > 150 && (
+                {/* Show more/less button for bio */}
+                {instructor.bio.length > 150 && (
                   <Button
                     variant="ghost"
                     className="transition-colors text-green-600 font-medium hover:text-green-800 p-0 flex items-center"
@@ -84,5 +83,5 @@ export default function CourseInstructor({ course }: CourseInstructorProps) {
         </div>
       </div>
     </section>
-  )
+  );
 }
