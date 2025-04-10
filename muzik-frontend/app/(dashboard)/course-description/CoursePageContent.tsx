@@ -114,3 +114,100 @@ export default function CoursePageContent() {
     </ScrollArea>
   )
 }
+
+
+// CoursePageContent.tsx
+// "use client"
+
+// import CourseHeader from "@/components/course-header"
+// import CourseDescription from "@/components/course-description"
+// import CourseRequirements from "@/components/course-requirements"
+// import CourseInstructor from "@/components/course-instructor"
+// import PurchaseCard from "@/components/purchase-card"
+// import { ScrollArea } from "@/components/ui/scroll-area"
+// import { useEffect, useState } from "react"
+// import { useSearchParams } from "next/navigation"
+// import axios from "axios"
+// import { Skeleton } from "@/components/ui/skeleton"
+
+// export default function CoursePageContent() {
+//   const [courseData, setCourseData] = useState<any>({})
+//   const [purchasedCourses, setPurchasedCourses] = useState<any[]>([])
+//   const [loading, setLoading] = useState(true)
+//   const searchParams = useSearchParams()
+//   const courseId = searchParams.get("courseId")
+
+//   // Fetch course data from API based on courseId from URL
+//   useEffect(() => {
+//     const fetchCourseData = async (id: string) => {
+//       try {
+//         setLoading(true)
+//         // API call to get course details
+//         const response = await axios.get(`https://muzik-mgj9.onrender.com/api/courses/${id}`)
+//         setCourseData(response.data)
+//       } catch (error) {
+//         console.error("Error fetching course by ID:", error)
+//       } finally {
+//         setLoading(false)
+//       }
+//     }
+
+//     if (courseId) {
+//       fetchCourseData(courseId)
+//     }
+//   }, [courseId])
+
+//   // Fetch purchased courses for the user
+//   useEffect(() => {
+//     const fetchPurchasedAllCourses = async () => {
+//       try {
+//         const response = await fetch(
+//           "https://muzik-mgj9.onrender.com/api/purchases/my-courses",
+//           {
+//             method: "GET",
+//             headers: {
+//               "Content-Type": "application/json",
+//               Authorization: `Bearer ${localStorage.getItem("token")}`,
+//             },
+//           }
+//         )
+//         const data = await response.json()
+//         setPurchasedCourses(data?.courses || [])
+//       } catch (error) {
+//         console.error("Error fetching purchased courses", error)
+//       }
+//     }
+//     fetchPurchasedAllCourses()
+//   }, [])
+
+//   return (
+//     <ScrollArea className="h-[calc(100vh-40px)] border-none w-full rounded-md p-4">
+//       <div className="min-h-screen bg-white">
+//         {loading ? (
+//           // Loading skeleton UI
+//           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+//             {/* ...Skeleton code unchanged... */}
+//           </div>
+//         ) : (
+//           // Actual content when data is loaded
+//           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+//             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+//               <div className="lg:col-span-2">
+//                 <CourseHeader course={courseData} />
+//                 <div className="mt-8 space-y-8">
+//                   <CourseDescription course={courseData} />
+//                   <CourseRequirements course={courseData} />
+//                   <CourseInstructor course={courseData} />
+//                 </div>
+//               </div>
+//               <div className="lg:col-span-1">
+//                 {/* Pass purchasedCourses as a new prop */}
+//                 <PurchaseCard course={courseData} purchasedCourses={purchasedCourses} />
+//               </div>
+//             </div>
+//           </div>
+//         )}
+//       </div>
+//     </ScrollArea>
+//   )
+// }
