@@ -23,7 +23,7 @@ export default function CourseHeader({ course }: CourseHeaderProps) {
       <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">{title}</h1>
 
       {/* Video player with thumbnail fallback */}
-      <div className="relative aspect-video bg-gray-100 rounded-xl  mb-6 shadow-lg"> {/*//overflow-hidden*/}
+      <div className="relative aspect-video bg-gray-100 rounded-xl  mb-6 shadow-lg "> {/*//overflow-hidden*/}
         {promoVideoUrl ? (
           <div className="w-full h-full">
             <iframe

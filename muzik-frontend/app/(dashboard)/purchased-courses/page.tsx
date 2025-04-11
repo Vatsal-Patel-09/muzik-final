@@ -1,6 +1,6 @@
 "use client";
 import { CourseCard } from "@/components/courseCard";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 

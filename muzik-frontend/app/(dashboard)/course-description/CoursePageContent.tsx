@@ -12,6 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export default function CoursePageContent() {
   const [courseData, setCourseData] = useState<any>({})
+  const [purchasedCourses, setPurchasedCourses] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const searchParams = useSearchParams()
   const courseId = searchParams.get("courseId")
@@ -35,6 +36,29 @@ export default function CoursePageContent() {
       fetchCourseData(courseId)
     }
   }, [courseId])
+
+  // Fetch purchased courses for the user
+  useEffect(() => {
+    const fetchPurchasedAllCourses = async () => {
+      try {
+        const response = await fetch(
+          "https://muzik-mgj9.onrender.com/api/purchases/my-courses",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        const data = await response.json()
+        setPurchasedCourses(data?.courses || [])
+      } catch (error) {
+        console.error("Error fetching purchased courses", error)
+      }
+    }
+    fetchPurchasedAllCourses()
+  }, [])
 
   return (
     <ScrollArea className="h-[calc(100vh-40px)] border-none w-full rounded-md p-4">
@@ -99,7 +123,7 @@ export default function CoursePageContent() {
               <div className="lg:col-span-2">
                 <CourseHeader course={courseData} />
                 <div className="lg:hidden block">
-                  <PurchaseCard course={courseData} />
+                <PurchaseCard course={courseData} purchasedCourses={purchasedCourses} />
                 </div>
                 <div className="mt-8 space-y-8">
                   <CourseDescription course={courseData} />
@@ -107,7 +131,7 @@ export default function CoursePageContent() {
                 </div>
               </div>
               <div className="lg:col-span-1 hidden lg:block">
-                <PurchaseCard course={courseData} />
+              <PurchaseCard course={courseData} purchasedCourses={purchasedCourses} />
               </div>
             </div>
           </div>
@@ -118,7 +142,7 @@ export default function CoursePageContent() {
 }
 
 
-// CoursePageContent.tsx
+// // CoursePageContent.tsx
 // "use client"
 
 // import CourseHeader from "@/components/course-header"
