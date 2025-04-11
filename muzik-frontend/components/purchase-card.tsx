@@ -55,7 +55,10 @@ export default function PurchaseCard({ course, purchasedCourses }: PurchaseCardP
         <div className="p-6">
           {/* Course price */}
           <div className="text-3xl font-bold -mt-8 text-gray-900 mb-4">
-            {price}
+            <div className="flex items-center space-x-2">
+              <span className="text-3xl font-bold text-gray-900">₹{price}/-</span>
+              <span className="text-xl line-through text-gray-500 ml-2">₹{price * 5}</span>
+            </div>
           </div>
 
           {/* Purchase button (or go to course if already purchased) */}
