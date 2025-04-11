@@ -2,12 +2,14 @@
 import { Button } from "@/components/ui/button"
 import { Tabs } from "@/components/ui/tabs"
 import { ShoppingCart, Heart, Award, Clock, BarChart, ArrowLeft, ArrowRight } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 interface PurchaseCardProps {
   course: any
+  purchasedCourses?: any[]
 }
 
-export default function PurchaseCard({ course }: PurchaseCardProps) {
+export default function PurchaseCard({ course, purchasedCourses }: PurchaseCardProps) {
   // Extract course data from the API response
   // If course is an array, get the first item, otherwise use the course object directly
   const courseData = Array.isArray(course) ? course[0] : course
@@ -19,6 +21,14 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
   const duration = courseData?.duration || "Self-paced"
   const callToAction = courseData?.callToAction || "Enroll Now"
   const totalLessons = courseData?.playlist?.[0]?.modules?.length || 0
+
+  const router = useRouter()
+
+  // Check if the current course is already purchased.
+  // Adjust the identifier property based on your data structure (e.g., courseData.id or courseData._id).
+  const isPurchased = purchasedCourses?.some(
+    (purchasedCourse) => purchasedCourse?.id === courseData?.id
+  )
 
   // Handle payment gateway redirect
   const handlePaymentGateway = () => {
@@ -33,6 +43,11 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
     }
   }
 
+  // Handler to redirect to purchased course page
+  const goToCourse = () => {
+    router.push("/purchased-courses")
+  }
+
   return (
     <div className="border rounded-xl overflow-hidden shadow-lg mx-auto bg-white animate-fadeIn sticky top-6">
       <Tabs defaultValue="personal" className="w-full">
@@ -43,15 +58,26 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
             {price}
           </div>
 
-          {/* Purchase buttons */}
+          {/* Purchase button (or go to course if already purchased) */}
           <div className="space-y-3 mb-6">
-            <Button
-              onClick={handlePaymentGateway}
-              className="w-full py-6 bg-green-600 hover:bg-green-700 text-white"
-              size="lg"
-            >
-              <ShoppingCart className="mr-2 h-5 w-5" /> Buy now
-            </Button>
+            {isPurchased ? (
+              <Button
+                onClick={goToCourse}
+                className="w-full py-6 bg-green-600 hover:bg-green-700 text-white"
+                size="lg"
+              >
+                {/* You can include an appropriate icon here if desired */}
+                Go to course
+              </Button>
+            ) : (
+              <Button
+                onClick={handlePaymentGateway}
+                className="w-full py-6 bg-green-600 hover:bg-green-700 text-white"
+                size="lg"
+              >
+                <ShoppingCart className="mr-2 h-5 w-5" /> Buy now
+              </Button>
+            )}
           </div>
 
           {/* Course details */}
@@ -150,7 +176,7 @@ export default function PurchaseCard({ course }: PurchaseCardProps) {
 //             {isPurchased ? (
 //               <Button
 //                 onClick={goToCourse}
-//                 className="w-full py-6 bg-blue-600 hover:bg-blue-700 text-white"
+//                 className="w-full py-6 bg-green-600 hover:bg-green-700 text-white"
 //                 size="lg"
 //               >
 //                 {/* You can include an appropriate icon here if desired */}
