@@ -24,6 +24,7 @@ const formSchema = z.object({
 import React, { useState } from 'react'
 import OTPModal from "./OTPModal"
 import axios from "axios"
+import { toast } from "react-toastify"
 
 const AuthForm = () => {
   const [isOTPModalOpen, setIsOTPModalOpen] = useState(false); // State to control OTP modal visibility
@@ -37,14 +38,13 @@ const AuthForm = () => {
         email: "",
       },
     })
-   
-    // 2. Define a submit handler.
+
     function onSubmit(values: z.infer<typeof formSchema>) {
-      // Do something with the form values.
-      // ✅ This will be type-safe and validated.
-      console.log("dsgygsdufgusdgfsd", values)
-      setEmail(values.email);
-      sendOtpFunction(values);
+      const lowercasedEmail = values.email.trim().toLowerCase();
+      console.log("Form values:", lowercasedEmail);
+    
+      setEmail(lowercasedEmail);
+      sendOtpFunction({ email: lowercasedEmail }); // Send lowercase email
     }
 
     const sendOtpFunction = async (values: z.infer<typeof formSchema>) => {
@@ -53,13 +53,18 @@ const AuthForm = () => {
           email: values.email
         }).then((response) => {
           localStorage.setItem("email", values.email)
-          // console.log("dsbfygdsuf", response)
+          localStorage.setItem("token", response?.data?.token);
+          
+          toast.success("OTP sent successfully! Please check your Spam Mail", {
+            position: "top-right",
+            autoClose: 3000,
+          });
+          
+          console.log("OTP sent successfully", response.data);
           setIsOTPModalOpen(true);
         }).catch((error) => {
           console.error("Error sending OTP", error)
-  
         })
-  
       } catch (error) {
         console.error("adsjgygufgdsfsdf", error)
       }
@@ -78,7 +83,11 @@ const AuthForm = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your email" {...field} />
+                <Input
+                  placeholder="Enter your email"
+                  {...field}
+                  onChange={(e) => field.onChange(e.target.value.toLowerCase())}
+                />
                 </FormControl>
                 <FormDescription className="text-gray-900">
                   Enter the email with which the course was purchased.
