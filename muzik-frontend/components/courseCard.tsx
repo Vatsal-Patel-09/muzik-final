@@ -20,7 +20,7 @@ export function CourseCard({ course }: any) {
           translateZ="60"
           className="text-neutral-800 text-md font-semibold mt-2 dark:text-neutral-300"
         >
-          {course?.price}
+          ₹{course?.price}/-<span className="text-sm font-semibold line-through text-gray-500 ml-2">₹{course?.price * 5}</span>
         </CardItem>
         
         <CardItem translateZ="100" className="w-full mt-4">

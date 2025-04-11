@@ -67,69 +67,78 @@ export function UpcomingVideosList({
 
   return (
     <div className="bg-white text-black rounded-xl p-4 shadow-md max-w-full">
-      <h2 className="text-xl font-semibold mb-4">Course Lessons</h2>
-      <ul className="space-y-2">
-        {videos.map((video, idx) => {
-          const isActive = video.id.toString() === currentVideoId;
+      {/* Set a fixed max-height and add vertical scrolling */}
+      <div className="max-h-[60vh] overflow-y-auto">
+        <h2 className="text-xl font-semibold mb-4">Course Lessons</h2>
+        <ul className="space-y-2">
+          {videos.map((video, idx) => {
+            const isActive = video.id.toString() === currentVideoId;
 
-          return (
-            <motion.li
-              key={`video-${video.id}-${id}`}
-              onClick={() => handleVideoClick(video, idx)}
-              className={`p-3 rounded-lg cursor-pointer flex justify-between items-center 
-                transition-all duration-200 
-                ${isActive ? "bg-green-100 border border-green-500" : "bg-gray-50 hover:bg-gray-100"}
-              `}
-            >
-              <div className="flex items-start gap-3">
-                {video.thumbnail && (
-                  <Image
-                    src={video.thumbnail}
-                    alt={video.title}
-                    width={60}
-                    height={60}
-                    className="rounded flex-shrink-0"
-                  />
-                )}
+            return (
+              <motion.li
+                key={`video-${video.id}-${id}`}
+                onClick={() => handleVideoClick(video, idx)}
+                className={`p-3 rounded-lg cursor-pointer flex justify-between items-center 
+                  transition-all duration-200 
+                  ${
+                    isActive
+                      ? "bg-green-100 border border-green-500"
+                      : "bg-gray-50 hover:bg-gray-100"
+                  }
+                `}
+              >
+                <div className="flex items-start gap-3">
+                  {video.thumbnail && (
+                    <Image
+                      src={video.thumbnail}
+                      alt={video.title}
+                      width={60}
+                      height={60}
+                      className="rounded flex-shrink-0"
+                    />
+                  )}
 
-                {/* Title wraps instead of truncating */}
-                <div className="flex flex-col">
-                  <span className="font-medium text-black text-sm leading-5 break-words">
-                    {video.title}
-                  </span>
-                  <span className="text-gray-500 text-xs leading-4">
-                    {video.duration}
-                  </span>
+                  {/* Title wraps instead of truncating */}
+                  <div className="flex flex-col">
+                    <span className="font-medium text-black text-sm leading-5 break-words">
+                      {video.title}
+                    </span>
+                    <span className="text-gray-500 text-xs leading-4">
+                      {video.duration}
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              {/* "Pending" / "Completed" + Button stay on same line */}
-              <div className="flex items-center gap-2 flex-shrink-0">
-                {video.isCompleted ? (
-                  <span className="text-green-600 text-xs font-bold">Completed</span>
-                ) : (
-                  <span className="text-gray-400 text-xs">Pending</span>
-                )}
-                <motion.button
-                  className="
-                    px-2 
-                    py-1 
-                    text-xs 
-                    rounded-full 
-                    bg-gray-200 
-                    hover:bg-green-500 
-                    hover:text-white 
-                    transition-colors 
-                    whitespace-nowrap
-                  "
-                >
-                  {video.isCompleted ? "Rewatch" : "Play"}
-                </motion.button>
-              </div>
-            </motion.li>
-          );
-        })}
-      </ul>
+                {/* "Pending" / "Completed" + Button stay on same line */}
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  {video.isCompleted ? (
+                    <span className="text-green-600 text-xs font-bold">
+                      Completed
+                    </span>
+                  ) : (
+                    <span className="text-gray-400 text-xs">Pending</span>
+                  )}
+                  <motion.button
+                    className="
+                      px-2 
+                      py-1 
+                      text-xs 
+                      rounded-full 
+                      bg-gray-200 
+                      hover:bg-green-500 
+                      hover:text-white 
+                      transition-colors 
+                      whitespace-nowrap
+                    "
+                  >
+                    {video.isCompleted ? "Rewatch" : "Play"}
+                  </motion.button>
+                </div>
+              </motion.li>
+            );
+          })}
+        </ul>
+      </div>
 
       {/* Optional Modal */}
       <AnimatePresence>

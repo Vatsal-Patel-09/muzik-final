@@ -28,68 +28,66 @@ export function VideoRoomContent() {
     setError(null);
 
     try {
-      const response = await axios.get(
-        `https://muzik-mgj9.onrender.com/api/courses/${courseId}`
-      );
+      const response = await axios.get(`https://muzik-mgj9.onrender.com/api/courses/${courseId}`);
       const data = response?.data?.[0];
 
-      // Ensure we have a proper courseStructure, introVideo, and modules
-      const hasIntro =
-        data?.courseStructure?.introVideo?.introVideoUrl &&
-        data.courseStructure.introVideo.title !== "";
-
-      const hasModules =
-        data?.courseStructure?.modules &&
-        data.courseStructure.modules.length > 0;
-
-      if (hasIntro && hasModules) {
-        // Create a lesson entry for the intro (id = 0)
-        const introVideo = {
-          id: 0,
-          title: data.courseStructure.introVideo.title,
-          url: data.courseStructure.introVideo.introVideoUrl,
-          description: data.courseStructure.introVideo.description,
-          isCompleted: false
-        };
-
-        // Create lesson entries for each module (id starts from 1)
-        const modules = data.courseStructure.modules.map(
-          (module: any, index: number) => ({
-            id: index + 1,
-            title: module.video?.title || module.moduleTitle,
-            url: module.video?.videoUrl,
-            description:
-              module.video?.description || module.moduleDescription,
-            isCompleted: module.isCompleted || false
-          })
-        );
-
-        // Combine intro + modules into one array
-        const finalLessons = [introVideo, ...modules];
-
-        // Update the course data (for displaying course title, etc.)
-        const updatedData = {
-          ...data,
-          courseTitle: data.courseTitle || "",
-        };
-
-        setCourseData(updatedData);
-        setAllLessons(finalLessons);
-
-        // Determine which lesson to show first
-        if (lessonIdParam) {
-          const lessonId = parseInt(lessonIdParam, 10);
-          const selectedLesson = finalLessons.find(
-            (lesson) => lesson.id === lessonId
-          );
-          setCurrentLesson(selectedLesson || finalLessons[0]);
-        } else {
-          setCurrentLesson(finalLessons[0]); // default to intro
-        }
-      } else {
-        // Fallback if no intro or modules
+      // Make sure courseStructure exists
+      if (!data?.courseStructure) {
         setCourseData(data);
         setAllLessons([]);
+        setCurrentLesson(null);
+        return;
+      }
+
+      const intro = data.courseStructure.introVideo;
+      const modules = data.courseStructure.modules ?? [];
+
+      // Prepare a finalLessons array that can hold both intro + modules
+      const finalLessons: any[] = [];
+
+      // If intro video exists, push it into finalLessons first
+      if (intro?.introVideoUrl && intro.title) {
+        finalLessons.push({
+          id: 0,
+          title: intro.title,
+          url: intro.introVideoUrl,
+          description: intro.description || "",
+          isCompleted: false
+        });
+      }
+
+      // If modules exist, map them into finalLessons
+      if (modules.length > 0) {
+        const mappedModules = modules.map((module: any, index: number) => ({
+          id: finalLessons.length + index, // ensure unique IDs after intro
+          title: module.video?.title || module.moduleTitle,
+          url: module.video?.videoUrl,
+          description: module.video?.description || module.moduleDescription,
+          isCompleted: module.isCompleted || false
+        }));
+        finalLessons.push(...mappedModules);
+      }
+
+      // Update our course data and allLessons
+      setCourseData({
+        ...data,
+        courseTitle: data.courseTitle || ""
+      });
+      setAllLessons(finalLessons);
+
+      // Determine which lesson to show first
+      if (finalLessons.length > 0) {
+        if (lessonIdParam) {
+          // If there's a valid lessonId in the URL, use it
+          const lessonId = parseInt(lessonIdParam, 10);
+          const selectedLesson = finalLessons.find(l => l.id === lessonId);
+          setCurrentLesson(selectedLesson || finalLessons[0]);
+        } else {
+          // Otherwise, default to the first item (intro if present)
+          setCurrentLesson(finalLessons[0]);
+        }
+      } else {
+        // If no lessons at all, set null so we show "No video available."
         setCurrentLesson(null);
       }
     } catch (err: any) {
@@ -107,24 +105,18 @@ export function VideoRoomContent() {
   // Whenever currentLesson changes, update the URL query param
   useEffect(() => {
     if (currentLesson) {
-      router.push(
-        `/video-room?courseId=${courseId}&lessonId=${currentLesson.id}`,
-        { shallow: true }
-      );
+      router.push(`/video-room?courseId=${courseId}&lessonId=${currentLesson.id}`, { shallow: true });
     }
   }, [currentLesson, courseId, router]);
 
   // Mark current lesson as completed
   const markLessonCompleted = () => {
     if (!currentLesson) return;
-
     const updatedLesson = { ...currentLesson, isCompleted: true };
     setCurrentLesson(updatedLesson);
 
-    const updatedLessons = allLessons.map((lesson) =>
-      lesson.id === currentLesson.id
-        ? { ...lesson, isCompleted: true }
-        : lesson
+    const updatedLessons = allLessons.map(lesson =>
+      lesson.id === currentLesson.id ? { ...lesson, isCompleted: true } : lesson
     );
     setAllLessons(updatedLessons);
   };
@@ -132,11 +124,7 @@ export function VideoRoomContent() {
   // Move to next lesson
   const handleNextLesson = () => {
     if (!currentLesson) return;
-
-    const currentIndex = allLessons.findIndex(
-      (lesson) => lesson.id === currentLesson.id
-    );
-
+    const currentIndex = allLessons.findIndex(lesson => lesson.id === currentLesson.id);
     if (currentIndex !== -1 && currentIndex < allLessons.length - 1) {
       setCurrentLesson(allLessons[currentIndex + 1]);
     }
@@ -202,12 +190,10 @@ export function VideoRoomContent() {
           <button
             onClick={handleNextLesson}
             disabled={
-              allLessons.findIndex((lesson) => lesson.id === currentLesson?.id) ===
-              allLessons.length - 1
+              allLessons.findIndex(l => l.id === currentLesson?.id) === allLessons.length - 1
             }
             className={`bg-green-600 hover:bg-green-700 text-black px-3 py-2 rounded-full flex items-center justify-center gap-2 text-sm whitespace-nowrap ${
-              allLessons.findIndex((lesson) => lesson.id === currentLesson?.id) ===
-              allLessons.length - 1
+              allLessons.findIndex(l => l.id === currentLesson?.id) === allLessons.length - 1
                 ? "opacity-50 cursor-not-allowed"
                 : ""
             }`}
@@ -223,9 +209,9 @@ export function VideoRoomContent() {
           <ModuleDescription
             title="Lesson Description"
             description={
-              typeof currentLesson.description === "string"
-                ? currentLesson.description
-                : currentLesson.description.join("\n\n")
+              Array.isArray(currentLesson.description)
+                ? currentLesson.description.join("\n\n")
+                : currentLesson.description
             }
           />
         )}
