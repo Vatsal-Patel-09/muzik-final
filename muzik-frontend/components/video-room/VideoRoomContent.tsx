@@ -139,7 +139,7 @@ export function VideoRoomContent() {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto -ml-2">
       <div className="grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-6">
         {/* Video Player */}
         <div>
