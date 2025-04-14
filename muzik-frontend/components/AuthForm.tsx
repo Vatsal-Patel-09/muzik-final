@@ -29,6 +29,7 @@ import { toast } from "react-toastify"
 const AuthForm = () => {
   const [isOTPModalOpen, setIsOTPModalOpen] = useState(false); // State to control OTP modal visibility
   const [email, setEmail] = useState(""); // State to store the email dynamically
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
@@ -40,11 +41,19 @@ const AuthForm = () => {
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
+
+      if (isButtonDisabled) return;
+      
       const lowercasedEmail = values.email.trim().toLowerCase();
       console.log("Form values:", lowercasedEmail);
     
       setEmail(lowercasedEmail);
       sendOtpFunction({ email: lowercasedEmail }); // Send lowercase email
+
+      setIsButtonDisabled(true);
+      setTimeout(() => {
+        setIsButtonDisabled(false);
+      }, 20000); // 20 seconds
     }
 
     const sendOtpFunction = async (values: z.infer<typeof formSchema>) => {
@@ -96,7 +105,14 @@ const AuthForm = () => {
               </FormItem>
             )}
           />
-          <Button type="submit" variant="default" className="border-2 border-black">Send OTP</Button>
+          <Button 
+            type="submit" 
+            variant="default" 
+            className="border-2 border-black"
+            disabled={isButtonDisabled}
+          >
+            {isButtonDisabled ? "Please wait (20s)..." : "Send OTP"}
+          </Button>
         </form>
       </Form>
 
