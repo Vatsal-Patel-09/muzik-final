@@ -9,7 +9,7 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const PIXEL_ID = '516326594884066';
+// const PIXEL_ID = '1074769974557499';
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   title: "Muzik Skill House",
   description: "Master the Art of Music – Learn, Create, and Elevate!",
   icons: {
-    icon: "muzik-frontend/app/favicon.ico",
+    icon: "muzik-frontend/app/favicon.ico", 
     },
 };
 
@@ -49,7 +49,7 @@ export default function RootLayout({
               t.src=v;s=b.getElementsByTagName(e)[0];
               s.parentNode.insertBefore(t,s)}(window, document, 'script',
               'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '991488343116364');
+              fbq('init', '1074769974557499');
               fbq('track', 'PageView');
             `,
           }}
@@ -59,7 +59,7 @@ export default function RootLayout({
           height="1"
           width="1"
           style={{ display: 'none' }}
-          src="https://www.facebook.com/tr?id=991488343116364&ev=PageView&noscript=1"
+          src="https://www.facebook.com/tr?id=1074769974557499&ev=PageView&noscript=1"
           alt="facebook pixel"
         />
       </noscript>        
@@ -72,3 +72,20 @@ export default function RootLayout({
     </html>
   );
 }
+
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1074769974557499');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1074769974557499&ev=PageView&noscript=1"
+/></noscript>
+
