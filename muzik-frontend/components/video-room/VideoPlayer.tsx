@@ -55,8 +55,6 @@
 //   );
 // }
 
-//fucking ass hole over flow hidden error  
-
 import React from "react";
 
 interface VideoPlayerProps {
@@ -65,7 +63,7 @@ interface VideoPlayerProps {
 
 export function VideoPlayer({ videoUrl }: VideoPlayerProps) {
   return (
-    <div className="w-full aspect-video rounded-lg ">
+    <div className="w-full aspect-video rounded-lg shadow-lg">
       <iframe 
         src={videoUrl}
         className="w-full h-full"

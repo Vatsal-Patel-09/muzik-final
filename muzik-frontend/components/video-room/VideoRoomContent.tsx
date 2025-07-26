@@ -105,7 +105,7 @@ export function VideoRoomContent() {
   // Whenever currentLesson changes, update the URL query param
   useEffect(() => {
     if (currentLesson) {
-      router.push(`/video-room?courseId=${courseId}&lessonId=${currentLesson.id}`, { shallow: true });
+      router.push(`/video-room?courseId=${courseId}&lessonId=${currentLesson.id}`);
     }
   }, [currentLesson, courseId, router]);
 
@@ -131,27 +131,45 @@ export function VideoRoomContent() {
   };
 
   if (loading) {
-    return <div className="text-center py-10">Loading course data...</div>;
+    return (
+      <div className="container mx-auto px-2 sm:px-4 lg:px-6 max-w-7xl">
+        <div className="text-center py-10 sm:py-20">
+          <div className="animate-spin rounded-full h-8 w-8 sm:h-12 sm:w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
+          <p className="text-sm sm:text-base text-gray-600">Loading course data...</p>
+        </div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="text-center text-red-500 py-10">{error}</div>;
+    return (
+      <div className="container mx-auto px-2 sm:px-4 lg:px-6 max-w-7xl">
+        <div className="text-center text-red-500 py-10 sm:py-20">
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4 sm:p-6 max-w-md mx-auto">
+            <h3 className="text-lg sm:text-xl font-semibold mb-2">Error Loading Course</h3>
+            <p className="text-sm sm:text-base">{error}</p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="container mx-auto -ml-2">
-      <div className="grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-6">
-        {/* Video Player */}
-        <div>
+    <div className="container mx-auto px-2 sm:px-4 lg:px-6 max-w-7xl">
+      <div className="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-4 sm:gap-6">
+        {/* Video Player - Always first on mobile, first column on desktop */}
+        <div className="w-full order-1 xl:order-1">
           {currentLesson?.url ? (
             <VideoPlayer videoUrl={currentLesson.url} />
           ) : (
-            <p className="text-center">No video available.</p>
+            <div className="w-full aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
+              <p className="text-center text-gray-500 text-sm sm:text-base">No video available.</p>
+            </div>
           )}
         </div>
 
-        {/* Course Lessons (intro + modules) */}
-        <div>
+        {/* Course Lessons (intro + modules) - Second on mobile, second column on desktop */}
+        <div className="w-full order-2 xl:order-2">
           <UpcomingVideosList
             videos={allLessons}
             onVideoSelect={(selected) => setCurrentLesson(selected)}
@@ -161,28 +179,34 @@ export function VideoRoomContent() {
       </div>
 
       {/* Title and Buttons */}
-      <div className="mt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+      <div className="mt-4 sm:mt-6 space-y-4">
+        {/* Title Section */}
         {courseData?.courseTitle && (
-          <VideoTitle title={courseData.courseTitle} />
+          <div className="w-full">
+            <VideoTitle title={courseData.courseTitle} />
+          </div>
         )}
 
-        <div className="flex flex-col sm:flex-row gap-3">
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-3 w-full justify-center sm:justify-start">
           <a
             href="https://chat.whatsapp.com/JCQTWuhiWso60lQ3R9U8Qg"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-green-500 hover:bg-green-600 text-black px-3 py-2 rounded-full flex items-center justify-center gap-2 text-sm whitespace-nowrap"
+            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2.5 rounded-full flex items-center justify-center gap-2 text-sm font-medium transition-colors duration-200 min-w-0 flex-1 sm:flex-initial sm:min-w-[180px]"
           >
-            Join WhatsApp Community
+            <span className="hidden xs:inline">Join WhatsApp Community</span>
+            <span className="xs:hidden">Join Community</span>
           </a>
 
           {/* Mark as Completed button */}
           {!currentLesson?.isCompleted && (
             <button
               onClick={markLessonCompleted}
-              className="bg-green-600 hover:bg-green-700 text-black px-3 py-2 rounded-full flex items-center justify-center gap-2 text-sm whitespace-nowrap"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-full flex items-center justify-center gap-2 text-sm font-medium transition-colors duration-200 min-w-0 flex-1 sm:flex-initial sm:min-w-[140px]"
             >
-              Mark as Completed
+              <span className="hidden xs:inline">Mark as Completed</span>
+              <span className="xs:hidden">Complete</span>
             </button>
           )}
 
@@ -192,19 +216,20 @@ export function VideoRoomContent() {
             disabled={
               allLessons.findIndex(l => l.id === currentLesson?.id) === allLessons.length - 1
             }
-            className={`bg-green-600 hover:bg-green-700 text-black px-3 py-2 rounded-full flex items-center justify-center gap-2 text-sm whitespace-nowrap ${
+            className={`bg-purple-600 hover:bg-purple-700 text-white px-4 py-2.5 rounded-full flex items-center justify-center gap-2 text-sm font-medium transition-colors duration-200 min-w-0 flex-1 sm:flex-initial sm:min-w-[120px] ${
               allLessons.findIndex(l => l.id === currentLesson?.id) === allLessons.length - 1
-                ? "opacity-50 cursor-not-allowed"
+                ? "opacity-50 cursor-not-allowed hover:bg-purple-600"
                 : ""
             }`}
           >
-            Next Lesson
+            <span className="hidden xs:inline">Next Lesson</span>
+            <span className="xs:hidden">Next</span>
           </button>
         </div>
       </div>
 
       {/* Module / Lesson Description */}
-      <div className="mt-6">
+      <div className="mt-4 sm:mt-6">
         {currentLesson?.description && (
           <ModuleDescription
             title="Lesson Description"

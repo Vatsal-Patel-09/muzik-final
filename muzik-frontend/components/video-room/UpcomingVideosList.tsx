@@ -27,8 +27,35 @@ export function UpcomingVideosList({
   currentVideoId,
 }: UpcomingVideosListProps) {
   const [active, setActive] = useState<Video | boolean | null>(null);
-  const ref = useRef<HTMLDivElement>(null);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const ref = useRef<HTMLDivElement>(null!);
   const id = useId();
+
+  // Mobile view settings
+  const MOBILE_VISIBLE_COUNT = 3;
+
+  // Check if it's mobile on mount and window resize
+  useEffect(() => {
+    const checkMobile = () => {
+      const newIsMobile = window.innerWidth < 640; // sm breakpoint
+      setIsMobile(newIsMobile);
+      
+      // If switching from mobile to desktop, reset expanded state
+      if (!newIsMobile && isExpanded) {
+        setIsExpanded(false);
+      }
+    };
+    
+    // Check on mount
+    checkMobile();
+    
+    // Add resize listener
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, [isExpanded]);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -59,26 +86,54 @@ export function UpcomingVideosList({
 
   if (!videos || videos.length === 0) {
     return (
-      <div className="p-4 text-center text-gray-500">
+      <div className="p-4 text-center text-gray-500 bg-white rounded-xl shadow-md">
         No lessons available.
       </div>
     );
   }
 
   return (
-    <div className="bg-white text-black rounded-xl p-4 shadow-md max-w-full">
-      {/* Set a fixed max-height and add vertical scrolling */}
-      <div className="max-h-[60vh] overflow-y-auto">
-        <h2 className="text-xl font-semibold mb-4">Course Lessons</h2>
+    <div className="bg-white text-black rounded-xl p-3 sm:p-4 shadow-md w-full">
+      {/* Header with title and expand/collapse button for mobile */}
+      <div className="flex justify-between items-center mb-3 sm:mb-4">
+        <h2 className="text-lg sm:text-xl font-semibold">Course Lessons</h2>
+        {isMobile && videos.length > MOBILE_VISIBLE_COUNT && (
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-full text-xs font-medium transition-colors flex items-center gap-1"
+          >
+            {isExpanded ? (
+              <>
+                <span>Show Less</span>
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                </svg>
+              </>
+            ) : (
+              <>
+                <span>All ({videos.length})</span>
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </>
+            )}
+          </button>
+        )}
+      </div>
+
+      {/* Video list with conditional rendering for mobile */}
+      <div className="max-h-[50vh] sm:max-h-[60vh] xl:max-h-[70vh] overflow-y-auto">
         <ul className="space-y-2">
-          {videos.map((video, idx) => {
+          {videos
+            .slice(0, !isExpanded && isMobile ? MOBILE_VISIBLE_COUNT : videos.length)
+            .map((video, idx) => {
             const isActive = video.id.toString() === currentVideoId;
 
             return (
               <motion.li
                 key={`video-${video.id}-${id}`}
                 onClick={() => handleVideoClick(video, idx)}
-                className={`p-3 rounded-lg cursor-pointer flex justify-between items-center 
+                className={`p-2 sm:p-3 rounded-lg cursor-pointer flex justify-between items-center 
                   transition-all duration-200 
                   ${
                     isActive
@@ -87,20 +142,20 @@ export function UpcomingVideosList({
                   }
                 `}
               >
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-2 sm:gap-3 flex-1 min-w-0">
                   {video.thumbnail && (
                     <Image
                       src={video.thumbnail}
                       alt={video.title}
-                      width={60}
-                      height={60}
-                      className="rounded flex-shrink-0"
+                      width={50}
+                      height={50}
+                      className="rounded flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 md:w-[60px] md:h-[60px]"
                     />
                   )}
 
                   {/* Title wraps instead of truncating */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-black text-sm leading-5 break-words">
+                  <div className="flex flex-col min-w-0 flex-1">
+                    <span className="font-medium text-black text-xs sm:text-sm leading-4 sm:leading-5 break-words">
                       {video.title}
                     </span>
                     <span className="text-gray-500 text-xs leading-4">
@@ -110,17 +165,17 @@ export function UpcomingVideosList({
                 </div>
 
                 {/* "Pending" / "Completed" + Button stay on same line */}
-                <div className="flex items-center gap-2 flex-shrink-0">
+                <div className="flex flex-col sm:flex-row items-end sm:items-center gap-1 sm:gap-2 flex-shrink-0">
                   {video.isCompleted ? (
-                    <span className="text-green-600 text-xs font-bold">
+                    <span className="text-green-600 text-xs font-bold text-right sm:text-left">
                       Completed
                     </span>
                   ) : (
-                    <span className="text-gray-400 text-xs">Pending</span>
+                    <span className="text-gray-400 text-xs text-right sm:text-left">Pending</span>
                   )}
                   <motion.button
                     className="
-                      px-2 
+                      px-2 sm:px-3
                       py-1 
                       text-xs 
                       rounded-full 
@@ -129,6 +184,7 @@ export function UpcomingVideosList({
                       hover:text-white 
                       transition-colors 
                       whitespace-nowrap
+                      min-w-[50px] sm:min-w-[60px]
                     "
                   >
                     {video.isCompleted ? "Rewatch" : "Play"}
@@ -138,6 +194,21 @@ export function UpcomingVideosList({
             );
           })}
         </ul>
+        
+        {/* Show More button for mobile when collapsed */}
+        {!isExpanded && videos.length > MOBILE_VISIBLE_COUNT && isMobile && (
+          <div className="mt-3 text-center border-t border-gray-100 pt-3">
+            <button
+              onClick={() => setIsExpanded(true)}
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2 mx-auto"
+            >
+              <span>Show {videos.length - MOBILE_VISIBLE_COUNT} More Lessons</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Optional Modal */}
@@ -168,23 +239,23 @@ export function UpcomingVideosList({
             <motion.div
               layoutId={`card-${active.id}-${id}`}
               ref={ref}
-              className="w-full max-w-[500px] h-full md:h-auto md:max-h-[90%] flex flex-col bg-white sm:rounded-3xl overflow-hidden shadow-lg p-4"
+              className="w-full max-w-[90vw] sm:max-w-[500px] h-full md:h-auto md:max-h-[90%] flex flex-col bg-white sm:rounded-3xl overflow-hidden shadow-lg p-3 sm:p-4 mx-2 sm:mx-0"
             >
               {/* Lesson detail example */}
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="font-bold text-xl">{active.title}</h3>
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3">
+                <h3 className="font-bold text-lg sm:text-xl break-words flex-1 min-w-0">{active.title}</h3>
                 <motion.button
                   layoutId={`button-${active.id}-${id}`}
                   onClick={() => {
                     if (onVideoSelect) onVideoSelect(active);
                     setActive(null);
                   }}
-                  className="px-4 py-2 text-sm rounded-full font-bold bg-green-500 text-white"
+                  className="px-4 py-2 text-sm rounded-full font-bold bg-green-500 text-white whitespace-nowrap flex-shrink-0"
                 >
                   {active.isCompleted ? "Rewatch" : "Start"}
                 </motion.button>
               </div>
-              <div className="overflow-auto text-sm text-gray-800 leading-5">
+              <div className="overflow-auto text-sm text-gray-800 leading-5 break-words">
                 {typeof active.content === "function"
                   ? active.content()
                   : active.content}
