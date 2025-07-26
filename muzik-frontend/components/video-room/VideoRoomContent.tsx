@@ -7,6 +7,7 @@ import { VideoTitle } from "@/components/video-room/VideoTitle";
 import { ModuleDescription } from "@/components/video-room/ModuleDescription";
 import { UpcomingVideosList } from "@/components/video-room/UpcomingVideosList";
 import axios from "axios";
+import { FaWhatsapp } from "react-icons/fa";
 
 export function VideoRoomContent() {
   const searchParams = useSearchParams();
@@ -195,8 +196,9 @@ export function VideoRoomContent() {
             rel="noopener noreferrer"
             className="bg-green-500 hover:bg-green-600 text-white px-4 py-2.5 rounded-full flex items-center justify-center gap-2 text-sm font-medium transition-colors duration-200 min-w-0 flex-1 sm:flex-initial sm:min-w-[180px]"
           >
-            <span className="hidden xs:inline">Join WhatsApp Community</span>
-            <span className="xs:hidden">Join Community</span>
+            <FaWhatsapp />
+            {/* <span className="hidden xs:inline">Join Community</span> */}
+            <span className="">Join Whatsapp Community</span>
           </a>
 
           {/* Mark as Completed button */}
