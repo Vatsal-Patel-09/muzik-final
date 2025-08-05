@@ -75,42 +75,46 @@ const page = () => {
   return (
     <div>
         <Navbar />
-        <div className="mt-24 flex flex-col items-center justify-center">
+        <div className="mt-16 sm:mt-20 md:mt-24 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
 
-            <div className="relative w-full">
+            <div className="relative w-full max-w-7xl mx-auto">
               
               {/* Background image with dark blur overlay */}
               <div 
-                className="absolute inset-0 bg-cover bg-center mx-auto md:mx-20 overflow-x-hidden w-[90%] rounded-2xl "
+                className="absolute inset-0 bg-cover bg-center rounded-2xl"
                 style={{
-                  backgroundImage: 'url("/assets/about/AboutFixed04.jpg")', // Replace with your actual image path
+                  backgroundImage: 'url("/assets/about/AboutFixed04.jpg")',
                 }}
               >
-                {/* <div className="absolute inset-0 bg-black/70 backdrop-blur-sm"></div> */}
+                <div className="absolute inset-0 bg-black/50 rounded-2xl"></div>
               </div>
               
               {/* Content */}
-              <div className="relative z-10">
-                <div className="border-b-2 border-gray/30 w-[90%] md:ml-20 bg-black/50 rounded-t-2xl mx-auto flex justify-center">
-                  <h3 className="text-[35px] font-bold font-serif mb-5 mt-10 text-white">About US</h3>
+              <div className="relative z-10 min-h-[600px] sm:min-h-[500px] md:min-h-[600px]">
+                <div className="border-b-2 border-gray-300/30 bg-black/30 backdrop-blur-sm rounded-t-2xl flex justify-center py-6 sm:py-8">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-serif text-white text-center">About Us</h3>
                 </div>
 
-                <div className="md:h-[20rem] h-[40rem]  flex items-center justify-center my-[-45%] md:my-[-4%]">
-                  <TextHoverEffect text="Muzik Skill House" />
+                <div className="flex items-center justify-center py-8 sm:py-12 md:py-16">
+                  <div className="w-full max-w-4xl">
+                    <TextHoverEffect text="Muzik Skill House" />
+                  </div>
                 </div>
               
-                <div className="max-w-8xl mx-auto px-8 border-b-2 border-gray/30 w-[90%] mt-[-5%]">
+                <div className="px-4 sm:px-6 md:px-8 pb-8 border-b-2 border-gray-300/30">
                   <HoverEffect items={about} />
                 </div>
               </div>
             </div>
-            <div>
-                <div className="w-full">
-                    <Timeline data={data} />
-                </div>
+            
+            {/* Timeline Section */}
+            <div className="w-full max-w-7xl mx-auto mt-12 sm:mt-16 md:mt-20 px-4 sm:px-6 lg:px-8">
+                <Timeline data={data} />
             </div>
         </div>
-        <div className="border-t-2 border-gray mx-4 mt-10">
+        
+        {/* Contact and Footer Section */}
+        <div className="border-t-2 border-gray-300 mx-4 sm:mx-6 lg:mx-8 mt-12 sm:mt-16 md:mt-20">
             <Contact />
             <Footer />
         </div>
