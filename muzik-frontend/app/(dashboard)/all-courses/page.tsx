@@ -37,7 +37,7 @@ const AllCourses = () => {
       </h1>
       
       <div className="w-full relative">
-        <ScrollArea className="h-[650px] w-full">
+        <ScrollArea className="h-[calc(100vh-200px)] w-full">
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {[...Array(6)].map((_, index) => (

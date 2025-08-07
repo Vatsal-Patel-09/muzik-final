@@ -48,7 +48,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     },
   ];
   const [open, setOpen] = useState(false);
-  const [storeUserData, setStoreUserData] = useState({});
+  const [storeUserData, setStoreUserData] = useState<{email?: string} | null>(null);
 
   const fetchLoggedInUser = async () => {
     try {
@@ -107,21 +107,33 @@ const layout = ({ children }: { children: React.ReactNode }) => {
             </div>
           </div>
           <div>
-            <SidebarLink
-              link={{
-                label: storeUserData?.email,
-                href: "#",
-                icon: (
-                  <Image
-                    src="/avatar.jpg"
-                    className="h-7 w-7 shrink-0 rounded-full"
-                    width={50}
-                    height={50}
-                    alt="Avatar"
-                  />
-                ),
-              }}
-            />
+            {storeUserData?.email ? (
+              <SidebarLink
+                link={{
+                  label: storeUserData?.email,
+                  href: "#",
+                  icon: (
+                    <Image
+                      src="/avatar.jpg"
+                      className="h-7 w-7 shrink-0 rounded-full"
+                      width={50}
+                      height={50}
+                      alt="Avatar"
+                    />
+                  ),
+                }}
+              />
+            ) : (
+              <SidebarLink
+                link={{
+                  label: "Login",
+                  href: "/login",
+                  icon: (
+                    <IconUserBolt className="h-5 w-5 shrink-0 text-black dark:text-neutral-200" />
+                  ),
+                }}
+              />
+            )}
           </div>
         </SidebarBody>
       </Sidebar>
