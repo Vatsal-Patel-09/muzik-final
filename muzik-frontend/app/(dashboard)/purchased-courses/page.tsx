@@ -77,22 +77,37 @@ const page = () => {
         </h1>
         <div className="w-full relative">
           <div className="scroll-fade-wrapper relative">
-            <ScrollArea className="h-[650px] w-full">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-5">
-              {storePurchasedCourse?.length > 0 &&
-                storePurchasedCourse?.map((response, idx) => {
-                return (
-                  <div key={idx} className="mb-2 ml-2">
-                    <Link
-                      href={`/video-room?courseId=${response?._id}`}
-                      key={idx + 1}
-                      >
-                      <CourseCard course={response} />
-                    </Link>
-                  </div>
-                );
-                })}
-              </div>
+            <ScrollArea className="h-[calc(100vh-200px)] w-full">
+              {storePurchasedCourse?.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-5">
+                  {storePurchasedCourse?.map((response, idx) => {
+                    return (
+                      <div key={idx} className="mb-2 ml-2">
+                        <Link
+                          href={`/video-room?courseId=${response?._id}`}
+                          key={idx + 1}
+                        >
+                          <CourseCard course={response} />
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center h-96 text-center">
+                  <h2 className="text-2xl font-semibold text-gray-600 mb-4">
+                    No Purchased Courses
+                  </h2>
+                  <p className="text-gray-500 mb-6">
+                    You haven't purchased any courses yet. Explore our course catalog to get started!
+                  </p>
+                  <Link href="/all-courses">
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200">
+                      Browse All Courses
+                    </button>
+                  </Link>
+                </div>
+              )}
             </ScrollArea>
             {/* <div className="fade-top absolute top-0 left-0 right-0 h-10 bg-gradient-to-b from-white to-transparent pointer-events-none z-10"></div> */}
             {/* <div className="fade-bottom absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-white to-transparent pointer-events-none z-10"></div> */}
